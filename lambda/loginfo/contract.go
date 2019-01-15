@@ -22,14 +22,12 @@ func (r *Request) Validate() error {
 	return nil
 }
 
-
 type Response struct {
 	Status     string
 	Error      string
 	FileCount  uint32
 	LinesCount uint32
 }
-
 
 func (r *Response) SetError(err error) bool {
 	if err == nil {
@@ -42,7 +40,6 @@ func (r *Response) SetError(err error) bool {
 
 func NewResponse() *Response {
 	return &Response{
-		Status:StatusOK,
+		Status: StatusOK,
 	}
 }
-

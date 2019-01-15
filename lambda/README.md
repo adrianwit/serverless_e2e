@@ -12,6 +12,11 @@
 AWS Lambda is a serverless compute service that runs a provided code in response to events and automatically manages the underlying compute resources.
 The event can be fired by a specific trigger, which determines how and when your function executes. 
 
+References:
+* [Programming-model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html)
+
+    
+#### Event/Trigger
 
 Lambda entry point:
 ```go
@@ -35,19 +40,32 @@ where handler supports the following function signatures:
 
 This project provides example for the following native mechanisms:
 
+References:
+* [Go Programming Model Handler Types](https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-handler-types.html)
+
+
+### Examples
+
 #### Direct lambda trigger
 
 - [HelloWorld](hello/hello.go)
 - [E2E Use Case](e2e/regression/cases/001_hello_world)
-- Signature 
+- _Handler Signature_ 
 ```go
     func() (Output, error)
+    func(Event) (Output, error)
 ```
+
 
 #### HTTP APIGateway trigger
 
-
-**APIGateway Proxy Event**
+- [LogInfo](loginfo/app/loginfo.go)
+- [E2E Use Case](e2e/regression/cases/002_logs_count)
+- _Handler Signature_ 
+```go
+    func(context.Context, events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
+```
+- APIGatewayProxyRequest 
 ```go
 // APIGatewayProxyRequest contains data coming from the API Gateway proxy
 type APIGatewayProxyRequest struct {
@@ -65,18 +83,7 @@ type APIGatewayProxyRequest struct {
 	IsBase64Encoded                 bool                          `json:"isBase64Encoded,omitempty"`
 }
 ```
-
-- [LogInfo](loginfo/app/loginfo.go)
-- [E2E Use Case](e2e/regression/cases/002_logs_count)
-- Signature 
-```go
-    func(ctx context.Context, apiRequest events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
-```
-- Resources
-    * [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html)
-    * [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/apigw.go)
 - Usage    
-    
 ```go
 
 func main() {
@@ -100,7 +107,6 @@ func handleRequest(ctx context.Context, apiRequest events.APIGatewayProxyRequest
 	}, nil
 }
 
-
 func handleError(err error) (events.APIGatewayProxyResponse, error) {
 	errorLogger.Printf("unable to process request %v", err)
 	return events.APIGatewayProxyResponse{
@@ -108,5 +114,68 @@ func handleError(err error) (events.APIGatewayProxyResponse, error) {
 		Body:       http.StatusText(http.StatusInternalServerError),
 	}, nil
 }
-
 ```    
+- References
+    * [Amazon API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html)
+    * [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/apigw.go)
+
+
+#### S3 triggers
+
+- [FileMeta](filemeta/filemeta.go)
+- [E2E Use Case](e2e/regression/cases/003_filemeta)
+- _Handler Signature_ 
+```go
+    func(context.Context, events.S3Event)
+```
+
+- Event types:
+ * s3:ObjectCreated:*
+ * s3:ObjectCreated:Put
+ * s3:ObjectCreated:Post
+ * s3:ObjectCreated:Copy
+ * s3:ObjectCreated:CompleteMultipartUpload
+ * s3:ObjectRemoved:*
+ * s3:ObjectRemoved:Delete
+ * s3:ObjectRemoved:DeleteMarkerCreated
+ * s3:ObjectRestore:Post
+ * s3:ObjectRestore:Completed
+ * s3:ReducedRedundancyLostObject 
+
+- S3Event
+```go
+type S3Event struct {
+	Records []S3EventRecord `json:"Records"`
+}
+
+type S3EventRecord struct {
+	EventVersion      string              `json:"eventVersion"`
+	EventSource       string              `json:"eventSource"`
+	AWSRegion         string              `json:"awsRegion"`
+	EventTime         time.Time           `json:"eventTime"`
+	EventName         string              `json:"eventName"`
+	PrincipalID       S3UserIdentity      `json:"userIdentity"`
+	RequestParameters S3RequestParameters `json:"requestParameters"`
+	ResponseElements  map[string]string   `json:"responseElements"`
+	S3                S3Entity            `json:"s3"`
+}
+
+type S3UserIdentity struct {
+	PrincipalID string `json:"principalId"`
+}
+```
+- [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/s3.go)
+
+- References:
+    * [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
+    * [Using AWS Lambda with Amazon S3 Example](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html)
+    * [NotificationHowTo](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
+    * [Setting Bucket Notification](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-notification-configuration.html)
+
+
+
+### Error Handling
+
+References:
+ * [Errors](https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-errors.html)
+ 

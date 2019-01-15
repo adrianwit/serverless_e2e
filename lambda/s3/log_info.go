@@ -19,13 +19,11 @@ type book struct {
 
 func handle(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-
 	JSON, err := json.Marshal(getBook())
 	if err != nil {
 		return serverError(err)
 	}
 	body := string(JSON)
-
 
 	// Return a response with a 200 OK status and the JSON book record
 	// as the body.
@@ -45,7 +43,7 @@ func serverError(err error) (events.APIGatewayProxyResponse, error) {
 	}, nil
 }
 
-func getBook() (*book) {
+func getBook() *book {
 	bk := &book{
 		ISBN:   "978-1420931693",
 		Title:  "The Republic",

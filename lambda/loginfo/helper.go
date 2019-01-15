@@ -10,10 +10,9 @@ import (
 	"unsafe"
 )
 
-
-
 func countLines(service storage.Service, object storage.Object, response *Response) {
 	atomic.AddUint32(&response.FileCount, 1)
+
 	isCompressed := path.Ext(object.URL()) == ".gz"
 	contentReader, err := service.Download(object)
 	if response.SetError(err) {
@@ -36,8 +35,6 @@ func countLines(service storage.Service, object storage.Object, response *Respon
 	atomic.AddUint32(&response.LinesCount, uint32(lineCount))
 }
 
-
-
 func countFileAndLines(service storage.Service, URL string, response *Response) {
 	objects, err := service.List(URL)
 	if response.SetError(err) {
@@ -45,7 +42,7 @@ func countFileAndLines(service storage.Service, URL string, response *Response) 
 	}
 	URL = strings.Trim(URL, "/")
 	for _, object := range objects {
-		if strings.Trim(object.URL(), "/") ==  URL {
+		if strings.Trim(object.URL(), "/") == URL {
 			continue
 		}
 		if object.IsFolder() {

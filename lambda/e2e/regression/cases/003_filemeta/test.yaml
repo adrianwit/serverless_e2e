@@ -1,30 +1,12 @@
 pipeline:
-  check-proxySubscription1:
-    action: msg:pull
-    source:
-      URL: proxySubscription1
-      type: subscription
-      vendor: gc
-      credentials: $gcSecrets
-    count: 1
-    UDF: AsMap
-    expect:
-      - Transformed:
-          message: "this is my 1st message"
-          projectID: $projectID
-          source: /proxySourceTopic/
-
-  check-proxySubscription2:
-    action: msg:pull
-    source:
-      URL: proxySubscription2
-      type: subscription
-      vendor: gc
-      credentials: $gcSecrets
-    count: 1
-    UDF: AsMap
-    expect:
-      - Transformed:
-          message: "this is my 2nd message"
-          projectID: $projectID
-          source: /proxySourceTopic/
+  loop:
+    check-content:
+      action: storage:download
+      source:
+        URL: s3://mye2e-bucket2/meta/filemeta.json
+        credentials: $awsCredentials
+      expect:
+        Paths:
+          's3://mye2e-bucket2/folder1':
+            FileCount: 2
+            LinesCount: 52

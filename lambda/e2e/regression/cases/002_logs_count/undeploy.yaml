@@ -2,4 +2,4 @@ pipeline:
   deploy:
     action: aws/lambda:deleteFunction
     credentials: $awsCredentials
-    functionname: FilemetaFn
+    functionname: LoginfoFn

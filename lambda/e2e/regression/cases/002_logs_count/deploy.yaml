@@ -1,6 +1,6 @@
 init:
   functionRole: lambda-loginfo-executor
-  functionName: loginfo
+  functionName: LoginfoFn
   codeZip: ${appPath}/loginfo/app/loginfo.zip
   privilegePolicy: ${parent.path}/privilege-policy.json
 pipeline:
@@ -43,5 +43,6 @@ pipeline:
           methods:
             - httpMethod: ANY
               functionname: $functionName
+    sleepTimeMs: 10000
 post:
   endpointURL: ${setupAPI.EndpointURL}

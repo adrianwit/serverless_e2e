@@ -2,4 +2,4 @@ pipeline:
   deploy:
     action: aws/lambda:deleteFunction
     credentials: $awsCredentials
-    functionname: HelloWorld
+    functionname: HelloWorldFn

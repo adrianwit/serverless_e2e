@@ -95,8 +95,8 @@ func Test_countFileAndLines(t *testing.T) {
 		}
 		response := &Response{}
 		countFileAndLines(service, useCase.url, response)
-		assert.EqualValues(t, useCase.expectedRowCount, response.LinesCount, "line count,  " + useCase.description)
-		assert.EqualValues(t, useCase.expectedFileCount, response.FileCount, "file count,  " + useCase.description)
+		assert.EqualValues(t, useCase.expectedRowCount, response.LinesCount, "line count,  "+useCase.description)
+		assert.EqualValues(t, useCase.expectedFileCount, response.FileCount, "file count,  "+useCase.description)
 		assert.EqualValues(t, "", response.Status, useCase.description)
 	}
 }

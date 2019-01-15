@@ -8,7 +8,7 @@ pipeline:
     tag: Test
     description: '@info'
     subPath: 'cases/${index}*'
-    range: 2..002
+    range: 1..003
     template:
       setVars:
         action: nop
@@ -39,7 +39,6 @@ pipeline:
         request: '@test'
 
       ubdeploy:
-        when: false
         zzwhen: $HasResource(${path}/undeploy.yaml)
         action: run
         comments: undeploy lambda function

@@ -1,34 +1,20 @@
+init:
+  data: e2e test
 pipeline:
-  setup:
-    action: msg:create
-    resources:
-      - URL: proxySourceTopic
-        type: topic
-        vendor: gc
-        credentials: $gcSecrets
-
-      - URL: proxyTargetTopic1
-        type: topic
-        vendor: gc
-        credentials: $gcSecrets
-
-      - URL: proxySubscription1
-        type: subscription
-        vendor: gc
-        credentials: $gcSecrets
-        config:
-          topic:
-            URL: /projects/${projectID}/topics/proxyTargetTopic1
-
-      - URL: proxyTargetTopic2
-        type: topic
-        vendor: gc
-        credentials: $gcSecrets
-
-      - URL: proxySubscription2
-        type: subscription
-        vendor: gc
-        credentials: $gcSecrets
-        config:
-          topic:
-            URL: /projects/${projectID}/topics/proxyTargetTopic2
+  create-bucket:
+    action: storage:upload
+    comments: init bucket
+    sourceKey: data
+    dest:
+      URL: s3://mye2e-bucket2/data.txt
+      credentials: $awsCredentials
+  cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: s3://mye2e-bucket2/meta/filemeta.json
+        credentials: $awsCredentials
+      - URL: s3://mye2e-bucket2/data.txt
+        credentials: $awsCredentials
+      - URL: s3://mye2e-bucket2/data/
+        credentials: $awsCredentials

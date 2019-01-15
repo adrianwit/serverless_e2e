@@ -11,11 +11,11 @@ type Service interface {
 	CountLogs(request *Request) *Response
 }
 
+type service struct{}
 
-type service struct {}
 func (s *service) CountLogs(request *Request) *Response {
 	response := NewResponse()
-	s3.SetProvider(&cred.Config{Region:request.Region})
+	s3.SetProvider(&cred.Config{Region: request.Region})
 	service, err := storage.NewServiceForURL(request.URL, "")
 	if response.SetError(err) {
 		return response
@@ -23,7 +23,6 @@ func (s *service) CountLogs(request *Request) *Response {
 	countFileAndLines(service, request.URL, response)
 	return response
 }
-
 
 func New() Service {
 	return &service{}

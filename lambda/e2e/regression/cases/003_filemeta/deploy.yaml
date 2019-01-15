@@ -1,25 +1,51 @@
+init:
+  functionRole: lambda-filemeta-executor
+  functionName: FilemetaFn
+  codeZip: ${appPath}filemeta/app/filemeta.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
 pipeline:
   deploy:
-    action: exec:run
-    comments: deploy ProxyMsg tirggered by google.pubsub.topic.publish
-    target: $target
-    sleepTimeMs: 1500
-    terminators:
-     - Do you want to continue
-    errors:
-     - ERROR
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcSecrets}.json
-    commands:
-      - cd $appPath
-      - go build
-      - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/
-      - gcloud config set project $projectID
-      - #gcloud alpha functions delete ProxyMsg
-      - ${cmd[4].stdout}:/Do you want to continue/ ? Y
-      - gcloud alpha functions deploy ProxyMsg --entry-point PubSubProxyFn --trigger-resource proxySourceTopic --trigger-event google.pubsub.topic.publish --runtime go111
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}filemeta/app
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build -o filemeta
+        - zip -j filemeta.zip filemeta
 
+    setupFunction:
+      action: aws/lambda:setupFunction
+      credentials: $awsCredentials
+      functionname: $functionName
+      runtime:  go1.x
+      handler: filemeta
+      code:
+        zipfile: $LoadBinary(${codeZip})
+      rolename: lambda-filemeta-executor
+      define:
+        - policyname: s3-mye2e-bucket-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
 
-
-
-
+    notification:
+      action: aws/s3:setupBucketNotification
+      credentials: $awsCredentials
+      sleepTimeMs: 8000
+      bucket: mye2e-bucket2
+      lambdaFunctionConfigurations:
+        - functionName: $functionName
+          id: ObjectCreatedEvents
+          events:
+            - s3:ObjectCreated:*
+          filter:
+            prefix:
+              - folder1
+            suffix:
+              - .csv

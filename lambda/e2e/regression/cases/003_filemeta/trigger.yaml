@@ -1,16 +1,13 @@
 pipeline:
-  trigger:
-    action: msg:push
+  create-bucket:
+    action: storage:copy
+    comments: copy test assets
+    sleepTimeMs: 8000
+    source:
+      URL: ${parent.path}/data/
     dest:
-      URL: /projects/${projectID}/topics/proxySourceTopic
-      credentials: $gcSecrets
-      vendor: gc
-    messages:
-      - data:
-          dest: proxyTargetTopic1
-          projectID: $projectID
-          message: 'this is my 1st message'
-      - data:
-          dest: proxyTargetTopic2
-          projectID: $projectID
-          message: 'this is my 2nd message'
+      URL: s3://mye2e-bucket2/folder1/
+      credentials: $awsCredentials
+    assets:
+      datafile1.csv: datafile1.csv
+      datafile2.csv: datafile2.csv

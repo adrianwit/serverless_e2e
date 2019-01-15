@@ -10,13 +10,13 @@ import (
 
 func TestService_CountLogs(t *testing.T) {
 	credentialsFile := path.Join(os.Getenv("HOME"), ".secret/aws.json")
-	if ! toolbox.FileExists(credentialsFile) {
+	if !toolbox.FileExists(credentialsFile) {
 		return
 	}
 	service := New()
 	response := service.CountLogs(&Request{
-		Region:"us-east-2",
-		URL:"s3://mye2e-bucket/folder1/",
+		Region: "us-east-2",
+		URL:    "s3://mye2e-bucket/folder1/",
 	})
 	assert.EqualValues(t, 2, response.FileCount)
 }

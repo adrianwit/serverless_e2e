@@ -1,6 +1,6 @@
 init:
   functionRole: lambda-helloworld-executor
-  functionName: HelloWorld
+  functionName: HelloWorldFn
   codeZip: ${appPath}/hello/main.zip
 pipeline:
   deploy:
