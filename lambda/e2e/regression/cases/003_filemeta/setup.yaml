@@ -1,0 +1,34 @@
+pipeline:
+  setup:
+    action: msg:create
+    resources:
+      - URL: proxySourceTopic
+        type: topic
+        vendor: gc
+        credentials: $gcSecrets
+
+      - URL: proxyTargetTopic1
+        type: topic
+        vendor: gc
+        credentials: $gcSecrets
+
+      - URL: proxySubscription1
+        type: subscription
+        vendor: gc
+        credentials: $gcSecrets
+        config:
+          topic:
+            URL: /projects/${projectID}/topics/proxyTargetTopic1
+
+      - URL: proxyTargetTopic2
+        type: topic
+        vendor: gc
+        credentials: $gcSecrets
+
+      - URL: proxySubscription2
+        type: subscription
+        vendor: gc
+        credentials: $gcSecrets
+        config:
+          topic:
+            URL: /projects/${projectID}/topics/proxyTargetTopic2

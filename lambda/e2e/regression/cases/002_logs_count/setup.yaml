@@ -1,0 +1,12 @@
+pipeline:
+  create-bucket:
+    action: storage:copy
+    comments: copy test assets
+    source:
+      URL: ${parent.path}/data/
+    dest:
+      URL: s3://mye2e-bucket/folder1/
+      credentials: $awsCredentials
+    assets:
+      datafile1.csv: datafile1.csv
+      datafile2.csv: datafile2.csv

@@ -1,0 +1,16 @@
+init:
+  functionName: HelloWorld
+pipeline:
+  trigger:
+    action: aws/lambda:invoke
+    credentials: $awsCredentials
+    comments: call $functionName lambda function
+    functionname: $functionName
+    payload: ""
+    post:
+      payload: $AsString($Payload)
+  assert:
+    action: validator:assert
+    comments: 'validate function output: $payload '
+    actual: $payload
+    expected: /Hello World/

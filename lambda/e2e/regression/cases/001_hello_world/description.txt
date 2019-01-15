@@ -1,0 +1,7 @@
+Lambda function direct call
+
+Input:
+ n/a
+
+Output:
+ hello world

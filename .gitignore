@@ -1,0 +1,5 @@
+vendor
+logs
+.idea
+*.iml
+*.zip

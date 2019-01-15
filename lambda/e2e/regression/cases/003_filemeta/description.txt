@@ -1,0 +1,16 @@
+Function proxies message arriving at proxySourceTopic to destination defined in the processing message
+
+Input:
+
+event triggered on proxySourceTopic topic, --trigger-resource proxySourceTopic --trigger-event google.pubsub.topic.publish
+message published on proxySourceTopic topic
+type ProxyMessage struct {
+	Source string `json:"source"`
+	Dest string `json:"dest"`
+	ProjectID string `json:"projectID"`
+	Message []byte `json:"message"`
+}
+
+Output:
+    message proxied to dynamic destination
+

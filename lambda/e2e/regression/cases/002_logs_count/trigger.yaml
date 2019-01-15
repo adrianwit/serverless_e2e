@@ -1,0 +1,12 @@
+pipeline:
+  trigger:
+    action: rest/runner:send
+    URL: ${endpointURL}loginfo
+    method: post
+    '@request':
+      region: ${awsSecrets.Region}
+      URL: s3://mye2e-bucket/folder1/
+    expect:
+      Status: ok
+      FileCount: 2
+      LinesCount: 52

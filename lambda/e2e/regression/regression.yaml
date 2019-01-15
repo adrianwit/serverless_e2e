@@ -1,0 +1,51 @@
+pipeline:
+  set_sdk:
+    action: sdk.set
+    target: $target
+    sdk: go:1.11
+
+  test:
+    tag: Test
+    description: '@info'
+    subPath: 'cases/${index}*'
+    range: 2..002
+    template:
+      setVars:
+        action: nop
+        comments: use case init
+        skip: $HasResource(${path}/skip.txt)
+
+      setup:
+        when: $HasResource(${path}/setup.yaml)
+        action: run
+        comments: setup use case resources
+        request: '@setup'
+
+      deploy:
+        action: run
+        comments: deploy lambda function
+        request: '@deploy'
+
+      run-trigger:
+        action: run
+        comments: fire lambda function trigger
+        request: '@trigger'
+        sleepTimeMs: 500
+
+      validate:
+        when: $HasResource(${path}/test.yaml)
+        action: run
+        comments: validate lambda function execution
+        request: '@test'
+
+      ubdeploy:
+        when: false
+        zzwhen: $HasResource(${path}/undeploy.yaml)
+        action: run
+        comments: undeploy lambda function
+        request: '@undeploy'
+
+    post-test-sleep:
+      action: nop
+      sleepTimeMs: 1000
+      comments: sleep for extra debuging
