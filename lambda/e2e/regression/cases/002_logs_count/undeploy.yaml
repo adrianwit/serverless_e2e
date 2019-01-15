@@ -1,5 +1,8 @@
 pipeline:
-  undeploy:
+  undeployFunction:
     action: aws/lambda:deleteFunction
     credentials: $awsCredentials
     functionname: LoginfoFn
+  undeployRestAPI:
+    action: aws/apigateway:removeRestAPI
+    name: loginfoAPI
