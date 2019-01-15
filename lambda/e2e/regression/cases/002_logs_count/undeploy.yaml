@@ -1,5 +1,5 @@
 pipeline:
-  deploy:
+  undeploy:
     action: aws/lambda:deleteFunction
     credentials: $awsCredentials
     functionname: LoginfoFn

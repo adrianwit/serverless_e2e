@@ -1,4 +1,4 @@
-## Cloud function with e2e testing
+## Cloud Function with e2e testing
 
 **Prerequisites:**
 
@@ -25,4 +25,4 @@ Cloud function handler supports the following function signatures:
     func(context.Context, Event) (error)
 
 
-TODO: update this project with defined examples once cloud function goes to Beta
+TODO: update this project with defined examples once cloud function golang runtime goes to Beta
