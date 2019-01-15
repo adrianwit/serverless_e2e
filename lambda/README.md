@@ -9,7 +9,7 @@
     
 #### Introduction
 
-AWS Lambda is a serverless compute service that runs a code in response to events and automatically manages the underlying compute resources.
+AWS Lambda is a serverless compute service that runs a provided code in response to events and automatically manages the underlying compute resources.
 The event can be fired by a specific trigger, which determines how and when your function executes. 
 
 

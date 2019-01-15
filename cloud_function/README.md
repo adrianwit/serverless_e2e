@@ -13,10 +13,10 @@
 #### Introduction
 
 
-Cloud Functions can be fired by a specific trigger. 
-The trigger type determines how and when your function executes. 
+Cloud Functions is a serverless compute service that runs a specified  code in response to events and automatically manages the underlying compute resources.
+The event can be fired by a specific trigger, which determines how and when your function executes.
 
-Cloud function handler depending on source supports the following function signatures: 
+Cloud function handler supports the following function signatures: 
  
 - HTTP Endpoint
     func(http.ResponseWriter, *http.Request)
