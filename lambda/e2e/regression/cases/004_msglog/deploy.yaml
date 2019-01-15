@@ -1,0 +1,37 @@
+init:
+  functionRole: lambda-msglog-executor
+  functionName: FilemetaFn
+  codeZip: ${appPath}msglog/msglog.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
+pipeline:
+  deploy:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}msglog
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build -o msglog
+        - zip -j msglog.zip msglog
+
+    setupFunction:
+      action: aws/lambda:setupFunction
+      credentials: $awsCredentials
+      functionname: $functionName
+      runtime:  go1.x
+      handler: msglog
+      code:
+        zipfile: $LoadBinary(${codeZip})
+      rolename: lambda-msglog-executor
+      define:
+        - policyname: sqs-my-queue-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  

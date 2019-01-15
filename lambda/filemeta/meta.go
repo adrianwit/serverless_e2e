@@ -7,6 +7,14 @@ type Meta struct {
 	Assets map[string]int
 }
 
+type FolderInfo struct {
+	Folder     string
+	FileCount  int
+	LinesCount int
+}
+
+
+
 func (m *Meta) Add(URL string, lineCount int) {
 	key, _ := toolbox.URLSplit(URL)
 	info, ok := m.Paths[key]
@@ -23,10 +31,4 @@ func (m *Meta) Add(URL string, lineCount int) {
 	m.Assets[URL] = lineCount
 	info.FileCount++
 	info.LinesCount += lineCount
-}
-
-type FolderInfo struct {
-	Folder     string
-	FileCount  int
-	LinesCount int
 }

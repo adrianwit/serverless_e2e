@@ -2,7 +2,14 @@ Function count log and log lines
 
 Input:
     s3 location to count logs and log lines:
-    gs://my_e2ebucket/folder1/datafile1.csv
-    gs://my_e2ebucket/folder1/datafile2.csv
+    s3://my_e2ebucket/folder1/datafile1.csv
+    s3://my_e2ebucket/folder1/datafile2.csv
 
 Output:
+
+    type Response struct {
+    	Status     string
+    	Error      string
+    	FileCount  uint32
+    	LinesCount uint32
+    }

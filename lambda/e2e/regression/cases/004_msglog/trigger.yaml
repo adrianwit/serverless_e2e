@@ -1,0 +1,13 @@
+pipeline:
+  trigger:
+    action: msg:push
+    dest:
+      URL: mye2eQueue
+      type: queue
+      credentials: $awsCredentials
+      vendor: aws
+    messages:
+      - data:
+          message: 'this is my 1st message'
+      - data:
+          message: 'this is my 2nd message'

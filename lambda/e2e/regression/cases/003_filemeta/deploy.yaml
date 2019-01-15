@@ -29,7 +29,7 @@ pipeline:
         zipfile: $LoadBinary(${codeZip})
       rolename: lambda-filemeta-executor
       define:
-        - policyname: s3-mye2e-bucket-role
+        - policyname: s3-mye2e-bucket2-role
           policydocument: $Cat('${privilegePolicy}')
       attach:
         - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole

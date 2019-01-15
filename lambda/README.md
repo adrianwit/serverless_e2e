@@ -46,7 +46,7 @@ References:
 
 ### Examples
 
-#### Direct lambda trigger
+#### Direct Function Invocation
 
 - [HelloWorld](hello/hello.go)
 - [E2E Use Case](e2e/regression/cases/001_hello_world)
@@ -57,7 +57,7 @@ References:
 ```
 
 
-#### HTTP APIGateway trigger
+#### HTTP APIGateway 
 
 - [LogInfo](loginfo/app/loginfo.go)
 - [E2E Use Case](e2e/regression/cases/002_logs_count)
@@ -120,7 +120,7 @@ func handleError(err error) (events.APIGatewayProxyResponse, error) {
     * [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/apigw.go)
 
 
-#### S3 triggers
+#### S3 Storage 
 
 - [FileMeta](filemeta/filemeta.go)
 - [E2E Use Case](e2e/regression/cases/003_filemeta)
@@ -128,7 +128,6 @@ func handleError(err error) (events.APIGatewayProxyResponse, error) {
 ```go
     func(context.Context, events.S3Event)
 ```
-
 - Event types:
  * s3:ObjectCreated:*
  * s3:ObjectCreated:Put
@@ -172,6 +171,39 @@ type S3UserIdentity struct {
     * [NotificationHowTo](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
     * [Setting Bucket Notification](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-notification-configuration.html)
 
+#### Simple Queue Service 
+
+
+- [FileMeta](msglog/msglog.go)
+- [E2E Use Case](e2e/regression/cases/004_msglog)
+- _Handler Signature_ 
+```go
+    func(ctx context.Context, sqsEvent events.SQSEvent) error
+```
+- SQSEvent
+```go
+type SQSEvent struct {
+	Records []SQSMessage `json:"Records"`
+}
+
+type SQSMessage struct {
+	MessageId              string                         `json:"messageId"`
+	ReceiptHandle          string                         `json:"receiptHandle"`
+	Body                   string                         `json:"body"`
+	Md5OfBody              string                         `json:"md5OfBody"`
+	Md5OfMessageAttributes string                         `json:"md5OfMessageAttributes"`
+	Attributes             map[string]string              `json:"attributes"`
+	MessageAttributes      map[string]SQSMessageAttribute `json:"messageAttributes"`
+	EventSourceARN         string                         `json:"eventSourceARN"`
+	EventSource            string                         `json:"eventSource"`
+	AWSRegion              string                         `json:"awsRegion"`
+}
+```
+
+- [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/sqs.go)
+
+- References:
+   * [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
 
 
 ### Error Handling
