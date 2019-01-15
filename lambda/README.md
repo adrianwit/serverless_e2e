@@ -9,11 +9,11 @@
     
 #### Introduction
 
-Lambda can be fired by a specific trigger. 
-The trigger type determines how and when your function executes. 
+AWS Lambda is a serverless compute service that runs a code in response to events and automatically manages the underlying compute resources.
+The event can be fired by a specific trigger, which determines how and when your function executes. 
 
-Lambda entry point is main with lambda.Start call.
 
+Lambda entry point:
 ```go
 func main() {
 	lambda.Start(handler)
