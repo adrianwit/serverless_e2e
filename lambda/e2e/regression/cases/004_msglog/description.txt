@@ -1,23 +1,9 @@
-Function count log and log lines trigger by  S3 Create Object event
+Function receives pushed message to the mye2eQueue, and log it to cloud watch
 
 Input:
 
-    s3 location to count logs and log lines:
-    s3://mye2e-bucket2/folder1/datafile1.csv
-    s3://mye2e-bucket2/folder1/datafile2.csv
+   mye2eQueue: messages
 
 
 Output:
 
-    Meta file in s3://mye2e-bucket2/meta/filemeta.json
-
-    type Meta struct {
-        Paths  map[string]*FolderInfo
-        Assets map[string]int
-    }
-
-    type FolderInfo struct {
-        Folder     string
-        FileCount  int
-        LinesCount int
-    }

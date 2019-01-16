@@ -15,6 +15,7 @@ The event can be fired by a specific trigger, which determines how and when your
 References:
 * [Programming-model](https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html)
 
+
     
 #### Event/Trigger
 
@@ -38,13 +39,24 @@ where handler supports the following function signatures:
 - func(context.Context, Event) (Output, error)
 
 
-This project provides example for the following native mechanisms:
+**Pull/Push model lambda trigger configuration**
+
+1. Poll-based AWS services: Amazon Kinesis Data Streams and DynamoDB streams or Amazon SQS queues
+    - trigger is configured within lambda via Event Source Mapping
+    
+2. Push based AWS services     
+    - trigger is configured within event source. For example, Amazon S3 provides the bucket notification configuration API
+    - source event need necessary permissions to invoke a lambda function
+
 
 References:
 * [Go Programming Model Handler Types](https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-handler-types.html)
-
+* [invocation-modes](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html)
 
 ### Examples
+
+This project provides example for the following native mechanisms:
+
 
 #### Direct Function Invocation
 
@@ -166,10 +178,12 @@ type S3UserIdentity struct {
 - [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/s3.go)
 
 - References:
-    * [Using AWS Lambda with Amazon S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
-    * [Using AWS Lambda with Amazon S3 Example](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html)
+    * [Using Lambda with S3](https://docs.aws.amazon.com/lambda/latest/dg/with-s3.html)
+    * [Using Lambda with S3 Example](https://docs.aws.amazon.com/lambda/latest/dg/with-s3-example.html)
     * [NotificationHowTo](https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html)
     * [Setting Bucket Notification](https://docs.aws.amazon.com/cli/latest/reference/s3api/put-bucket-notification-configuration.html)
+
+
 
 #### Simple Queue Service 
 
@@ -203,7 +217,12 @@ type SQSMessage struct {
 - [Event Contract](https://github.com/aws/aws-lambda-go/blob/master/events/sqs.go)
 
 - References:
-   * [Using AWS Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
+   * [Using Lambda with Amazon SQS](https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html)
+   * [Lambda Event Source Mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html)
+
+
+
+
 
 
 ### Error Handling

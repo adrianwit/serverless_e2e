@@ -1,0 +1,16 @@
+pipeline:
+  undeploy:
+    action: exec:run
+    comments: deploy cloud function
+    target: $target
+    timeoutMs: 150000
+    terminators:
+      - Do you want to continue
+    errors:
+      - ERROR
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcSecrets}.json
+    commands:
+      - cd $appPath
+      - gcloud alpha functions delete QueryBQ
+      - ${cmd[1].stdout}:/Do you want to continue/ ? Y

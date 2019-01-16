@@ -1,0 +1,19 @@
+[
+  {
+    "id": "85E3D707",
+    "likes_count": 3,
+    "likes": {
+      "User3456": true,
+      "User7658": true,
+      "User0083": true
+    }
+  },
+  {
+    "id": "846904D2",
+    "likes_count": 2,
+    "likes": {
+      "User0083": true,
+      "User7658": true
+    }
+  }
+]

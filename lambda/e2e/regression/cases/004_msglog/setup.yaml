@@ -6,4 +6,11 @@ pipeline:
       - URL: mye2eQueue
         type: queue
         vendor: aws
-
+  removeLogGroup:
+    action: aws/logs:deleteLogGroup
+    credentials: $awsCredentials
+    logGroupName: /aws/lambda/MsgLogFn
+  createLogGroup:
+    action: aws/logs:createLogGroup
+    credentials: $awsCredentials
+    logGroupName: /aws/lambda/MsgLogFn

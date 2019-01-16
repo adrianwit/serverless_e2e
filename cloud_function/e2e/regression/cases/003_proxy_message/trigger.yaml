@@ -1,0 +1,16 @@
+pipeline:
+  trigger:
+    action: msg:push
+    dest:
+      URL: /projects/${projectID}/topics/proxySourceTopic
+      credentials: $gcSecrets
+      vendor: gc
+    messages:
+      - data:
+          dest: proxyTargetTopic1
+          projectID: $projectID
+          message: 'this is my 1st message'
+      - data:
+          dest: proxyTargetTopic2
+          projectID: $projectID
+          message: 'this is my 2nd message'

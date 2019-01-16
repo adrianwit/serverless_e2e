@@ -1,0 +1,9 @@
+pipeline:
+  trigger:
+    action: storage:copy
+    source:
+      URL: ${parent.path}/data/data.csv
+    dest:
+      URL: gs://my_e2ebucket/data/master/data.csv
+      credentials: $gcSecrets
+    sleepTimeMs: 1500

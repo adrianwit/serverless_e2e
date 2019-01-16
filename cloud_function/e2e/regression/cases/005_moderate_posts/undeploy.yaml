@@ -1,0 +1,13 @@
+pipeline:
+  deploy:
+    action: exec:run
+    target: $target
+    timeoutMs: 150000
+    commands:
+      - cd $appPath
+      - gcloud alpha functions delete ModeratePost
+      - ${cmd[1].stdout}:/Do you want to continue/ ? Y
+
+
+
+

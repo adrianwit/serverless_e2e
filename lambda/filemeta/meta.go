@@ -13,8 +13,6 @@ type FolderInfo struct {
 	LinesCount int
 }
 
-
-
 func (m *Meta) Add(URL string, lineCount int) {
 	key, _ := toolbox.URLSplit(URL)
 	info, ok := m.Paths[key]

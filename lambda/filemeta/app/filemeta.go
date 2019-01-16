@@ -8,14 +8,14 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"log"
 	"os"
-
 )
 
 var errorLogger = log.New(os.Stderr, "ERROR ", log.Llongfile)
+
 const metaURL = "meta/filemeta.json"
 
 func handleEvent(ctx context.Context, s3Event events.S3Event) {
-	if len(s3Event.Records) ==  0 {
+	if len(s3Event.Records) == 0 {
 		return
 	}
 	service, err := filemeta.New(s3Event.Records[0].AWSRegion)
@@ -24,7 +24,7 @@ func handleEvent(ctx context.Context, s3Event events.S3Event) {
 		return
 	}
 	request := &filemeta.Request{
-		MetaURL: fmt.Sprintf("s3://%s/%s",  s3Event.Records[0].S3.Bucket.Name, metaURL),
+		MetaURL:    fmt.Sprintf("s3://%s/%s", s3Event.Records[0].S3.Bucket.Name, metaURL),
 		ObjectURLs: make([]string, 0),
 	}
 
@@ -38,8 +38,6 @@ func handleEvent(ctx context.Context, s3Event events.S3Event) {
 		return
 	}
 }
-
-
 
 func main() {
 	lambda.Start(handleEvent)

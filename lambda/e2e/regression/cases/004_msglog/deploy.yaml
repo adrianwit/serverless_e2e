@@ -1,6 +1,6 @@
 init:
   functionRole: lambda-msglog-executor
-  functionName: FilemetaFn
+  functionName: MsgLogFn
   codeZip: ${appPath}msglog/msglog.zip
   privilegePolicy: ${parent.path}/privilege-policy.json
 pipeline:
@@ -33,5 +33,8 @@ pipeline:
           policydocument: $Cat('${privilegePolicy}')
       attach:
         - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-
+      triggers:
+        - source: mye2eQueue
+          type: sqs
+          batchSize: 2
   

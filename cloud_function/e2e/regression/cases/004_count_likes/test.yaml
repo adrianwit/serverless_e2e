@@ -1,0 +1,6 @@
+pipeline:
+ expect:
+    db2:
+      action: dsunit:expect
+      datastore: db2
+      URL:  ${parent.path}/db2/expect

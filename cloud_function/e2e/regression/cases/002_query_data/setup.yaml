@@ -1,0 +1,16 @@
+pipeline:
+  init:
+    action: dsunit:init
+    datastore: db1
+    config:
+      driverName: bigquery
+      credentials: $gcSecrets
+      parameters:
+        datasetId: db1
+    scripts:
+     - URL: ${parent.path}/db1/schema.sql
+  prepare:
+    db1:
+      action: dsunit:prepare
+      datastore: db1
+      URL:  ${parent.path}/db1/data

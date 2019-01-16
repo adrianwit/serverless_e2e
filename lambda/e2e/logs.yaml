@@ -1,0 +1,10 @@
+pipeline:
+  task1:
+    action: aws/logs:filterLogEventMessages
+    credentials: aws
+    loggroupname: "/aws/lambda/MsgLogFn"
+    starttime: ${timestamp.1HoursAgoInUTC}
+    exclude:
+      - START
+      - REPORT
+      - END

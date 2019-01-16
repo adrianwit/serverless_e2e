@@ -1,13 +1,30 @@
+init:
+  self.i: 1
 pipeline:
-  trigger:
-    action: msg:push
-    dest:
-      URL: mye2eQueue
-      type: queue
+  loop:
+    trigger:
+      action: msg:push
+      comments: pushing message ${self.i}
       credentials: $awsCredentials
-      vendor: aws
-    messages:
-      - data:
-          message: 'this is my 1st message'
-      - data:
-          message: 'this is my 2nd message'
+      dest:
+        URL: mye2eQueue
+        type: queue
+        vendor: aws
+      messages:
+        - data: 'Test: this is my ${self.i} message'
+          attributes:
+            id: $self.i
+    inc:
+      action: nop
+      logging: false
+      init:
+        self.i: ${self.i++}
+    until:
+      action: goto
+      logging: false
+      task: loop
+      when: $self.i <= 10
+    thinkTime:
+      action: nop
+      comments: allow extract time to message be process and log stream flushed
+      sleepTimeMs: 20000

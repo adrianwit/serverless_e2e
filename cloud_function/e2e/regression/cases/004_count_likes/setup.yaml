@@ -1,0 +1,15 @@
+pipeline:
+  init:
+    action: dsunit:init
+    datastore: db2
+    config:
+      driverName: fbc
+      credentials: $fbSecrets
+      parameters:
+        databaseURL: https://${fbProjectID}.firebaseio.com
+        projectID: ${fbProjectID}
+  prepare:
+    db2:
+      action: dsunit:prepare
+      datastore: db2
+      URL:  ${parent.path}/db2/init

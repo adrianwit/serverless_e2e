@@ -1,0 +1,28 @@
+init:
+  app: bqwt
+  target:
+    URL: ssh://127.0.0.1/
+    credentials: localhost
+  appHost: $Hostname($target.URL)
+  gcSecrets: e2e
+  appPath: $WorkingDirectory(../)
+  e2e: $secrets.e2e
+  projectID: $e2e.ProjectID
+
+  fbSecrets: fbc
+  fbc: $secrets.fbc
+  fbProjectID: $fbc.ProjectID
+
+defaults:
+  app: $app
+  target: $target
+  buildTarget: $buildTarget
+  appTarget: $appTarget
+  bqCredentials: $bqCredentials
+pipeline:
+  setSdk:
+
+  test:
+    action: run
+    request: '@regression/regression'
+    tasks: '*'

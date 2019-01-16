@@ -1,0 +1,26 @@
+pipeline:
+  fetchLogEvent:
+    action: aws/logs:filterLogEventMessages
+    logging: false
+    credentials: $awsCredentials
+    loggroupname: /aws/lambda/MsgLogFn
+    starttime: $startTimestamp
+    include:
+      - '{'
+  assert:
+    action: validator:assert
+    normalizeKVPairs: true
+    actual: ${fetchLogEvent.Messages}
+    expect:
+      - '@indexBy@': messageAttributes.id.stringValue
+
+      - body: /this is my 3 message/
+        messageAttributes:
+          id:
+            stringValue: 3
+
+
+      - body: /this is my 4 message/
+        messageAttributes:
+          id:
+            stringValue: 4

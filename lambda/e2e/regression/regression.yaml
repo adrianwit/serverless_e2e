@@ -39,7 +39,7 @@ pipeline:
         request: '@test'
 
       ubdeploy:
-        zzwhen: $HasResource(${path}/undeploy.yaml)
+        when: $HasResource(${path}/undeploy.yaml)
         action: run
         comments: undeploy lambda function
         request: '@undeploy'

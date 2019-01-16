@@ -1,0 +1,14 @@
+pipeline:
+  init:
+    action: dsunit:init
+    datastore: db3
+    config:
+      driverName: fsc
+      credentials: $fbSecrets
+      parameters:
+        projectID: $fbProjectID
+  prepare:
+    db3:
+      action: dsunit:prepare
+      datastore: db3
+      URL: ${parent.path}/db3/init

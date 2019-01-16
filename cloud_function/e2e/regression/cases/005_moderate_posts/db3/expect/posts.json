@@ -1,0 +1,26 @@
+[
+  {
+    "id": "85E3D707",
+    "text": "This is my first post",
+
+    "comments": [
+      {
+        "text": "FIRST comments"
+      },
+      {
+        "text": "SECOND comments"
+      }
+    ]
+  },
+  {
+    "id": "846904D2",
+    "comments": [
+      {
+        "text": "FIRST comments"
+      },
+      {
+        "text": "SECOND comments"
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+
+Input:
+
+HTTP Post Request
+    https://us-central1-${projectID}.cloudfunctions.net/QueryBQ
+    {
+        "DatasetID": "db1",
+        "ProjectID": "my project",
+        "SQL": "SELECT * FROM table "
+    }
+
+
+Output:
+HTTP Response
+    SQL based data

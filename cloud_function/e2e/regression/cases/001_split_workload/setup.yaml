@@ -1,0 +1,24 @@
+init:
+  testData: '_'
+pipeline:
+  create-bucket:
+    action: storage:upload
+    comments: create a bucket with dummy data
+    sourceKey: testData
+    dest:
+      URL: gs://my_e2ebucket/data
+      credentials: $gcSecrets
+  cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: gs://my_e2ebucket/data/master/data.csv
+        credentials: $gcSecrets
+      - URL: gs://my_e2ebucket/data/workers/01_data.csv
+        credentials: $gcSecrets
+      - URL: gs://my_e2ebucket/data/workers/02_data.csv
+        credentials: $gcSecrets
+      - URL: gs://my_e2ebucket/data/workers/00_data.csv
+        credentials: $gcSecrets
+      - URL: gs://my_e2ebucket/data
+        credentials: $gcSecrets

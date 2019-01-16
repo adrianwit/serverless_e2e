@@ -1,0 +1,7 @@
+pipeline:
+  prepare:
+    db2:
+      action: dsunit:prepare
+      datastore: db3
+      URL:  ${parent.path}/db3/triggger
+      sleepTimeMs: 2000

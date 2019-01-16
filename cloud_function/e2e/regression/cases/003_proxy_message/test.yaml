@@ -1,0 +1,30 @@
+pipeline:
+  check-proxySubscription1:
+    action: msg:pull
+    source:
+      URL: proxySubscription1
+      type: subscription
+      vendor: gc
+      credentials: $gcSecrets
+    count: 1
+    UDF: AsMap
+    expect:
+      - Transformed:
+          message: "this is my 1st message"
+          projectID: $projectID
+          source: /proxySourceTopic/
+
+  check-proxySubscription2:
+    action: msg:pull
+    source:
+      URL: proxySubscription2
+      type: subscription
+      vendor: gc
+      credentials: $gcSecrets
+    count: 1
+    UDF: AsMap
+    expect:
+      - Transformed:
+          message: "this is my 2nd message"
+          projectID: $projectID
+          source: /proxySourceTopic/

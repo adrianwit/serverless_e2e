@@ -1,0 +1,20 @@
+init:
+  httpsTrigger: https://us-central1-${projectID}.cloudfunctions.net/QueryBQ
+pipeline:
+  trigger:
+    action: rest/runner:send
+    comments: call function via HTTP
+    URL: $httpsTrigger
+    method: POST
+    request:
+      ProjectID: $projectID
+      DatasetID: db1
+      SQL: SELECT * FROM dummy ORDER BY id
+    expect:
+      Rows:
+        - id: 1
+          name: dummy 1
+        - id: 2
+          name: dummy 2
+        - id: 3
+          name: dummy 3
