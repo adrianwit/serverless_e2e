@@ -16,7 +16,7 @@ type FirebaseEvent struct {
 }
 
 /*
-gcloud alpha functions deploy CountLikesFn
+gcloud  functions deploy CountLikesFn
 --trigger-event providers/google.firebase.database/eventTypes/ref.write
 --trigger-resource  'projects/_/instances/$instanceID/refs/posts/{key}/likes'
 --runtime go111

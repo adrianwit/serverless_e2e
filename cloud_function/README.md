@@ -8,7 +8,8 @@
     * regular secrets file -> ~/.secret/e2e.json from http://console.cloud.google.com/
     * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
     * [Setup endly google secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
- 
+    * [endly e2e runner](https://github.com/viant/endly/releases) 
+    
  
 #### Introduction
 
@@ -185,4 +186,14 @@ type Resource struct {
 	Type string `json:"type"`
 }
 
+```
+
+
+### Running e2e tests
+
+
+```bash
+git clone https://github.com/adrianwit/serverless_e2e
+cd  serverless_e2e/cloud_fuction/e2e
+endly -r=run
 ```

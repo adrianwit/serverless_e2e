@@ -29,7 +29,7 @@ type FirestoreEvent struct {
 
 /*
 
-gcloud alpha functions deploy ModeratePost --entry-point ModeratePostFn  \
+gcloud  functions deploy ModeratePost --entry-point ModeratePostFn  \
 	--trigger-event providers/cloud.firestore/eventTypes/document.write \
 	--trigger-resource  'projects/abstractdb-154a9/databases/(default)/documents/posts/{doc}' --runtime go111
 
