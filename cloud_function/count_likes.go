@@ -15,12 +15,7 @@ type FirebaseEvent struct {
 	Auth  interface{} `json:"auth"`
 }
 
-/*
-gcloud  functions deploy CountLikesFn
---trigger-event providers/google.firebase.database/eventTypes/ref.write
---trigger-resource  'projects/_/instances/$instanceID/refs/posts/{key}/likes'
---runtime go111
-*/
+
 
 //CountLikesFn counts post likes to update likes_count
 func CountLikesFn(ctx context.Context, event FirebaseEvent) error {
