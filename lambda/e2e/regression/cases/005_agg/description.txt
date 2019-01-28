@@ -1,0 +1,8 @@
+Function aggregates messages push to sns in dynamodb table
+
+Input:
+  mye2eTopic  messages
+
+Output:
+  dynamoDB: Events table
+

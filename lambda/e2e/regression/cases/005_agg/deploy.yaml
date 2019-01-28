@@ -1,0 +1,40 @@
+init:
+  functionRole: lambda-agg-executor
+  functionName: AggFn
+  codeZip: ${appPath}agg/app/agg.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
+pipeline:
+  deploy:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}agg/app
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build -o agg
+        - zip -j agg.zip agg
+
+    setupFunction:
+      action: aws/lambda:setupFunction
+      credentials: $awsCredentials
+      functionname: $functionName
+      runtime:  go1.x
+      handler: agg
+      code:
+        zipfile: $LoadBinary(${codeZip})
+      rolename: lambda-agg-executor
+      define:
+        - policyname: lambda-sns-execution-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    setupSubscription:
+      action: aws/sns:setupSubscription
+      protocol: lambda
+      endpoint: $functionName
+      topic: mye2eTopic

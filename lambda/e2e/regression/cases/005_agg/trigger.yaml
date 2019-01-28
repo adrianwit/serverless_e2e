@@ -1,0 +1,31 @@
+init:
+  self.i: 1
+pipeline:
+  loop:
+    trigger:
+      action: msg:push
+      comments: pushing message ${self.i}
+      credentials: $awsCredentials
+      dest:
+        URL: mye2eTopic
+        type: topic
+        vendor: aws
+      messages:
+        - subject: Test subject
+          data: '{"EventType":1, "Timestamp":"${tzTime.now}"}'
+          attributes:
+            id: $self.i
+    inc:
+      action: nop
+      logging: false
+      init:
+        self.i: ${self.i++}
+    until:
+      action: goto
+      logging: false
+      task: loop
+      when: $self.i <= 10
+    thinkTime:
+      action: nop
+      comments: allow extra time for message processing
+      sleepTimeMs: 2000

@@ -26,5 +26,5 @@ pipeline:
       when: $self.i <= 10
     thinkTime:
       action: nop
-      comments: allow extract time to message be process and log stream flushed
+      comments: allow extra time for message processing and log flushing
       sleepTimeMs: 20000

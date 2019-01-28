@@ -1,0 +1,7 @@
+[
+  {
+    "EventType":1,
+    "EventDate": "$date",
+    "Qty": 10
+  }
+]

@@ -1,0 +1,25 @@
+pipeline:
+  setup:
+    action: msg:setupResource
+    credentials: $awsCredentials
+    resources:
+      - URL: mye2eTopic
+        type: topic
+        vendor: aws
+  initDb:
+    action: dsunit:init
+    datastore: db1
+    config:
+      driverName: dyndb
+      credentials: $awsCredentials
+    tables:
+      - table: Events
+        pkColumns:
+          - Date
+          - EventType
+        schemaURL: ${parent.path}/db1/schema/events.json
+  prepareDb:
+    db1:
+      action: dsunit:prepare
+      datastore: db1
+      URL:  ${parent.path}/db1/data
