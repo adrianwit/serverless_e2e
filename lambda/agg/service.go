@@ -8,12 +8,12 @@ import (
 )
 
 type Service interface {
-	Consume(message *Message ) error
+	Consume(message *Message) error
 }
 
-type service struct {}
+type service struct{}
 
-func (s *service) Consume(message *Message ) error  {
+func (s *service) Consume(message *Message) error {
 	dyndbService, err := getDynamoService()
 	if err != nil {
 		return err
@@ -24,26 +24,26 @@ func (s *service) Consume(message *Message ) error  {
 		return fmt.Errorf("unable to marshal key %v", err)
 	}
 	if getOutput, err := dyndbService.GetItem(&dynamodb.GetItemInput{
-		TableName:table,
-		Key:key,
-	});err != nil || len(getOutput.Item) == 0  {
+		TableName: table,
+		Key:       key,
+	}); err != nil || len(getOutput.Item) == 0 {
 		event := &Event{
-			EventType:message.EventType,
-			Date:message.Date,
-			Quantity:0,
+			EventType: message.EventType,
+			Date:      message.Date,
+			Quantity:  0,
 		}
 		item, err := dynamodbattribute.MarshalMap(event)
 		if err != nil {
 			return err
 		}
 		if _, err = dyndbService.PutItem(&dynamodb.PutItemInput{
-			TableName:table,
-			Item:item,
-		});err != nil {
+			TableName: table,
+			Item:      item,
+		}); err != nil {
 			return err
 		}
 	}
-	delta, err := dynamodbattribute.MarshalMap(Counter{Value: 1,})
+	delta, err := dynamodbattribute.MarshalMap(Counter{Value: 1})
 	if err != nil {
 		return fmt.Errorf("unable to marshal counter %v", err)
 	}
@@ -58,13 +58,10 @@ func (s *service) Consume(message *Message ) error  {
 	return err
 }
 
-
 //New returns new service
 func New() Service {
 	return &service{}
 }
-
-
 
 type Counter struct {
 	Value int `json:":Delta"`

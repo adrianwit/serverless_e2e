@@ -7,11 +7,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
-
-
 func SNSEventRecordToMessage(record *events.SNSEventRecord) (*Message, error) {
 	message := record.SNS.Message
-	result := &Message{EventKey:&EventKey{}}
+	result := &Message{EventKey: &EventKey{}}
 	err := json.Unmarshal([]byte(message), result)
 	if err == nil {
 		result.Date = result.Timestamp.Format("2006-01-02")
@@ -19,10 +17,9 @@ func SNSEventRecordToMessage(record *events.SNSEventRecord) (*Message, error) {
 	return result, err
 }
 
-
 func getDynamoService() (*dynamodb.DynamoDB, error) {
-	sess, err :=  session.NewSession()
-	if err  != nil {
+	sess, err := session.NewSession()
+	if err != nil {
 		return nil, err
 	}
 	service := dynamodb.New(sess)
