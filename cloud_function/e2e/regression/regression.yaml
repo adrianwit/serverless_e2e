@@ -1,8 +1,8 @@
 pipeline:
-  set_sdk:
-    action: sdk.set
-    target: $target
-    sdk: go:1.11
+#  set_sdk:
+#    action: sdk.set
+#    target: $target
+#    sdk: go:1.11
 
   test:
     tag: Test

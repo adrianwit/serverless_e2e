@@ -194,6 +194,8 @@ type Resource struct {
 
 ```bash
 git clone https://github.com/adrianwit/serverless_e2e
-cd  serverless_e2e/cloud_fuction/e2e
+cd  serverless_e2e/cloud_function/e2e
 endly -r=run
 ```
+
+
