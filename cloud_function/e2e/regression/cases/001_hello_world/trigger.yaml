@@ -1,3 +1,5 @@
+defaults:
+  credentials: $gcSecrets
 pipeline:
   test1:
     trigger:
