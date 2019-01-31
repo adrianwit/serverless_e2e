@@ -11,7 +11,7 @@ pipeline:
     inc:
       action: nop
       init:
-        self.i: ${self.i++}
+        _: ${self.i++}
     goto:
       action: goto
       when: ${self.i} < 3

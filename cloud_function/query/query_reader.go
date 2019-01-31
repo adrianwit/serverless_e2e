@@ -1,11 +1,10 @@
-package cloud_function
+package query
 
 import (
 	"cloud.google.com/go/bigquery"
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/adrianwit/serverless_e2e/cloud_function/bq"
 	"net/http"
 	"strings"
 	"time"
@@ -65,7 +64,7 @@ func query(ctx context.Context, request *QueryRequest) (*QueryResponse, error) {
 		var result = map[string]bigquery.Value{}
 		return &result
 	}
-	err := bq.RunQuery(ctx, request.ProjectID, request.DatasetID, request.SQL, nil, request.UseLegacy, mapProvider, func(row interface{}) (b bool, e error) {
+	err := RunQuery(ctx, request.ProjectID, request.DatasetID, request.SQL, nil, request.UseLegacy, mapProvider, func(row interface{}) (b bool, e error) {
 		aMap, ok := row.(*map[string]bigquery.Value)
 		if !ok {
 			return false, fmt.Errorf("expected *map[string]bigquery.Value, but had %T", aMap)

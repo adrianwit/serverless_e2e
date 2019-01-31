@@ -1,0 +1,13 @@
+defaults:
+  credentials: $gcSecrets
+pipeline:
+  deploy:
+    action: gc/cloudfunctions:deploy
+    '@name': SplitWorkload
+    entryPoint: SplitWorkloadFn
+    runtime: go111
+    eventTrigger:
+      eventType: google.storage.object.finalize
+      resource: projects/_/buckets/my_e2ebucket
+    source:
+      URL: ${appPath}/split/

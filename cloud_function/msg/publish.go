@@ -1,4 +1,4 @@
-package ps
+package msg
 
 import (
 	"cloud.google.com/go/pubsub"

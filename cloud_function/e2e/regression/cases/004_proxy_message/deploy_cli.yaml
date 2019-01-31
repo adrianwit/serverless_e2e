@@ -1,12 +1,13 @@
 pipeline:
   deploy:
     action: exec:run
+    comments: deploy ProxyMsg tirggered by google.pubsub.topic.publish
     target: $target
     sleepTimeMs: 1500
     terminators:
-      - Do you want to continue
+     - Do you want to continue
     errors:
-      - ERROR
+     - ERROR
     env:
       GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcSecrets}.json
     commands:
@@ -14,9 +15,11 @@ pipeline:
       - go build
       - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/
       - gcloud config set project $projectID
-      - #gcloud alpha functions delete SplitWorkload
+      - #gcloud alpha functions delete ProxyMsg
       - ${cmd[4].stdout}:/Do you want to continue/ ? Y
-      - gcloud alpha functions deploy SplitWorkload --entry-point SplitWorkloadFn --trigger-resource my_e2ebucket --trigger-event google.storage.object.finalize --runtime go111
+      - gcloud alpha functions deploy PubSubProxy --entry-point PubSubProxyFn --trigger-resource proxySourceTopic --trigger-event google.pubsub.topic.publish --runtime go111
+
+
 
 
 

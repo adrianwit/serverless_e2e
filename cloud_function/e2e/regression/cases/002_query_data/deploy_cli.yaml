@@ -1,0 +1,32 @@
+pipeline:
+  deploy:
+    action: exec:run
+    comments: deploy QueryBQ triggered by http
+    target: $target
+    sleepTimeMs: 1500
+    terminators:
+      - Do you want to continue
+    errors:
+      - ERROR
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcSecrets}.json
+    commands:
+      - cd $appPath
+      - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/
+      - gcloud config set project $projectID
+      - #gcloud functions delete QueryBQ
+      - ${cmd[4].stdout}:/Do you want to continue/ ? Y
+      - gcloud functions deploy QueryBQ --entry-point QueryFn --runtime go111 --trigger-http
+    extract:
+      - key: triggerURL
+        regExpr: (?sm).+httpsTrigger:[^u]+url:[\s\t]+([^\r\n]+)
+
+  validateTriggerURL:
+    action: validator:assert
+    actual: ${deploy.Data.triggerURL}
+    expected: /QueryBQ/
+post:
+  triggerURL: ${deploy.Data.triggerURL}
+
+
+

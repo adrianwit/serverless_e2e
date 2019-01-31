@@ -27,7 +27,6 @@ type FirestoreEvent struct {
 	UpdateMask *UpdateMask `json:"updateMask"`
 }
 
-
 func ModeratePostFn(ctx context.Context, event FirestoreEvent) error {
 	meta, err := metadata.FromContext(ctx)
 	if err != nil {

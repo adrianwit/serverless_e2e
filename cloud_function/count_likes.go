@@ -15,8 +15,6 @@ type FirebaseEvent struct {
 	Auth  interface{} `json:"auth"`
 }
 
-
-
 //CountLikesFn counts post likes to update likes_count
 func CountLikesFn(ctx context.Context, event FirebaseEvent) error {
 	meta, err := metadata.FromContext(ctx)

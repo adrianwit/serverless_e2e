@@ -8,7 +8,7 @@ pipeline:
     tag: Test
     description: '@info'
     subPath: 'cases/${index}*'
-    range: 1..005
+    range: 1..006
     template:
       setVars:
         action: nop
@@ -16,6 +16,7 @@ pipeline:
         skip: $HasResource(${path}/skip.txt)
 
       setup:
+        when: $HasResource(${path}/setup.yaml)
         action: run
         comments: setup use case resources
         request: '@setup'
@@ -37,11 +38,13 @@ pipeline:
         comments: validate cloud function execution
         request: '@test'
 
-      ubdeploy:
-        when: $HasResource(${path}/undeploy.yaml)
-        action: run
-        comments: undeploy cloud function
-        request: '@undeploy'
+
+#     left commented for debugging
+#      ubdeploy:
+#    	when: $HasResource(${path}/undeploy.yaml)
+#        action: run
+#        comments: undeploy cloud function
+#        request: '@undeploy'
 
     post-test-sleep:
       action: nop

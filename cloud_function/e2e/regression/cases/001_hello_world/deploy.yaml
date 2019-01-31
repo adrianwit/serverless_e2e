@@ -3,8 +3,8 @@ defaults:
 pipeline:
   deploy:
     action: gc/cloudfunctions:deploy
-    '@name': QueryBQ
-    entryPoint: QueryFn
+    '@name': HelloWorld
+    entryPoint: HelloWorldFn
     runtime: go111
     source:
-      URL: ${appPath}/query/
+      URL: ${appPath}/hello/

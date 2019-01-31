@@ -1,0 +1,19 @@
+pipeline:
+  test1:
+    trigger:
+      action: gc/cloudfunctions:call
+      '@name': HelloWorld
+      data:
+        from: Endly
+    assert:
+      action: validator:assert
+      expect: /Endly/
+      actual: $trigger.Result
+  test2:
+    trigger:
+      action: gc/cloudfunctions:call
+      '@name': HelloWorld
+    assert:
+      action: validator:assert
+      expect: /World/
+      actual: $trigger.Result

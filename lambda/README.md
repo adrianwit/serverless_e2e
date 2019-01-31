@@ -6,7 +6,7 @@
  - dedicated aws account for e2e testing 
     * aws credentials file-> ~/.secret/e2e.json 
     * [Setup Endly AWS Credentials](https://github.com/viant/endly/tree/master/doc/secrets#aws)
-    * [endly e2e runner](http://github.com/viant/endly/)
+    * [endly e2e runner](http://github.com/viant/endly/) (0.29+)
     
 #### Introduction
 

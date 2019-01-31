@@ -8,7 +8,7 @@
     * regular secrets file -> ~/.secret/e2e.json from http://console.cloud.google.com/
     * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
     * [Setup endly google secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
-    * [endly e2e runner](https://github.com/viant/endly/releases) 
+    * [endly e2e runner](https://github.com/viant/endly/releases) (0.29+)
     
  
 #### Introduction

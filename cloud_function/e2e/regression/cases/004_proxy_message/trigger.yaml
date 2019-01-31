@@ -1,6 +1,7 @@
 pipeline:
   trigger:
     action: msg:push
+    sleepTimeMs: 5000
     dest:
       URL: /projects/${projectID}/topics/proxySourceTopic
       credentials: $gcSecrets

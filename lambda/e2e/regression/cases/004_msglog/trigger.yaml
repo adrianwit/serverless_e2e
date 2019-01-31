@@ -18,7 +18,7 @@ pipeline:
       action: nop
       logging: false
       init:
-        self.i: ${self.i++}
+        _: ${self.i++}
     until:
       action: goto
       logging: false

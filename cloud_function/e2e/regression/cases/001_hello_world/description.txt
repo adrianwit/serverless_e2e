@@ -1,0 +1,14 @@
+Call directly cloud function with simple message
+
+Input:
+
+Direct function call with a message
+
+    {
+        "From": "Endly",
+        "Message": "simple message"
+    }
+
+
+Output:
+Response: Hello Endly

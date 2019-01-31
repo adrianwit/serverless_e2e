@@ -1,0 +1,13 @@
+defaults:
+  credentials: $fbSecrets
+pipeline:
+  deploy:
+    action: gc/cloudfunctions:deploy
+    '@name': CountLikes
+    entryPoint: CountLikesFn
+    runtime: go111
+    eventTrigger:
+      eventType: providers/google.firebase.database/eventTypes/ref.write
+      resource: projects/_/instances/${gc.projectID}/refs/posts/{key}/likes
+    source:
+      URL: ${appPath}

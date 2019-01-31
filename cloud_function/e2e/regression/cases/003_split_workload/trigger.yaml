@@ -6,4 +6,4 @@ pipeline:
     dest:
       URL: gs://my_e2ebucket/data/master/data.csv
       credentials: $gcSecrets
-    sleepTimeMs: 1500
+    sleepTimeMs: 5000

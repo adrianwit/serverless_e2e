@@ -1,4 +1,4 @@
 pipeline:
   undeploy:
     action: gc/cloudfunctions:delete
-    '@name': QueryBQ
+    '@name': PubSubProxy

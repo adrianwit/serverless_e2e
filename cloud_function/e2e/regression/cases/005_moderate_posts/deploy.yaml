@@ -1,27 +1,13 @@
+defaults:
+  credentials: $fbSecrets
 pipeline:
   deploy:
-    action: exec:run
-    comments: deploy CountLikes triggered by providers/google.firebase.database/eventTypes/ref.write
-    target: $target
-    sleepTimeMs: 1500
-    terminators:
-      - Do you want to continue
-    errors:
-      - ERROR
-    env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${fbSecrets}.json
-    commands:
-      - cd $appPath
-        - go version
-      - go build
-      - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/
-      - gcloud config set project $fbProjectID
-      - #gcloud alpha functions delete ModeratePost
-      - ${cmd[4].stdout}:/Do you want to continue/ ? Y
-      - gcloud alpha functions deploy ModeratePost --entry-point ModeratePostFn  --trigger-event providers/cloud.firestore/eventTypes/document.write  --trigger-resource  'projects/${fbProjectID}/databases/(default)/documents/posts/{doc}' --runtime go111
-
-
-
-
-
-
+    action: gc/cloudfunctions:deploy
+    '@name': ModeratePost
+    entryPoint: ModeratePostFn
+    runtime: go111
+    eventTrigger:
+      eventType: providers/cloud.firestore/eventTypes/document.write
+      resource: projects/${gc.projectID}/databases/(default)/documents/posts/{doc}
+    source:
+      URL: ${appPath}

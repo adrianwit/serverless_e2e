@@ -1,0 +1,13 @@
+defaults:
+  credentials: $gcSecrets
+pipeline:
+  deploy:
+    action: gc/cloudfunctions:deploy
+    '@name': PubSubProxy
+    entryPoint: PubSubProxyFn
+    runtime: go111
+    eventTrigger:
+      eventType: google.pubsub.topic.publish
+      resource: projects/${gc.projectID}/topics/proxySourceTopic
+    source:
+      URL: ${appPath}/msg/

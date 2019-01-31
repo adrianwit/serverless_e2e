@@ -20,7 +20,7 @@ pipeline:
         - zip -j agg.zip agg
 
     setupFunction:
-      action: aws/lambda:setupFunction
+      action: aws/lambda:deploy
       credentials: $awsCredentials
       functionname: $functionName
       runtime:  go1.x

@@ -1,4 +1,4 @@
-package bq
+package query
 
 import (
 	"cloud.google.com/go/bigquery"

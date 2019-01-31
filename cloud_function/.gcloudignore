@@ -12,6 +12,8 @@
 # below:
 .git
 .gitignore
-
+e2e
 node_modules
+.idea
+*.iml
 #!include:.gitignore

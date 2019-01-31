@@ -1,4 +1,4 @@
-package cloud_function
+package msg
 
 import (
 	"cloud.google.com/go/functions/metadata"
@@ -6,7 +6,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/adrianwit/serverless_e2e/cloud_function/ps"
 )
 
 //ProxyMessage represent a proxy message
@@ -57,7 +56,7 @@ func PubSubProxyFn(ctx context.Context, event PubsubProxyEvent) error {
 		return fmt.Errorf("failed to marshal message %v", err)
 	}
 	msg := &pubsub.Message{Data: data}
-	err = ps.Publish(ctx, message.ProjectID, message.Dest, msg)
+	err = Publish(ctx, message.ProjectID, message.Dest, msg)
 	if err != nil {
 		return fmt.Errorf("failed to publish message: %v", err)
 	}

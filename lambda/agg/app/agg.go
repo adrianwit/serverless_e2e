@@ -1,15 +1,16 @@
 package main
 
 import (
-	"context"
 	"agg"
-	"github.com/aws/aws-lambda-go/lambda"
+	"context"
 	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 	"log"
 	"os"
 )
 
 var errorLogger = log.New(os.Stderr, "ERROR ", log.Llongfile)
+
 func handleEvent(ctx context.Context, snsEvent events.SNSEvent) {
 	service := agg.New()
 	for _, record := range snsEvent.Records {
@@ -23,7 +24,6 @@ func handleEvent(ctx context.Context, snsEvent events.SNSEvent) {
 		}
 	}
 }
-
 
 func main() {
 	lambda.Start(handleEvent)
