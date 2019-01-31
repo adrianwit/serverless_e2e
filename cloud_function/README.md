@@ -31,7 +31,7 @@ This project provides example for the following native trigger mechanisms:
 
 #### Google Storage
 
-- [SplitWorkloadFn](split_workload.go)
+- [SplitWorkloadFn](split/split_workload.go)
 - [E2E Use Case](e2e/regression/cases/001_split_workload)
 - Google Storage Event:
 ```go
@@ -66,7 +66,7 @@ type GSEvent struct {
 
 #### HTTP Endpoint
 
-- [QueryFn](query.go)
+- [QueryFn](query/query_reader.go)
 - [E2E Use Case](e2e/regression/cases/002_query_data)
 - _Reference_: 
     * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
@@ -74,7 +74,7 @@ type GSEvent struct {
 
 #### Pubsub
 
-- [PubSubProxyFn](proxy_msg.go)
+- [PubSubProxyFn](msg/proxy_msg.go)
 - [E2E Use Case](e2e/regression/cases/003_proxy_message)
 - _Reference_: 
     * [Calling PubSub](https://cloud.google.com/functions/docs/calling/pubsub)
