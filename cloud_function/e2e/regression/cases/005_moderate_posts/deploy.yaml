@@ -11,4 +11,4 @@ pipeline:
       eventType: providers/cloud.firestore/eventTypes/document.write
       resource: projects/${gc.projectID}/databases/(default)/documents/posts/{doc}
     source:
-      URL: ${appPath}
+      URL: ${appPath}/moderate/

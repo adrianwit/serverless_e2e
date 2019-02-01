@@ -1,4 +1,6 @@
+defaults:
+  credentials: $fbSecrets
 pipeline:
   undeploy:
     action: gc/cloudfunctions:delete
-    '@name': ModeratePost
+    '@name': CountLikes

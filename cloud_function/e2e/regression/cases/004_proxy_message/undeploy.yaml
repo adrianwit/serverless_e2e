@@ -1,3 +1,5 @@
+defaults:
+  credentials: $gcSecrets
 pipeline:
   undeploy:
     action: gc/cloudfunctions:delete

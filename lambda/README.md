@@ -7,6 +7,36 @@
     * aws credentials file-> ~/.secret/e2e.json 
     * [Setup Endly AWS Credentials](https://github.com/viant/endly/tree/master/doc/secrets#aws)
     * [endly e2e runner](http://github.com/viant/endly/) (0.29.1+)
+
+
+
+### Running e2e tests with endly docker container
+
+```bash
+mkdir -p ~/e2e
+mkdir -p ~/.secret
+docker run --name endly -v /var/run/docker.sock:/var/run/docker.sock -v ~/e2e:/e2e -v ~/.secret/:/root/.secret/ -p 7722:22  -d endly/endly:latest-ubuntu16.04  
+
+ssh root@127.0.0.1 -p 7722 ## password is dev
+
+#### all operation now taking place in endly docker container
+
+endly -v #to check version
+
+endly -c=localhost  ## create localhost credentials with user root/dev
+ls -al /root/.secret/localhost.json ## check encrypted credentials created
+
+## generate aws.json  -> /root/.secret/aws.json  
+### @aws.josn -> {"Region":"xxx", "Key":"yyy", "Secret":"zzz"}
+
+cd /e2e
+git clone https://github.com/adrianwit/serverless_e2e
+cd  serverless_e2e/lambda/e2e
+endly -r=run
+```
+
+
+
     
 #### Introduction
 
@@ -272,12 +302,3 @@ References:
  * [Errors](https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-errors.html)
  
  
- 
-### Running e2e tests
- 
- 
-```bash
-git clone https://github.com/adrianwit/serverless_e2e
-cd  serverless_e2e/lambda/e2e
-endly -r=run
-```

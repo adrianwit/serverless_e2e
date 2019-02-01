@@ -10,4 +10,4 @@ pipeline:
       eventType: providers/google.firebase.database/eventTypes/ref.write
       resource: projects/_/instances/${gc.projectID}/refs/posts/{key}/likes
     source:
-      URL: ${appPath}
+      URL: ${appPath}/likes/

@@ -1,3 +1,5 @@
+defaults:
+  credentials: $fbSecrets
 pipeline:
   undeploy:
     action: gc/cloudfunctions:delete

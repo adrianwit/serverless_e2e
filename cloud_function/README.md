@@ -9,7 +9,36 @@
     * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
     * [Setup endly google secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
     * [endly e2e runner](https://github.com/viant/endly/releases) (0.29+)
-    
+
+
+
+### Running e2e tests with endly docker container
+
+```bash
+mkdir -p ~/e2e
+mkdir -p ~/.secret
+docker run --name endly -v /var/run/docker.sock:/var/run/docker.sock -v ~/e2e:/e2e -v ~/.secret/:/root/.secret/ -p 7722:22  -d endly/endly:latest-ubuntu16.04  
+
+ssh root@127.0.0.1 -p 7722 ## password is dev
+
+#### all operation now taking place in endly docker container
+
+endly -v #to check version
+
+endly -c=localhost  ## create localhost ssh credentials with user root/dev
+ls -al /root/.secret/localhost.json ## check encrypted credentials created
+
+## generate google platform project secret -> /root/.secret/e2e.json  
+## generate firestore/firebase project secret -> /root/.secret/fbc.json
+
+cd /e2e
+git clone https://github.com/adrianwit/serverless_e2e
+cd  serverless_e2e/cloud_function/e2e
+endly -r=run
+```
+
+
+ 
  
 #### Introduction
 
@@ -187,15 +216,4 @@ type Resource struct {
 }
 
 ```
-
-
-### Running e2e tests
-
-
-```bash
-git clone https://github.com/adrianwit/serverless_e2e
-cd  serverless_e2e/cloud_function/e2e
-endly -r=run
-```
-
 
