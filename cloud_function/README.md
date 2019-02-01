@@ -58,10 +58,29 @@ Cloud function handler supports the following function signatures:
 
 This project provides example for the following native trigger mechanisms:
 
+
+
+
+#### HTTP Endpoint
+
+1. Hello World
+- [HelloFn](hello/hello.go)
+- [E2E Use Case](e2e/regression/cases/001_hello_world)
+- _Reference_: 
+    * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
+
+
+2. BigQuery reader
+- [QueryFn](query/query_reader.go)
+- [E2E Use Case](e2e/regression/cases/002_query_data)
+- _Reference_: 
+    * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
+
+
 #### Google Storage
 
 - [SplitWorkloadFn](split/split_workload.go)
-- [E2E Use Case](e2e/regression/cases/001_split_workload)
+- [E2E Use Case](e2e/regression/cases/003_split_workload)
 - Google Storage Event:
 ```go
 type GSEvent struct {
@@ -93,18 +112,11 @@ type GSEvent struct {
   * [Calling Storage](https://cloud.google.com/functions/docs/calling/storage)
 
 
-#### HTTP Endpoint
-
-- [QueryFn](query/query_reader.go)
-- [E2E Use Case](e2e/regression/cases/002_query_data)
-- _Reference_: 
-    * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
-
 
 #### Pubsub
 
 - [PubSubProxyFn](msg/proxy_msg.go)
-- [E2E Use Case](e2e/regression/cases/003_proxy_message)
+- [E2E Use Case](e2e/regression/cases/004_proxy_message)
 - _Reference_: 
     * [Calling PubSub](https://cloud.google.com/functions/docs/calling/pubsub)
 - Pubsub Event:
@@ -115,24 +127,11 @@ type PubSubMessage struct {
 }
 ```
 
-#### Realtime Database
-
-- [CountLikesFn](count_likes.go)
-- [E2E Use Case](e2e/regression/cases/004_count_likes)
-- Firebase Event
-```go
-type FirebaseEvent struct{
-	Delta []byte json:"delta"
-}
-```
-- _Reference_: 
-    * [Calling Realtime Database](https://cloud.google.com/functions/docs/calling/realtime-database)
-
 
 
 #### Cloud Firestore
 
-- [ModeratePostsFn](moderate.go)
+- [ModeratePostsFn](moderate/moderate.go)
 - [E2E Use Case](e2e/regression/cases/005_moderate_posts)
 - Firestore Event
 
@@ -180,6 +179,22 @@ Event example:
   "data": null
 }
 ```
+
+
+
+#### Realtime Database
+
+- [CountLikesFn](likes/count_likes.go)
+- [E2E Use Case](e2e/regression/cases/006_count_likes)
+- Firebase Event
+```go
+type FirebaseEvent struct{
+	Delta []byte json:"delta"
+}
+```
+- _Reference_: 
+    * [Calling Realtime Database](https://cloud.google.com/functions/docs/calling/realtime-database)
+
 
 
 #### Cloud function meta data.
