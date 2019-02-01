@@ -3,10 +3,10 @@ pipeline:
     check-content:
       action: storage:download
       source:
-        URL: s3://mye2e-bucket2/meta/filemeta.json
+        URL: s3://${testBucketPrefix}2/meta/filemeta.json
         credentials: $awsCredentials
       expect:
         Paths:
-          's3://mye2e-bucket2/folder1':
+          's3://${testBucketPrefix}2/folder1':
             FileCount: 2
             LinesCount: 52

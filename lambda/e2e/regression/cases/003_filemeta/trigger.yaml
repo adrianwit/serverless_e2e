@@ -6,7 +6,7 @@ pipeline:
     source:
       URL: ${parent.path}/data/
     dest:
-      URL: s3://mye2e-bucket2/folder1/
+      URL: s3://${testBucketPrefix}2/folder1/
       credentials: $awsCredentials
     assets:
       datafile1.csv: datafile1.csv

@@ -5,7 +5,7 @@ pipeline:
     method: post
     '@request':
       region: ${awsSecrets.Region}
-      URL: s3://mye2e-bucket/folder1/
+      URL: s3://${testBucketPrefix}/folder1/
     expect:
       Status: ok
       FileCount: 2

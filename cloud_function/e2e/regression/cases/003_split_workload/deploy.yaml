@@ -8,6 +8,6 @@ pipeline:
     runtime: go111
     eventTrigger:
       eventType: google.storage.object.finalize
-      resource: projects/_/buckets/my_e2ebucket
+      resource: projects/_/buckets/${testBucketPrefix}_e2e001
     source:
       URL: ${appPath}/split/

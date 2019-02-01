@@ -29,7 +29,7 @@ pipeline:
         zipfile: $LoadBinary(${codeZip})
       rolename: lambda-loginfo-executor
       define:
-        - policyname: s3-mye2e-bucket-role
+        - policyname: s3-${functionName}-role
           policydocument: $Cat('${privilegePolicy}')
       attach:
         - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
@@ -43,6 +43,6 @@ pipeline:
           methods:
             - httpMethod: ANY
               functionname: $functionName
-    sleepTimeMs: 10000
+    sleepTimeMs: 15000
 post:
   endpointURL: ${setupAPI.EndpointURL}

@@ -29,7 +29,7 @@ pipeline:
         zipfile: $LoadBinary(${codeZip})
       rolename: lambda-filemeta-executor
       define:
-        - policyname: s3-mye2e-bucket2-role
+        - policyname: s3-${testBucketPrefix}2-role
           policydocument: $Cat('${privilegePolicy}')
       attach:
         - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
@@ -38,7 +38,7 @@ pipeline:
       action: aws/s3:setupBucketNotification
       credentials: $awsCredentials
       sleepTimeMs: 10000
-      bucket: mye2e-bucket2
+      bucket: ${testBucketPrefix}2
       lambdaFunctionConfigurations:
         - functionName: $functionName
           id: ObjectCreatedEvents

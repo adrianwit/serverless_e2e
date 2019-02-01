@@ -8,12 +8,12 @@ init:
   awsSecrets: $secrets.aws
   appPath: $WorkingDirectory(../)
   startTimestamp: ${timestamp.now}
+  testBucketPrefix: e2e$FormatTime('now','MMdd')
 defaults:
   app: $app
   target: $target
   buildTarget: $buildTarget
   appTarget: $appTarget
-  bqCredentials: $bqCredentials
 pipeline:
   test:
     action: run

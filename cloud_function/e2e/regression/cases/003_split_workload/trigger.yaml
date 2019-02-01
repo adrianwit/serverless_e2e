@@ -4,6 +4,6 @@ pipeline:
     source:
       URL: ${parent.path}/data/data.csv
     dest:
-      URL: gs://my_e2ebucket/data/master/data.csv
+      URL: gs://${testBucketPrefix}_e2e001/data/master/data.csv
       credentials: $gcSecrets
     sleepTimeMs: 5000

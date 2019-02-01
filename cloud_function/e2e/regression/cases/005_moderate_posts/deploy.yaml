@@ -5,6 +5,7 @@ pipeline:
     action: gc/cloudfunctions:deploy
     '@name': ModeratePost
     entryPoint: ModeratePostFn
+    sleepTimeMs: 1000
     runtime: go111
     eventTrigger:
       eventType: providers/cloud.firestore/eventTypes/document.write

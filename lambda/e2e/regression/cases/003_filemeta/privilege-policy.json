@@ -7,8 +7,8 @@
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::mye2e-bucket2",
-        "arn:aws:s3:::mye2e-bucket2/*"
+        "arn:aws:s3:::${testBucketPrefix}2",
+        "arn:aws:s3:::${testBucketPrefix}2/*"
       ]
     }
   ]

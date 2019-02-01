@@ -6,15 +6,15 @@ pipeline:
     comments: init bucket
     sourceKey: data
     dest:
-      URL: s3://mye2e-bucket2/data.txt
+      URL: s3://${testBucketPrefix}2/data.txt
       credentials: $awsCredentials
   cleanup:
     action: storage:remove
     comments: remove assets used in this use case
     assets:
-      - URL: s3://mye2e-bucket2/meta/filemeta.json
+      - URL: s3://${testBucketPrefix}2/meta/filemeta.json
         credentials: $awsCredentials
-      - URL: s3://mye2e-bucket2/data.txt
+      - URL: s3://${testBucketPrefix}2/data.txt
         credentials: $awsCredentials
-      - URL: s3://mye2e-bucket2/data/
+      - URL: s3://${testBucketPrefix}2/data/
         credentials: $awsCredentials

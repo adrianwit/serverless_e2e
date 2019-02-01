@@ -15,7 +15,7 @@ pipeline:
       - gcloud config set project $projectID
       - #gcloud functions delete SplitWorkload
       - ${cmd[4].stdout}:/Do you want to continue/ ? Y
-      - gcloud functions deploy SplitWorkload --entry-point SplitWorkloadFn --trigger-resource my_e2ebucket --trigger-event google.storage.object.finalize --runtime go111
+      - gcloud functions deploy SplitWorkload --entry-point SplitWorkloadFn --trigger-resource ${testBucketPrefix}_e2e001 --trigger-event google.storage.object.finalize --runtime go111
 
 
 

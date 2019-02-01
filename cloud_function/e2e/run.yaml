@@ -8,7 +8,7 @@ init:
   appPath: $WorkingDirectory(../)
   e2e: $secrets.e2e
   projectID: $e2e.ProjectID
-
+  testBucketPrefix: ${projectID}
   fbSecrets: fbc
   fbc: $secrets.fbc
   fbProjectID: $fbc.ProjectID
