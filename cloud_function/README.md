@@ -1,4 +1,4 @@
-## Cloud function with e2e testing
+## Cloud functions with e2e testing
 
 **Prerequisites:**
 
@@ -43,8 +43,8 @@ endly -r=run
 #### Introduction
 
 
-Cloud Functions can be fired by a specific trigger. 
-The trigger type determines how and when your function executes. 
+Cloud Function is a serverless compute service that runs a provided code in response to events and automatically manages the underlying compute resources.
+The event can be fired by a specific trigger, which determines how and when your function executes. 
 
 Cloud function handler supports the following function signatures: 
  
@@ -54,12 +54,7 @@ Cloud function handler supports the following function signatures:
 - Other Events:
     ```func(context.Context, Event) (error)```
 
-
-
 This project provides example for the following native trigger mechanisms:
-
-
-
 
 #### HTTP Endpoint
 
@@ -128,7 +123,6 @@ type PubSubMessage struct {
 ```
 
 
-
 #### Cloud Firestore
 
 - [ModeratePostsFn](moderate/moderate.go)
@@ -180,8 +174,6 @@ Event example:
 }
 ```
 
-
-
 #### Realtime Database
 
 - [CountLikesFn](likes/count_likes.go)
@@ -194,6 +186,10 @@ type FirebaseEvent struct{
 ```
 - _Reference_: 
     * [Calling Realtime Database](https://cloud.google.com/functions/docs/calling/realtime-database)
+
+
+
+
 
 
 
