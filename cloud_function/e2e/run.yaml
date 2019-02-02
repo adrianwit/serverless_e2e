@@ -5,7 +5,7 @@ init:
     credentials: localhost
   appHost: $Hostname($target.URL)
   gcSecrets: e2e
-  appPath: $WorkingDirectory(../)
+  appPath: $WorkingDirectory(..)
   e2e: $secrets.e2e
   projectID: $e2e.ProjectID
   testBucketPrefix: ${projectID}

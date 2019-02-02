@@ -3,7 +3,6 @@ package split
 import (
 	"context"
 	"fmt"
-	"github.com/adrianwit/serverless_e2e/cloud_function/gs"
 	"github.com/viant/toolbox"
 	"path"
 	"strings"
@@ -30,7 +29,7 @@ type GCSWorkflowEvent struct {
 // SplitWorkloadFn split incoming master files into a smaller workers files
 func SplitWorkloadFn(ctx context.Context, event GCSWorkflowEvent) error {
 	URL := fmt.Sprintf("gs://%v/%v", event.Bucket, event.Name)
-	payload, err := gs.Download(ctx, URL)
+	payload, err := Download(ctx, URL)
 	if err != nil {
 		return err
 	}
@@ -41,7 +40,7 @@ func SplitWorkloadFn(ctx context.Context, event GCSWorkflowEvent) error {
 	_, ownerName := path.Split(event.Name)
 	for i, fragment := range fragments {
 		fragmentURL := fmt.Sprintf("gs://%v/%v", event.Bucket, path.Join(workerPath, fmt.Sprintf("%02d_%s", i, ownerName)))
-		if err = gs.Upload(ctx, fragmentURL, strings.NewReader(fragment)); err != nil {
+		if err = Upload(ctx, fragmentURL, strings.NewReader(fragment)); err != nil {
 			return fmt.Errorf("failed to upload %v %v", fragmentURL, err)
 		}
 	}

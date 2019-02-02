@@ -1,4 +1,4 @@
-package fs
+package cloud_function
 
 import (
 	"cloud.google.com/go/firestore"

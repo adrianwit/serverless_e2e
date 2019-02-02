@@ -1,6 +1,14 @@
 defaults:
   credentials: $gcSecrets
 pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/split
+      - go mod vendor
+
   deploy:
     action: gc/cloudfunctions:deploy
     '@name': SplitWorkload
@@ -10,4 +18,4 @@ pipeline:
       eventType: google.storage.object.finalize
       resource: projects/_/buckets/${testBucketPrefix}_e2e001
     source:
-      URL: ${appPath}/split/
+      URL: ${appPath}/split

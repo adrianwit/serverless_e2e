@@ -1,4 +1,4 @@
-package fb
+package cloud_function
 
 import (
 	"context"

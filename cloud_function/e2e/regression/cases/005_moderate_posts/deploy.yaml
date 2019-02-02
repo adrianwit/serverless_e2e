@@ -1,14 +1,22 @@
 defaults:
   credentials: $fbSecrets
 pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/moderate
+      - go mod vendor
+
   deploy:
     action: gc/cloudfunctions:deploy
     '@name': ModeratePost
     entryPoint: ModeratePostFn
-    sleepTimeMs: 1000
+    sleepTimeMs: 10000
     runtime: go111
     eventTrigger:
       eventType: providers/cloud.firestore/eventTypes/document.write
       resource: projects/${gc.projectID}/databases/(default)/documents/posts/{doc}
     source:
-      URL: ${appPath}/moderate/
+      URL: ${appPath}/moderate

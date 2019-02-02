@@ -5,7 +5,6 @@ import (
 	"context"
 	"firebase.google.com/go/db"
 	"fmt"
-	"github.com/adrianwit/serverless_e2e/cloud_function/fb"
 	"strings"
 )
 
@@ -26,7 +25,7 @@ func CountLikesFn(ctx context.Context, event FirebaseEvent) error {
 	key := fragments[len(fragments)-2]
 	databaseURL := fmt.Sprintf("https://%s.firebaseio.com", instanceID)
 	refPath := fmt.Sprintf("posts/%v", key)
-	return fb.RunTransaction(ctx, databaseURL, refPath, func(nodeSnapshot db.TransactionNode) (interface{}, error) {
+	return RunTransaction(ctx, databaseURL, refPath, func(nodeSnapshot db.TransactionNode) (interface{}, error) {
 		var record = make(map[string]interface{})
 		if err := nodeSnapshot.Unmarshal(&record); err != nil {
 			return nil, err

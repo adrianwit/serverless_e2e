@@ -1,4 +1,4 @@
-package gs
+package split
 
 import (
 	"cloud.google.com/go/storage"

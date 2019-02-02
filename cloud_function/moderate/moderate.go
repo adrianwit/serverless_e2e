@@ -4,7 +4,6 @@ import (
 	"cloud.google.com/go/firestore"
 	"cloud.google.com/go/functions/metadata"
 	"context"
-	"github.com/adrianwit/serverless_e2e/cloud_function/fs"
 	"github.com/viant/toolbox"
 	"strings"
 	"time"
@@ -39,7 +38,7 @@ func ModeratePostFn(ctx context.Context, event FirestoreEvent) error {
 	projectID := fragments[1]
 	collection := fragments[5]
 	documentID := fragments[6]
-	return fs.RunTransaction(ctx, projectID, collection, documentID, func(ref *firestore.DocumentRef, transaction *firestore.Transaction) error {
+	return RunTransaction(ctx, projectID, collection, documentID, func(ref *firestore.DocumentRef, transaction *firestore.Transaction) error {
 		doc, err := transaction.Get(ref)
 		if err != nil {
 			return err

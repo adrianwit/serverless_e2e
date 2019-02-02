@@ -1,8 +1,17 @@
 defaults:
   credentials: $fbSecrets
 pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/likes
+      - go mod vendor
+
   deploy:
     action: gc/cloudfunctions:deploy
+    sleepTimeMs: 10000
     '@name': CountLikes
     entryPoint: CountLikesFn
     runtime: go111
@@ -10,4 +19,4 @@ pipeline:
       eventType: providers/google.firebase.database/eventTypes/ref.write
       resource: projects/_/instances/${gc.projectID}/refs/posts/{key}/likes
     source:
-      URL: ${appPath}/likes/
+      URL: ${appPath}/likes

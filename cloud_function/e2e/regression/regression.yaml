@@ -1,9 +1,15 @@
 pipeline:
-#  set_sdk:
-#    action: sdk.set
-#    target: $target
-#    sdk: go:1.11
-
+  set_sdk:
+    action: sdk.set
+    target: $target
+    sdk: go:1.11
+  set_env:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - unset GOPATH
+      - export GO111MODULE=on
   test:
     tag: Test
     description: '@info'

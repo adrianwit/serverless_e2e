@@ -1,10 +1,18 @@
 defaults:
   credentials: $gcSecrets
 pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/query
+      - go mod vendor
+
   deploy:
     action: gc/cloudfunctions:deploy
     '@name': QueryBQ
     entryPoint: QueryFn
     runtime: go111
     source:
-      URL: ${appPath}/query/
+      URL: ${appPath}/query
