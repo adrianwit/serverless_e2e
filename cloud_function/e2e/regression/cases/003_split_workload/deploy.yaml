@@ -10,7 +10,7 @@ pipeline:
       - go mod vendor
 
   deploy:
-    action: gc/cloudfunctions:deploy
+    action: gcp/cloudfunctions:deploy
     '@name': SplitWorkload
     entryPoint: SplitWorkloadFn
     runtime: go111

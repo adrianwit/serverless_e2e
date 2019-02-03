@@ -4,17 +4,17 @@ pipeline:
     resources:
       - URL: proxySourceTopic
         type: topic
-        vendor: gc
+        vendor: gcp
         credentials: $gcSecrets
 
       - URL: proxyTargetTopic1
         type: topic
-        vendor: gc
+        vendor: gcp
         credentials: $gcSecrets
 
       - URL: proxySubscription1
         type: subscription
-        vendor: gc
+        vendor: gcp
         credentials: $gcSecrets
         config:
           topic:
@@ -22,12 +22,12 @@ pipeline:
 
       - URL: proxyTargetTopic2
         type: topic
-        vendor: gc
+        vendor: gcp
         credentials: $gcSecrets
 
       - URL: proxySubscription2
         type: subscription
-        vendor: gc
+        vendor: gcp
         credentials: $gcSecrets
         config:
           topic:

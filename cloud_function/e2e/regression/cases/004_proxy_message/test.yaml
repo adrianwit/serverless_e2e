@@ -5,7 +5,7 @@ pipeline:
     source:
       URL: proxySubscription1
       type: subscription
-      vendor: gc
+      vendor: gcp
       credentials: $gcSecrets
     count: 1
     UDF: AsMap
@@ -21,7 +21,7 @@ pipeline:
     source:
       URL: proxySubscription2
       type: subscription
-      vendor: gc
+      vendor: gcp
       credentials: $gcSecrets
     count: 1
     UDF: AsMap

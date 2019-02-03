@@ -2,5 +2,5 @@ defaults:
   credentials: $gcSecrets
 pipeline:
   undeploy:
-    action: gc/cloudfunctions:delete
+    action: gcp/cloudfunctions:delete
     '@name': PubSubProxy

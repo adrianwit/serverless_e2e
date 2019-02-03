@@ -5,7 +5,7 @@ pipeline:
     dest:
       URL: /projects/${projectID}/topics/proxySourceTopic
       credentials: $gcSecrets
-      vendor: gc
+      vendor: gcp
     messages:
       - data:
           dest: proxyTargetTopic1

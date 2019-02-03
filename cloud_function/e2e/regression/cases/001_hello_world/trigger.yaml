@@ -3,7 +3,7 @@ defaults:
 pipeline:
   test1:
     trigger:
-      action: gc/cloudfunctions:call
+      action: gcp/cloudfunctions:call
       '@name': HelloWorld
       data:
         from: Endly
@@ -13,7 +13,7 @@ pipeline:
       actual: $trigger.Result
   test2:
     trigger:
-      action: gc/cloudfunctions:call
+      action: gcp/cloudfunctions:call
       '@name': HelloWorld
     assert:
       action: validator:assert

@@ -2,7 +2,7 @@ defaults:
   credentials: $gcSecrets
 pipeline:
   deploy:
-    action: gc/cloudfunctions:deploy
+    action: gcp/cloudfunctions:deploy
     '@name': HelloWorld
     entryPoint: HelloWorldFn
     runtime: go111
