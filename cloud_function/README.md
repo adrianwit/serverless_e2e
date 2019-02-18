@@ -145,7 +145,8 @@ pipeline:
 
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --runtime go111 --trigger-http
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+           --runtime go111 --trigger-http
     ```
 2. _Reference_: 
     * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
