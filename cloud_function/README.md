@@ -223,7 +223,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --trigger-resource projects/_/jobs/{jobId}  --trigger-event google.cloud.bigquery.job.complete --runtime go111
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+           --trigger-resource projects/_/jobs/{jobId}  \
+           --trigger-event google.cloud.bigquery.job.complete \
+           --runtime go111
     ```
 2. Supported trigger types:
     * google.cloud.bigquery.job.create
@@ -241,7 +244,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 #### Google Storage
 1. Deployment: 
     ```bash
-    gcloud functions deploy SplitWorkload --entry-point SplitWorkloadFn --trigger-resource $myBucket --trigger-event google.storage.object.finalize --runtime go111
+    gcloud functions deploy SplitWorkload --entry-point SplitWorkloadFn \
+       --trigger-resource $myBucket \
+       --trigger-event google.storage.object.finalize \
+       --runtime go111
     ```
 2. Supported trigger types:
      * google.storage.object.finalize
@@ -289,7 +295,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 ####  Pubsub
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --trigger-resource myTopic --trigger-event google.pubsub.topic.publish --runtime go111
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+       --trigger-resource myTopic \
+       --trigger-event google.pubsub.topic.publish \
+       --runtime go111
     ```
 2. Supported trigger types:
    * google.pubsub.topic.publish
@@ -314,7 +323,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 #### Realtime Database
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn  --trigger-event providers/cloud.firestore/eventTypes/document.write  --trigger-resource  'projects/${gcp.projectID}/databases/(default)/documents/posts/{doc}' --runtime go111
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn  \
+       --trigger-event providers/cloud.firestore/eventTypes/document.write  \
+       --trigger-resource  'projects/${gcp.projectID}/databases/(default)/documents/posts/{doc}' \
+       --runtime go111
     ```
 2. Supported trigger types:
    * providers/google.firebase.database/eventTypes/ref.create
@@ -343,7 +355,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 ####  Cloud Firestore
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --trigger-event providers/cloud.firestore/eventTypes/document.write  --trigger-resource  'projects/${gcp.projectID}/databases/(default)/documents/posts/{doc}' --runtime go111
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+       --trigger-event providers/cloud.firestore/eventTypes/document.write  \
+       --trigger-resource  'projects/${gcp.projectID}/databases/(default)/documents/posts/{doc}' \
+       --runtime go111
     ```
 2. Supported trigger types:
    * providers/cloud.firestore/eventTypes/document.create
@@ -405,7 +420,10 @@ The following variables are automatically set by the Cloud Functions runtime.
 ####  Google Compute Engine
 1. Deployment: 
     ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --trigger-resource projects/PROJECT/zones/ZONE/instances/{id}  --trigger-event google.compute.instance.stop --runtime go111
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+       --trigger-resource projects/PROJECT/zones/ZONE/instances/{id}  \
+       --trigger-event google.compute.instance.stop \
+       --runtime go111
     ```
 2. Supported trigger types:
     * google.compute.instance.create
