@@ -67,6 +67,8 @@ Google cloud platform supports two following function types:
 - End to end testing
 
 
+
+
 ### HTTP Functions
 
 1. Deployment: 
@@ -77,60 +79,18 @@ Google cloud platform supports two following function types:
     * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
  
 
-### Background Functions
-1. Deployment: 
-```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
-            --trigger-resource $Resource \
-            --trigger-event $EventType  \
-            --runtime go111
+#### HTTP Examples:
+1. Hello World
+    - [Source code](hello/hello.go)
+    - [E2E Use Case](e2e/regression/cases/001_hello_world)
+      * ```endly -i=Test_cases001_hello_world```
+2. BigQuery reader
+    - [Source code](query/query_reader.go)
+    - [E2E Use Case](e2e/regression/cases/002_query_data)
+      * ```endly -i=Test_cases002_query_data```
 
-```
-2. Resource meta:
-    * Retrieve cloud function event resource info. 
-    ```go
-        meta, err := metadata.FromContext(ctx)
-    ```
-    * Metadata contract
-    ```go
-    // Metadata holds Google Cloud Functions metadata.
-    type Metadata struct {
-        // EventID is a unique ID for the event. For example: "70172329041928".
-        EventID string `json:"eventId"`
-        // Timestamp is the date/time this event was created.
-        Timestamp time.Time `json:"timestamp"`
-        // EventType is the type of the event. For example: "google.pubsub.topic.publish".
-        EventType string `json:"eventType"`
-        // Resource is the resource that triggered the event.
-        Resource Resource `json:"resource"`
-    }
-    
-    // Resource holds Google Cloud Functions resource metadata.
-    // Resource values are dependent on the event type they're from.
-    type Resource struct {
-        // Service is the service that triggered the event.
-        Service string `json:"service"`
-        // Name is the name associated with the event.
-        Name string `json:"name"`
-        // Type is the type of event.
-        Type string `json:"type"`
-    }
-    
-    ```
 
-### Cloud function runtime environment
 
-The following variables are automatically set by the Cloud Functions runtime.
-- GCLOUD_PROJECT 
-- FUNCTION_NAME
-- FUNCTION_REGION
-
-```go
-    projectID    = os.Getenv("GCLOUD_PROJECT")
-    functionName = os.Getenv("FUNCTION_NAME")
-    region       = os.Getenv("FUNCTION_REGION")
-```
-        
 ### E2E automation workflow:
 
 This project uses [endly](http://github.com/viant/endly/) as e2e test runner.
@@ -203,15 +163,61 @@ pipeline:
 7. [Find out more](https://github.com/adrianwit/endly-introduction) about E2E endly workflows.
 
 
-#### HTTP Examples:
-1. Hello World
-    - [Source code](hello/hello.go)
-    - [E2E Use Case](e2e/regression/cases/001_hello_world)
-      * ```endly -i=Test_cases001_hello_world```
-2. BigQuery reader
-    - [Source code](query/query_reader.go)
-    - [E2E Use Case](e2e/regression/cases/002_query_data)
-      * ```endly -i=Test_cases002_query_data```
+
+### Background Functions
+1. Deployment: 
+```bash
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
+            --trigger-resource $Resource \
+            --trigger-event $EventType  \
+            --runtime go111
+
+```
+2. Resource meta:
+    * Retrieve cloud function event resource info. 
+    ```go
+        meta, err := metadata.FromContext(ctx)
+    ```
+    * Metadata contract
+    ```go
+    // Metadata holds Google Cloud Functions metadata.
+    type Metadata struct {
+        // EventID is a unique ID for the event. For example: "70172329041928".
+        EventID string `json:"eventId"`
+        // Timestamp is the date/time this event was created.
+        Timestamp time.Time `json:"timestamp"`
+        // EventType is the type of the event. For example: "google.pubsub.topic.publish".
+        EventType string `json:"eventType"`
+        // Resource is the resource that triggered the event.
+        Resource Resource `json:"resource"`
+    }
+    
+    // Resource holds Google Cloud Functions resource metadata.
+    // Resource values are dependent on the event type they're from.
+    type Resource struct {
+        // Service is the service that triggered the event.
+        Service string `json:"service"`
+        // Name is the name associated with the event.
+        Name string `json:"name"`
+        // Type is the type of event.
+        Type string `json:"type"`
+    }
+    
+    ```
+
+### Cloud function runtime environment
+
+The following variables are automatically set by the Cloud Functions runtime.
+- GCLOUD_PROJECT 
+- FUNCTION_NAME
+- FUNCTION_REGION
+
+```go
+    projectID    = os.Getenv("GCLOUD_PROJECT")
+    functionName = os.Getenv("FUNCTION_NAME")
+    region       = os.Getenv("FUNCTION_REGION")
+```
+        
 
 
 #### BigQuery 
