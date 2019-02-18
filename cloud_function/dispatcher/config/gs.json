@@ -1,0 +1,13 @@
+{
+  "Routes": [
+    {
+      "Filter": {
+        "Suffix": [".ini"]
+      },
+      "Target": {
+        "Type": "topic",
+        "URL": "projects/${projectID}/topics/iniTopic"
+      }
+    }
+  ]
+}

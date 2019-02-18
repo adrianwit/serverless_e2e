@@ -14,7 +14,7 @@ pipeline:
     tag: Test
     description: '@info'
     subPath: 'cases/${index}*'
-    range: 1..006
+    range: 1..008
     template:
       setVars:
         action: nop
@@ -28,6 +28,7 @@ pipeline:
         request: '@setup'
 
       deploy:
+        #when: false
         action: run
         comments: deploy cloud function
         request: '@deploy'

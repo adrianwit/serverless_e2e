@@ -1,0 +1,35 @@
+init:
+  instanceId: 112306322498926XXX
+defaults:
+  credentials: $gcSecrets
+stop:
+  info:
+    action: gcp/compute:instancesGet
+    logging: false
+    credentials: gc
+    zone: us-central1-f
+    instance: $instanceId
+
+  print:
+    action: print
+    message: Instance $instanceId is $info.Status
+
+  check:
+    when: $info.Status = 'TERMINATED'
+    action: exit
+
+  instanceDown:
+    when: $info.Status = 'RUNNING'
+    action:  gc/compute:instancesStop
+    credentials: gc
+    zone: us-central1-f
+    instance: $instanceId
+
+  waitForStop:
+    action: nop
+    logging: false
+    sleepTimeMs: 5000
+
+  gotoStop:
+    action: goto
+    task: stop

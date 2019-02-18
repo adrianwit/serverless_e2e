@@ -13,7 +13,6 @@ func Download(ctx context.Context, URL string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	client, err := storage.NewClient(ctx)
 	if err != nil {
 		return nil, err

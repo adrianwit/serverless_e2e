@@ -1,0 +1,25 @@
+defaults:
+  credentials: $gcSecrets
+pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/dispatcher
+      - go mod vendor
+
+  deploy:
+    action: gcp/cloudfunctions:deploy
+    '@name': GSEventDispatcher
+    entryPoint: GSEventDispatcherFn
+    runtime: go111
+    eventTrigger:
+      eventType: google.storage.object.finalize
+      resource: projects/_/buckets/${testBucketPrefix}_ds
+    environmentVariables:
+      configURL: gs://${testBucketPrefix}_config/gs.json
+    source:
+      URL: ${appPath}/dispatcher
+
+    sleepTimeMs: 5000

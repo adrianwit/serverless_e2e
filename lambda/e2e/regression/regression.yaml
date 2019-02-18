@@ -8,7 +8,7 @@ pipeline:
     tag: Test
     description: '@info'
     subPath: 'cases/${index}*'
-    range: 1..005
+    range: 5..005
     template:
       setVars:
         action: nop

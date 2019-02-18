@@ -6,17 +6,17 @@ pipeline:
     comments: vendor build for deployment speedup
     target: $target
     commands:
-      - cd ${appPath}/likes
+      - cd ${appPath}/moderate
       - go mod vendor
 
   deploy:
     action: gcp/cloudfunctions:deploy
+    '@name': ModeratePost
+    entryPoint: ModeratePostFn
     sleepTimeMs: 10000
-    '@name': CountLikes
-    entryPoint: CountLikesFn
     runtime: go111
     eventTrigger:
-      eventType: providers/google.firebase.database/eventTypes/ref.write
-      resource: projects/_/instances/${gc.projectID}/refs/posts/{key}/likes
+      eventType: providers/cloud.firestore/eventTypes/document.write
+      resource: projects/${gcp.projectID}/databases/(default)/documents/posts/{doc}
     source:
-      URL: ${appPath}/likes
+      URL: ${appPath}/moderate

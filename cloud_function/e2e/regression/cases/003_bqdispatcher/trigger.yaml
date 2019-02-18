@@ -1,0 +1,19 @@
+defaults:
+  credentials: $gcSecrets
+init:
+  dataset: db2
+pipeline:
+  trigger:
+    copy:
+      logging: false
+      action: gcp/bigquery:query
+      query: SELECT * FROM table1
+      allowlargeresults: false
+      defaultdataset:
+        projectid: ${gcp.projectID}
+        datasetid: $dataset
+      destinationtable:
+        projectid: ${gcp.projectID}
+        datasetid: $dataset
+        tableid: table1_copy
+      writedisposition: WRITE_TRUNCATE

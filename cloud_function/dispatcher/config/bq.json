@@ -1,0 +1,13 @@
+{
+  "Routes": [
+    {
+      "Filter": {
+        "Source": ".+table1"
+      },
+      "Target": {
+        "Type": "topic",
+        "URL": "projects/${projectID}/topics/table1Topic"
+      }
+    }
+  ]
+}

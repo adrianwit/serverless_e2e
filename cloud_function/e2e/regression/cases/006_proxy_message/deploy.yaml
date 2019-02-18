@@ -16,6 +16,6 @@ pipeline:
     runtime: go111
     eventTrigger:
       eventType: google.pubsub.topic.publish
-      resource: projects/${gc.projectID}/topics/proxySourceTopic
+      resource: projects/${gcp.projectID}/topics/proxySourceTopic
     source:
       URL: ${appPath}/msg

@@ -1,0 +1,6 @@
+defaults:
+  credentials: $gcSecrets
+pipeline:
+  undeploy:
+    action: gcp/cloudfunctions:delete
+    '@name': GSEventDispatcher

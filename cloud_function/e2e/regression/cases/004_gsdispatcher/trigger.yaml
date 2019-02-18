@@ -1,0 +1,12 @@
+pipeline:
+  trigger:
+    action: storage:copy
+    source:
+      URL: ${parent.path}/data
+    dest:
+      URL: gs://${testBucketPrefix}_ds/folder1/
+      credentials: $gcSecrets
+    assets:
+      data.ini: data.ini
+      data.txt: data.txt
+    sleepTimeMs: 5000

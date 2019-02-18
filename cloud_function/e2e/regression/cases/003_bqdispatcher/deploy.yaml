@@ -1,0 +1,24 @@
+defaults:
+  credentials: $gcSecrets
+pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/dispatcher
+      - go mod vendor
+
+  deploy:
+    action: gcp/cloudfunctions:deploy
+    '@name': BQEventDispatcher
+    entryPoint: BQEventDispatcherFn
+    runtime: go111
+    environmentVariables:
+      configURL: gs://${testBucketPrefix}_config/bq.json
+    eventTrigger:
+      eventType: google.cloud.bigquery.job.complete
+      resource: projects/${projectID}/jobs/{jobId}
+    source:
+      URL: ${appPath}/dispatcher
+    sleepTimeMs: 20000

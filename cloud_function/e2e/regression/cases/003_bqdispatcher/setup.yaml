@@ -1,0 +1,41 @@
+pipeline:
+  setupDB:
+    initDB:
+      action: dsunit:init
+      datastore: db2
+      config:
+        driverName: bigquery
+        credentials: $gcSecrets
+        parameters:
+          datasetId: db2
+      scripts:
+       - URL: ${parent.path}/db2/schema.sql
+    loadData:
+      db2:
+        action: dsunit:prepare
+        datastore: db2
+        URL:  ${parent.path}/db2/data
+
+  deployConfig:
+    action: storage:copy
+    expand: true
+    source:
+      URL: ${appPath}/dispatcher/config/bq.json
+    dest:
+      URL: gs://${testBucketPrefix}_config/bq.json
+      credentials: $gcSecrets
+
+  setupMessageBus:
+    action: msg:setupResource
+    resources:
+      - URL: table1Topic
+        type: topic
+        vendor: gcp
+        credentials: $gcSecrets
+      - URL: table1TopicSubscription
+        type: subscription
+        vendor: gcp
+        credentials: $gcSecrets
+        config:
+          topic:
+            URL: /projects/${projectID}/topics/table1Topic

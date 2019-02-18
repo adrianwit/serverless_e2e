@@ -1,0 +1,42 @@
+init:
+  testData: '_'
+pipeline:
+  create-bucket:
+    action: storage:upload
+    comments: create a bucket with dummy data
+    sourceKey: testData
+    dest:
+      URL: gs://${testBucketPrefix}_ds/data
+      credentials: $gcSecrets
+
+  cleanup:
+    action: storage:remove
+    credentials: $gcSecrets
+    comments: remove assets used in this use case
+    assets:
+      - URL: gs://${testBucketPrefix}_ds/folder1/data.txt
+      - URL: gs://${testBucketPrefix}_ds/folder1/data.ini
+
+  deployConfig:
+    action: storage:copy
+    expand: true
+    source:
+      URL: ${appPath}/dispatcher/config/gs.json
+    dest:
+      URL: gs://${testBucketPrefix}_config/gs.json
+      credentials: $gcSecrets
+
+  setupMessageBus:
+    action: msg:setupResource
+    resources:
+      - URL: iniTopic
+        type: topic
+        vendor: gcp
+        credentials: $gcSecrets
+      - URL: iniTopicSubscription
+        type: subscription
+        vendor: gcp
+        credentials: $gcSecrets
+        config:
+          topic:
+            URL: /projects/${projectID}/topics/iniTopic

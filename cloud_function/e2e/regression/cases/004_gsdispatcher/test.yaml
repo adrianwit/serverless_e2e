@@ -1,0 +1,18 @@
+pipeline:
+  checkEvent:
+    action: msg:pull
+    timeoutMs: 10000
+    source:
+      URL: iniTopicSubscription
+      type: subscription
+      vendor: gcp
+      credentials: $gcSecrets
+    count: 1
+    UDF: AsMap
+    expect:
+      - Transformed:
+          name: folder1/data.ini
+
+#  notificationInfo:
+#    action: print
+#    message: $AsJSON($checkEvent)

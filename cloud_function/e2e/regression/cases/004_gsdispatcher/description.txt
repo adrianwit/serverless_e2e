@@ -1,0 +1,9 @@
+Function split content of master file into smaller worker files
+
+Input:
+    gs://my_e2ebucket/data/master/data.csv
+    cloud function event  triggered by --trigger-resource my_e2ebucket
+Output:
+    gs://my_e2ebucket/data/workers/01_data.csv
+    gs://my_e2ebucket/data/workers/02_data.csv
+    gs://my_e2ebucket/data/workers/03_data.csv

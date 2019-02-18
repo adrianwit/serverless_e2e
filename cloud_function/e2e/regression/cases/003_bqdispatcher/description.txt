@@ -1,0 +1,21 @@
+BQEventDispatcher dispatches BigQuery events to matched targets
+
+Input:
+    config: gs://${testBucketPrefix}_config/config.json
+    {
+      "Routes": [
+        {
+          "Filter": {
+            "Source": ".+table1"
+          },
+          "Target": {
+            "Type": "topic",
+            "URL": "projects/${projectID}/topics/table1Topic"
+          }
+        }
+      ]
+    }
+    BigQuery 'query' job that use table1
+
+Output:
+    message published to table1Topic

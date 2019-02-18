@@ -1,0 +1,19 @@
+pipeline:
+  checkEvent:
+    action: msg:pull
+    timeoutMs: 10000
+    source:
+      URL: table1TopicSubscription
+      type: subscription
+      vendor: gcp
+      credentials: $gcSecrets
+    count: 1
+    UDF: AsMap
+    expect:
+      - Transformed:
+          configuration:
+            jobType: "QUERY"
+
+#  notificationInfo:
+#    action: print
+#    message: $AsJSON($checkEvent)

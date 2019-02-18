@@ -15,9 +15,9 @@ pipeline:
       - go build
       - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/
       - gcloud config set project $projectID
-      - #gcloud alpha functions delete ProxyMsg
+      - #gcloud functions delete ProxyMsg
       - ${cmd[4].stdout}:/Do you want to continue/ ? Y
-      - gcloud alpha functions deploy PubSubProxy --entry-point PubSubProxyFn --trigger-resource proxySourceTopic --trigger-event google.pubsub.topic.publish --runtime go111
+      - gcloud functions deploy PubSubProxy --entry-point PubSubProxyFn --trigger-resource proxySourceTopic --trigger-event google.pubsub.topic.publish --runtime go111
 
 
 
