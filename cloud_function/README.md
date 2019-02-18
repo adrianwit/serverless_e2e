@@ -445,9 +445,6 @@ The following variables are automatically set by the Cloud Functions runtime.
        
 3. Resource: 
    * projects/{project}/zones/{zone}/instances/{id}
-   * projects/{project}/zones/{zone}/firewalls/{id}
-   * projects/{project}/zones/{zone}/instanceGroupManagers/{id} 
-   * projects/{project}/zones/{zone}/autoscalers/{id} 
 
 
 
