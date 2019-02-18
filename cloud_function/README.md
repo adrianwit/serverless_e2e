@@ -170,7 +170,7 @@ pipeline:
 3. package/deploy is arbitrary task name.
 4. defaults node appends specified attributes to all action nodes (no override).
 5. node with 'action' attribute triggers API call to specified service:method
-   * 
+   * package
    ```javascript
    sshExecutorService.run({
        target: {
@@ -183,7 +183,7 @@ pipeline:
        ]
    })
    ```
-   *
+   * deploy
    ```javascript
    gcpCloudFunctionsService.deploy({
         name: "HelloWorld",
