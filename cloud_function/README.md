@@ -426,34 +426,34 @@ The following variables are automatically set by the Cloud Functions runtime.
        --trigger-event google.compute.instance.stop \
        --runtime go111
     ```
-2. Supported trigger types:
-    * google.compute.instance.create
-    * google.compute.instance.delete
-    * google.compute.instance.start
-    * google.compute.instance.stop
-    * google.compute.instance.reset
+2. Instances 
+    -  Supported trigger types:
+        * google.compute.instance.create
+        * google.compute.instance.delete
+        * google.compute.instance.start
+        * google.compute.instance.stop
+        * google.compute.instance.reset
+    - Resource: 
+        * projects/{project}/zones/{zone}/instances/{id}
+3. instanceGroupManagers
+    -  Supported trigger types:
+        * google.compute.instancegroupmanager.create
+        * google.compute.instancegroupmanager.update
+        * google.compute.instancegroupmanager.resize
+        * google.compute.instancegroupmanager.delete
+    - Resource
+        * projects/{project}/{locationType}/{location}/instanceGroupManagers/{manager} 
+4. Firewall     
+    -  Supported trigger types:
+        * google.compute.firewall.create
+        * google.compute.firewall.update
+        * google.compute.firewall.delete
+5. Autoscaler    
+    -  Supported trigger types:
+        * google.compute.autoscaler.create
+        * google.compute.autoscaler.update
+        * google.compute.autoscaler.delete
     
-    
-    * google.compute.firewall.create
-    * google.compute.firewall.update
-    * google.compute.firewall.delete
-    
-    * google.compute.autoscaler.create
-    * google.compute.autoscaler.update
-    * google.compute.autoscaler.delete
-    
-    * google.compute.instancegroupmanager.create
-    * google.compute.instancegroupmanager.update
-    * google.compute.instancegroupmanager.resize
-    * google.compute.instancegroupmanager.delete
-        
-       
-3. Resource: 
-   * projects/{project}/zones/{zone}/instances/{id}
-   * projects/{project}/{locationType}/{location}/instanceGroupManagers/{manager}"
-
-
-
 ### External projects with e2e testing using cloud functions
 - [BigQuery Windowed Tables](http://github.com/viant/bqwt)
 
