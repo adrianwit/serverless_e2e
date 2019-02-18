@@ -67,30 +67,6 @@ Google cloud platform supports two following function types:
 - End to end testing
 
 
-
-
-### HTTP Functions
-
-1. Deployment: 
-    ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn --runtime go111 --trigger-http
-    ```
-2. _Reference_: 
-    * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
- 
-
-#### HTTP Examples:
-1. Hello World
-    - [Source code](hello/hello.go)
-    - [E2E Use Case](e2e/regression/cases/001_hello_world)
-      * ```endly -i=Test_cases001_hello_world```
-2. BigQuery reader
-    - [Source code](query/query_reader.go)
-    - [E2E Use Case](e2e/regression/cases/002_query_data)
-      * ```endly -i=Test_cases002_query_data```
-
-
-
 ### E2E automation workflow:
 
 This project uses [endly](http://github.com/viant/endly/) as e2e test runner.
@@ -161,6 +137,29 @@ pipeline:
     endly -s='*' 
 ```   
 7. [Find out more](https://github.com/adrianwit/endly-introduction) about E2E endly workflows.
+
+
+
+
+### HTTP Functions
+
+1. Deployment: 
+    ```bash
+    gcloud functions deploy MyFunction --entry-point MyFunctionFn --runtime go111 --trigger-http
+    ```
+2. _Reference_: 
+    * [Calling HTTP](https://cloud.google.com/functions/docs/calling/http)
+ 
+
+#### HTTP Examples:
+1. Hello World
+    - [Source code](hello/hello.go)
+    - [E2E Use Case](e2e/regression/cases/001_hello_world)
+      * ```endly -i=Test_cases001_hello_world```
+2. BigQuery reader
+    - [Source code](query/query_reader.go)
+    - [E2E Use Case](e2e/regression/cases/002_query_data)
+      * ```endly -i=Test_cases002_query_data```
 
 
 
