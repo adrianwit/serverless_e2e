@@ -432,19 +432,25 @@ The following variables are automatically set by the Cloud Functions runtime.
     * google.compute.instance.start
     * google.compute.instance.stop
     * google.compute.instance.reset
+    
+    
     * google.compute.firewall.create
     * google.compute.firewall.update
-    * google.compute.instance.delete
-    * google.compute.instanceGroupManager.create
-    * google.compute.instanceGroupManager.update
-    * google.compute.instanceGroupManager.resize
-    * google.compute.instanceGroupManager.delete
+    * google.compute.firewall.delete
+    
     * google.compute.autoscaler.create
     * google.compute.autoscaler.update
     * google.compute.autoscaler.delete
+    
+    * google.compute.instancegroupmanager.create
+    * google.compute.instancegroupmanager.update
+    * google.compute.instancegroupmanager.resize
+    * google.compute.instancegroupmanager.delete
+        
        
 3. Resource: 
    * projects/{project}/zones/{zone}/instances/{id}
+   * projects/{project}/{locationType}/{location}/instanceGroupManagers/{manager}"
 
 
 
