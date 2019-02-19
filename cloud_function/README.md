@@ -9,7 +9,7 @@
     * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
     * [endly GCP secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
     * [endly slack bot token](https://github.com/viant/endly/tree/master/doc/secrets#slack)
-    * [endly e2e runner](https://github.com/viant/endly/releases) (0.30+)
+    * [endly e2e runner](https://github.com/viant/endly/releases) (0.32+)
 
 ### Running e2e tests with endly docker container
 
