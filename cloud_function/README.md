@@ -59,6 +59,7 @@ Google cloud platform supports two following function types:
 - event driven
 - scales up automatically
 - fault tolerant
+- seamless cloud resource access
 
 **Challenges:**
 - debugging
