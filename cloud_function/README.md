@@ -7,7 +7,8 @@
  - service account for e2e testing dedicated project with enabled API
     * regular secrets file -> ~/.secret/e2e.json from http://console.cloud.google.com/
     * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
-    * [Setup endly google secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
+    * [Endly GCP secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
+    * [Endly slack bot token](https://github.com/viant/endly/tree/master/doc/secrets#slack)
     * [endly e2e runner](https://github.com/viant/endly/releases) (0.30+)
 
 ### Running e2e tests with endly docker container
