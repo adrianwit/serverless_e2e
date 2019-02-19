@@ -8,6 +8,29 @@
         "Type": "topic",
         "URL": "projects/${projectID}/topics/table1Topic"
       }
+    },
+    {
+      "Filter": {
+        "Source": ".+table2"
+      },
+      "Target": {
+        "Type": "slack",
+        "URL": "#serverless"
+      },
+      "Fields": {
+        "id": "id",
+        "configuration.query.query": "source",
+        "configuration.query.destinationTable": "dest",
+        "configuration.load.destinationTable": "dest",
+        "configuration.extract.sourceTable": "source",
+        "configuration.copy.sourceTable": "source",
+        "configuration.copy.destinationTable": "dest",
+        "status.state": "status",
+        "user_email": "user",
+        "statistics.query.totalBytesProcessed": "bytesProcessed",
+        "statistics.creationTime": "creationTime",
+        "statistics.endTime": "endTime"
+      }
     }
   ]
 }

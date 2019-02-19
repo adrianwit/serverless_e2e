@@ -3,7 +3,9 @@ module dispatcher
 require (
 	cloud.google.com/go v0.36.0
 	github.com/go-errors/errors v1.0.1 // indirect
+	github.com/gorilla/websocket v1.4.0 // indirect
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
+	github.com/nlopes/slack v0.5.0
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/stretchr/testify v1.3.0
 	github.com/viant/assertly v0.4.3 // indirect

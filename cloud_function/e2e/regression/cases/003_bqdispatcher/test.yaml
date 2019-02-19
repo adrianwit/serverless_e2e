@@ -13,6 +13,15 @@ pipeline:
       - Transformed:
           configuration:
             jobType: "QUERY"
+  checkSlack:
+    validate:
+      action: slack:pull
+      credentials: slack
+      expect:
+        - asset:
+            Data:
+              source: /table2/
+              status: DONE
 
 #  notificationInfo:
 #    action: print

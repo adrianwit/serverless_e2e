@@ -19,3 +19,38 @@ Input:
 
 Output:
     message published to table1Topic
+
+
+
+
+Slack notification:
+
+Input:
+
+      {
+          "Filter": {
+            "Source": ".+table2"
+          },
+          "Target": {
+            "Type": "slack",
+            "URL": "#serverless"
+          },
+          "Fields": {
+            "configuration.query.query": "source",
+            "configuration.query.destinationTable": "dest",
+            "configuration.load.destinationTable": "dest",
+            "configuration.extract.sourceTable": "source",
+            "configuration.copy.sourceTable": "source",
+            "configuration.copy.destinationTable": "dest",
+            "status.state": "status",
+            "user_email": "user",
+            "statistics.query.totalBytesProcessed": "bytesProcessed",
+            "statistics.creationTime": "creationTime",
+            "statistics.endTime": "endTime"
+          }
+        }
+
+Output:
+    message post to #serverless channel
+
+

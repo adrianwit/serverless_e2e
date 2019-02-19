@@ -25,6 +25,13 @@ pipeline:
       URL: gs://${testBucketPrefix}_config/bq.json
       credentials: $gcSecrets
 
+  listenOnSlack:
+    listen:
+      credentials: slack
+      action: slack:listen
+      description: listen for incoming slack messages
+      channel: '#serverless'
+
   setupMessageBus:
     action: msg:setupResource
     resources:

@@ -4,7 +4,7 @@ init:
   dataset: db2
 pipeline:
   trigger:
-    copy:
+    copyTable1:
       logging: false
       action: gcp/bigquery:query
       query: SELECT * FROM table1
@@ -16,4 +16,17 @@ pipeline:
         projectid: ${gcp.projectID}
         datasetid: $dataset
         tableid: table1_copy
+      writedisposition: WRITE_TRUNCATE
+    copyTable2:
+      logging: false
+      action: gcp/bigquery:query
+      query: SELECT * FROM table2
+      allowlargeresults: false
+      defaultdataset:
+        projectid: ${gcp.projectID}
+        datasetid: $dataset
+      destinationtable:
+        projectid: ${gcp.projectID}
+        datasetid: $dataset
+        tableid: table2_copy
       writedisposition: WRITE_TRUNCATE

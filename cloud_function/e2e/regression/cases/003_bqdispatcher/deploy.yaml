@@ -1,3 +1,6 @@
+init:
+  slackSecrets: $secrets.slack
+
 defaults:
   credentials: $gcSecrets
 pipeline:
@@ -16,6 +19,7 @@ pipeline:
     runtime: go111
     environmentVariables:
       configURL: gs://${testBucketPrefix}_config/bq.json
+      slackSecrets: $slackSecrets.Data
     eventTrigger:
       eventType: google.cloud.bigquery.job.complete
       resource: projects/${projectID}/jobs/{jobId}
