@@ -10,7 +10,8 @@ init:
   e2e: $secrets.e2e
 
   fbSecrets: fbc
-
+  fbc: $secrets.fbc
+  fbProjectID: $fbc.ProjectID
 
   projectID: $e2e.ProjectID
   testBucketPrefix: ${projectID}
