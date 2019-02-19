@@ -60,11 +60,11 @@ Google cloud platform supports two following function types:
 - fault tolerant
 
 **Challenges:**
-- Debugging
-- Transparency
-- Cold start/caching
-- Cost control
-- End to end testing
+- debugging
+- transparency
+- cold start/caching
+- cost control
+- end to end testing
 
 
 ### E2E automation workflow:
