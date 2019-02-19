@@ -55,7 +55,7 @@ Google cloud platform supports two following function types:
 **Advantages:**
 - infrastructure management is handled by cloud provider
 - lightweight and modular
-- even driven
+- event driven
 - scales up automatically
 - fault tolerant
 
@@ -221,7 +221,6 @@ The following variables are automatically set by the Cloud Functions runtime.
 
 
 #### BigQuery 
-
 1. Deployment: 
     ```bash
     gcloud functions deploy MyFunction --entry-point MyFunctionFn \
