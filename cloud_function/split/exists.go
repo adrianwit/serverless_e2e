@@ -1,7 +1,6 @@
 package split
 
 import (
-	"cloud.google.com/go/storage"
 	"context"
 	"net/url"
 	"os"
@@ -17,7 +16,7 @@ func Exists(ctx context.Context, URL string) bool {
 		_, err := os.Stat(parsedURL.Path)
 		return err == nil
 	}
-	client, err := storage.NewClient(ctx)
+	client, err := getClient()
 	if err != nil {
 		return false
 	}

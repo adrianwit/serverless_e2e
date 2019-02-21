@@ -1,7 +1,6 @@
 package split
 
 import (
-	"cloud.google.com/go/storage"
 	"context"
 	"io/ioutil"
 	"net/url"
@@ -13,7 +12,7 @@ func Download(ctx context.Context, URL string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	client, err := storage.NewClient(ctx)
+	client, err := getClient()
 	if err != nil {
 		return nil, err
 	}

@@ -12,18 +12,23 @@ import (
 
 const slackCredentialsEnvKey = "slackSecrets"
 
+var slackClient *slack.Client
+
 func getClient() (*slack.Client, error) {
+	if slackClient != nil {
+		return slackClient, nil
+	}
 	credentials := os.Getenv(slackCredentialsEnvKey)
 	if credentials == "" {
 		return nil, fmt.Errorf("os.env.%v was empty", slackCredentialsEnvKey)
 	}
 	credConfig := cred.Config{}
-	if err := credConfig.LoadFromReader(strings.NewReader(credentials), ".json");err != nil {
+	if err := credConfig.LoadFromReader(strings.NewReader(credentials), ".json"); err != nil {
 		return nil, err
 	}
-	return slack.New(credConfig.Password), nil
+	slackClient = slack.New(credConfig.Password)
+	return slackClient, nil
 }
-
 
 func Post(ctx context.Context, target *Target, event interface{}, eventType string) error {
 	client, err := getClient()
@@ -32,12 +37,12 @@ func Post(ctx context.Context, target *Target, event interface{}, eventType stri
 		return err
 	}
 	request := slack.FileUploadParameters{
-		Filename:eventType + ".json",
-		Title:eventType,
-		Filetype:"json",
-		Content:string(JSON),
-		Channels:[]string{target.URL},
+		Filename: eventType + ".json",
+		Title:    eventType,
+		Filetype: "json",
+		Content:  string(JSON),
+		Channels: []string{target.URL},
 	}
-	_,  err =client.UploadFile(request)
+	_, err = client.UploadFile(request)
 	return err
 }

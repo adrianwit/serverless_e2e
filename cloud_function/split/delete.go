@@ -1,7 +1,6 @@
 package split
 
 import (
-	"cloud.google.com/go/storage"
 	"context"
 	"net/url"
 	"os"
@@ -17,7 +16,7 @@ func Delete(ctx context.Context, URL string) error {
 		err = os.Remove(parsedURL.Path)
 		return err
 	}
-	client, err := storage.NewClient(ctx)
+	client, err := getClient()
 	if err != nil {
 		return err
 	}

@@ -35,23 +35,22 @@ func (s *service) transform(event interface{}, route *Route) interface{} {
 	}
 	var eventMap = make(map[string]interface{})
 	jsonConverter := toolbox.NewConverter("", "json")
-	err := jsonConverter.AssignConverted(&eventMap, event);
-	if err!= nil {
+	err := jsonConverter.AssignConverted(&eventMap, event)
+	if err != nil {
 		log.Printf("unable convert event: %v\n", err)
 		return event
 	}
 	eventDataMap := data.Map(eventMap)
 	result := data.NewMap()
-	for sourcePath, taragetPath := range  route.Fields {
+	for sourcePath, taragetPath := range route.Fields {
 		val, ok := eventDataMap.GetValue(sourcePath)
-		if ! ok {
+		if !ok {
 			continue
 		}
 		result.SetValue(taragetPath, val)
 	}
 	return result
 }
-
 
 func (s *service) notify(ctx context.Context, route *Route, event interface{}) error {
 	transformed := s.transform(event, route)

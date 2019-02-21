@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-var gsSrv Service
+var storageDispatcher Service
 
 //BQEventDispatcher dispatch Storage events to matched targets
 func GSEventDispatcherFn(ctx context.Context, event *gs.Event) error {
@@ -19,8 +19,8 @@ func GSEventDispatcherFn(ctx context.Context, event *gs.Event) error {
 }
 
 func getGSService(ctx context.Context) (Service, error) {
-	if gsSrv != nil {
-		return gsSrv, nil
+	if storageDispatcher != nil {
+		return storageDispatcher, nil
 	}
 	configURL := os.Getenv("configURL")
 	if configURL == "" {
@@ -30,6 +30,6 @@ func getGSService(ctx context.Context) (Service, error) {
 	if err != nil {
 		return nil, err
 	}
-	gsSrv, err = New(config, gs.NewPredicate)
-	return gsSrv, err
+	storageDispatcher, err = New(config, gs.NewPredicate)
+	return storageDispatcher, err
 }

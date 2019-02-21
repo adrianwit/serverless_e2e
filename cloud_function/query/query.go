@@ -4,10 +4,25 @@ import (
 	"cloud.google.com/go/bigquery"
 	"context"
 	"google.golang.org/api/iterator"
+	"os"
 )
 
+var client *bigquery.Client
+
+func getClient(project string) (*bigquery.Client, error) {
+	if client != nil {
+		return client, nil
+	}
+	if project == "" {
+		project = os.Getenv("GCLOUD_PROJECT")
+	}
+	var err error
+	client, err = bigquery.NewClient(context.Background(), project)
+	return client, err
+}
+
 func RunQuery(ctx context.Context, project, dataset string, SQL string, params []interface{}, useLegacy bool, rowProvider func() interface{}, handler func(row interface{}) (bool, error)) error {
-	client, err := bigquery.NewClient(ctx, project)
+	client, err := getClient(project)
 	if err != nil {
 		return err
 	}

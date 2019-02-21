@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-var bqSrv Service
+var bigQueryDispatcher Service
 
 //BQEventDispatcher dispatches BigQuery events to matched targets
 func BQEventDispatcherFn(ctx context.Context, eventData struct{}) error {
@@ -34,8 +34,8 @@ func BQEventDispatcherFn(ctx context.Context, eventData struct{}) error {
 }
 
 func getService(ctx context.Context) (Service, error) {
-	if bqSrv != nil {
-		return bqSrv, nil
+	if bigQueryDispatcher != nil {
+		return bigQueryDispatcher, nil
 	}
 	configURL := os.Getenv("configURL")
 	if configURL == "" {
@@ -45,6 +45,6 @@ func getService(ctx context.Context) (Service, error) {
 	if err != nil {
 		return nil, err
 	}
-	bqSrv, err = New(config, bq.NewPredicate)
-	return bqSrv, err
+	bigQueryDispatcher, err = New(config, bq.NewPredicate)
+	return bigQueryDispatcher, err
 }

@@ -12,11 +12,17 @@ const (
 	ScopeEmail  = "https://www.googleapis.com/auth/userinfo.email"
 )
 
+var client *firestore.Client
+
 //NewClient returns new firestore client
 func NewClient(ctx context.Context, projectID string) (*firestore.Client, error) {
+	if client != nil {
+		return client, nil
+	}
 	options := []option.ClientOption{
 		option.WithScopes(ScopeEmail, DatastoreDb, ScopeDb),
 	}
-
-	return firestore.NewClient(ctx, projectID, options...)
+	var err error
+	client, err = firestore.NewClient(ctx, projectID, options...)
+	return client, err
 }

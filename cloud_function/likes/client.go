@@ -12,15 +12,21 @@ const (
 	ScopeEmail = "https://www.googleapis.com/auth/userinfo.email"
 )
 
-//NewApp returns new app
+var app *firebase.App
+
+//NewApp returns cached or new app
 func NewApp(ctx context.Context, URL string) (*firebase.App, error) {
+	if app != nil {
+		return app, nil
+	}
 	options := []option.ClientOption{
 		option.WithScopes(ScopeEmail, ScopeDb),
 	}
-	return firebase.NewApp(ctx, &firebase.Config{
+	var err error
+	app, err = firebase.NewApp(ctx, &firebase.Config{
 		DatabaseURL: URL,
 	}, options...)
-
+	return app, err
 }
 
 //NewDb returns new db

@@ -8,12 +8,22 @@ import (
 	"google.golang.org/api/pubsub/v1"
 )
 
-func Publish(ctx context.Context, target *Target, event interface{}) error {
-	httpClient, err := getDefaultClient(ctx, pubsub.CloudPlatformScope, pubsub.PubsubScope)
-	if err != nil {
-		return err
+var pubsubService *pubsub.Service
+
+func getPubsubService() (*pubsub.Service, error) {
+	if pubsubService != nil {
+		return pubsubService, nil
 	}
-	service, err := pubsub.New(httpClient)
+	httpClient, err := getDefaultClient(context.Background(), pubsub.CloudPlatformScope, pubsub.PubsubScope)
+	if err != nil {
+		return nil, err
+	}
+	pubsubService, err = pubsub.New(httpClient)
+	return pubsubService, err
+}
+
+func Publish(ctx context.Context, target *Target, event interface{}) error {
+	service, err := getPubsubService()
 	if err != nil {
 		return err
 	}

@@ -5,12 +5,22 @@ import (
 	"google.golang.org/api/bigquery/v2"
 )
 
-func GetBQJob(ctx context.Context, projectID, jobID string) (*bigquery.Job, error) {
-	httpClient, err := getDefaultClient(ctx, bigquery.CloudPlatformScope, bigquery.BigqueryScope, bigquery.BigqueryInsertdataScope)
+var bqService *bigquery.Service
+
+func getBQService() (*bigquery.Service, error) {
+	if bqService != nil {
+		return bqService, nil
+	}
+	httpClient, err := getDefaultClient(context.Background(), bigquery.CloudPlatformScope, bigquery.BigqueryScope, bigquery.BigqueryInsertdataScope)
 	if err != nil {
 		return nil, err
 	}
-	service, err := bigquery.New(httpClient)
+	bqService, err = bigquery.New(httpClient)
+	return bqService, err
+}
+
+func GetBQJob(ctx context.Context, projectID, jobID string) (*bigquery.Job, error) {
+	service, err := getBQService()
 	if err != nil {
 		return nil, err
 	}

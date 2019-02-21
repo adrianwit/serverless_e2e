@@ -13,6 +13,7 @@ pipeline:
       - Transformed:
           configuration:
             jobType: "QUERY"
+
   checkSlack:
     validate:
       action: slack:pull

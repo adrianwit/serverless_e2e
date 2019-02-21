@@ -1,7 +1,6 @@
 package split
 
 import (
-	"cloud.google.com/go/storage"
 	"context"
 	"io"
 	"net/url"
@@ -13,7 +12,7 @@ func Upload(ctx context.Context, URL string, reader io.Reader) error {
 	if err != nil {
 		return err
 	}
-	client, err := storage.NewClient(ctx)
+	client, err := getClient()
 	if err != nil {
 		return err
 	}
