@@ -6,5 +6,6 @@ pipeline:
     '@name': HelloWorld
     entryPoint: HelloWorldFn
     runtime: go111
+    public: true
     source:
       URL: ${appPath}/hello/

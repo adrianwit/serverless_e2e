@@ -13,6 +13,7 @@ pipeline:
     action: gcp/cloudfunctions:deploy
     '@name': QueryBQ
     entryPoint: QueryFn
+    public: true
     runtime: go111
     source:
       URL: ${appPath}/query
