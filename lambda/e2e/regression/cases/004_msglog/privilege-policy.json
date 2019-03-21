@@ -6,7 +6,7 @@
       "Action": [
         "sqs:*"
       ],
-      "Resource": "*"
+      "Resource": "arn:aws:sqs:*:${aws.accountID}:mye2eQueue"
     }
   ]
 }

@@ -1,0 +1,13 @@
+init:
+  expectAssetURL: ${parent.path}/expect/gs/expenditure.json
+  expect: $Cat($expectAssetURL)
+
+pipeline:
+  validateAsset:
+    action: storage:download
+    source:
+      URL: gs://dstransfer_e2e/folder/expenditure.json.gz
+      credentials: $gcpCredentials
+    udf: UnzipText
+    expect: $AsJSON($expect)
+    destKey: gsExpenditure

@@ -2,13 +2,13 @@ pipeline:
   set_sdk:
     action: sdk.set
     target: $target
-    sdk: go:1.11
+    sdk: go:1.12
 
   test:
-    tag: Test
+    tag: $pathMatch
     description: '@info'
-    subPath: 'cases/${index}*'
-    range: 5..005
+    subPath: 'cases/${index}_*'
+    range: 1..006
     template:
       setVars:
         action: nop
@@ -38,11 +38,11 @@ pipeline:
         comments: validate lambda function execution
         request: '@test'
 
-      ubdeploy:
-        when: $HasResource(${path}/undeploy.yaml)
-        action: run
-        comments: undeploy lambda function
-        request: '@undeploy'
+#      ubdeploy:
+#        when: $HasResource(${path}/undeploy.yaml)
+#        action: run
+#        comments: undeploy lambda function
+#        request: '@undeploy'
 
     post-test-sleep:
       action: nop

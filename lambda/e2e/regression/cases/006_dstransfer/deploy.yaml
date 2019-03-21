@@ -1,0 +1,79 @@
+init:
+  functionRole: lambda-dstransfer-executor
+  functionName: DsTransferFn
+  codeZip: ${appPath}dstransfer/app/dstransfer.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
+  config: $Cat(${parent.path}/config.json)
+  gcpSecrets: ${secrets.$gcpCredentials}
+  mysqlSecrets: ${secrets.aws-e2e-mysql}
+
+pipeline:
+
+  setEncryptionKey:
+    setupKey:
+      credentials: $awsCredentials
+      action: aws/kms:setupKey
+      aliasName: alias/dstransfer
+
+  deployGSSecret:
+    action: aws/ssm:setParameter
+    name: dstransfer.gs
+    '@description': Google Storage credentials
+    type: SecureString
+    keyId: alias/dstransfer
+    value: $gcpSecrets.Data
+
+  deployMysqlSecret:
+    action: aws/ssm:setParameter
+    name: dstransfer.mysql
+    '@description': mysql credentials
+    type: SecureString
+    keyId: alias/dstransfer
+    value: $mysqlSecrets.Data
+
+  deploy:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}dstransfer/app
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build -o dstransfer
+        - zip -j dstransfer.zip dstransfer
+
+    deployFunction:
+      action: aws/lambda:deploy
+      credentials: $awsCredentials
+      functionname: $functionName
+      runtime:  go1.x
+      handler: dstransfer
+      timeout: 360
+      environment:
+        variables:
+          CONFIG: $AsString($config)
+      code:
+        zipfile: $LoadBinary(${codeZip})
+      rolename: lambda-dstransfer-executor
+      define:
+        - policyname: kms-dstransfere2e-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+    setupAPI:
+      action: aws/apigateway:setupRestAPI
+      credentials: $awsCredentials
+      '@name': dstransferAPI
+      resources:
+        - path: /{proxy+}
+          methods:
+            - httpMethod: ANY
+              functionname: $functionName
+    sleepTimeMs: 15000
+post:
+  endpointURL: ${setupAPI.EndpointURL}

@@ -1,0 +1,11 @@
+init:
+  copy: $Cat(${parent.path}/copy.json)
+pipeline:
+  postJob:
+    action: rest/runner:send
+    URL: ${endpointURL}copt
+    method: post
+    '@request': $copy
+    expect:
+      Count: 6
+      Status: ok

@@ -1,0 +1,40 @@
+[
+  {
+    "country": "Poland",
+    "year": 2014,
+    "category": "Food",
+    "expenditure": 6759
+  },
+  {
+    "country": "Poland",
+    "year": 2015,
+    "category": "Food",
+    "expenditure": 7023
+  },
+  {
+    "country": "Poland",
+    "year": 2016,
+    "category": "Food",
+    "expenditure": 7023
+  },
+
+  {
+    "country": "US",
+    "year": 2014,
+    "category": "Housing",
+    "expenditure": 17798
+  },
+  {
+    "country": "US",
+    "year": 2015,
+    "category": "Housing",
+    "expenditure": 18409
+  },
+  {
+    "country": "US",
+    "year": 2016,
+    "category": "Housing",
+    "expenditure": 18886
+  }
+
+]

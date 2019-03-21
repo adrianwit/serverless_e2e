@@ -2,6 +2,12 @@ init:
   self.i: 1
 pipeline:
   loop:
+
+    setEventType:
+      action: nop
+      init:
+        eventType: ${self.i % 3}
+
     trigger:
       action: msg:push
       comments: pushing message ${self.i}
@@ -12,7 +18,7 @@ pipeline:
         vendor: aws
       messages:
         - subject: Test subject
-          data: '{"EventType":1, "Timestamp":"${tzTime.now}"}'
+          data: '{"EventType":$eventType, "Timestamp":"${tzTime.now}"}'
           attributes:
             id: $self.i
     inc:

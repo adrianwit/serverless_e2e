@@ -19,7 +19,7 @@ pipeline:
         - go build -o loginfo
         - zip -j loginfo.zip loginfo
 
-    setupFunction:
+    deployFunction:
       action: aws/lambda:deploy
       credentials: $awsCredentials
       functionname: $functionName
@@ -36,7 +36,7 @@ pipeline:
 
     setupAPI:
       action: aws/apigateway:setupRestAPI
-      credentials: aws
+      credentials: $awsCredentials
       '@name': loginfoAPI
       resources:
         - path: /{proxy+}

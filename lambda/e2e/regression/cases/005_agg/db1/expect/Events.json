@@ -1,3 +1,5 @@
 [
-  {"EventDate": "$FormatTime('now','yyyy-MM-dd')", "EventType": 1, "Qty": 10}
+  {"EventDate": "$FormatTime('now','yyyy-MM-dd')", "EventType": 0, "Qty": 3},
+  {"EventDate": "$FormatTime('now','yyyy-MM-dd')", "EventType": 1, "Qty": 4},
+  {"EventDate": "$FormatTime('now','yyyy-MM-dd')", "EventType": 2, "Qty": 3}
 ]

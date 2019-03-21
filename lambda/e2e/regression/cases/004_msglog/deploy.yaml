@@ -36,5 +36,6 @@ pipeline:
       triggers:
         - source: mye2eQueue
           type: sqs
+          enabled: true
           batchSize: 2
   

@@ -1,7 +1,0 @@
-pipeline:
-  task1:
-    action: aws/cloudwatch:listMetrics
-    credentials: aws
-    dimensions:
-      - name: LogGroupName
-        value: /aws/lambda/MsgLogFn

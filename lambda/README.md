@@ -4,10 +4,9 @@
 
  - go1.11
  - dedicated aws account for e2e testing 
-    * aws credentials file-> ~/.secret/e2e.json 
+    * aws-e2e credentials file-> ~/.secret/aws-e2e.json 
     * [Setup Endly AWS Credentials](https://github.com/viant/endly/tree/master/doc/secrets#aws)
-    * [endly e2e runner](http://github.com/viant/endly/) (0.29.1+)
-
+    * [endly e2e runner](http://github.com/viant/endly/) (0.34.1+)
 
 
 ### Running e2e tests with endly docker container
@@ -26,8 +25,22 @@ endly -v #to check version
 endly -c=localhost  ## create localhost credentials with user root/dev
 ls -al /root/.secret/localhost.json ## check encrypted credentials created
 
-## generate aws.json  -> /root/.secret/aws.json  
-### @aws.josn -> {"Region":"xxx", "Key":"yyy", "Secret":"zzz"}
+## generate aws-e2e.json  -> /root/.secret/aws.json  
+### @aws-e2e.josn -> {"Region":"xxx", "Key":"yyy", "Secret":"zzz"}
+
+
+
+#For use case 6 (transfering data from mysql to data store) and remove skip.txt file
+
+## generate gcp-e2e.json  -> /root/.secret/gcp-e2e.json  (from google secrets with owner google storage permission)
+
+## generate aws-e2e-mysql with RDS mysql  (username root/password e2etesting)
+endly -c=aws-e2e-mysql
+
+## set AWS_E2E_MYSQL_HOST variable with mysql hostname
+export AWS_E2E_MYSQL_HOST=db.******.us-west-1.rds.amazonaws.com
+
+
 
 cd /e2e
 git clone https://github.com/adrianwit/serverless_e2e
@@ -93,6 +106,7 @@ This project provides example for the following native mechanisms:
 
 - [HelloWorld](hello/hello.go)
 - [E2E Use Case](e2e/regression/cases/001_hello_world)
+    * ```endly -i=hello_world```
 - _Handler Signature_ 
 ```go
     func() (Output, error)
@@ -100,10 +114,14 @@ This project provides example for the following native mechanisms:
 ```
 
 
+
+
 #### HTTP APIGateway 
 
-- [LogInfo](loginfo/app/loginfo.go)
+- [LogInfo Source Code](loginfo/app/)
 - [E2E Use Case](e2e/regression/cases/002_logs_count)
+  * ```endly -i=logs_count```
+
 - _Handler Signature_ 
 ```go
     func(context.Context, events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)
@@ -165,8 +183,9 @@ func handleError(err error) (events.APIGatewayProxyResponse, error) {
 
 #### S3 Storage 
 
-- [FileMeta](filemeta/filemeta.go)
+- [FileMeta](filemeta/)
 - [E2E Use Case](e2e/regression/cases/003_filemeta)
+   * ```endly -i=filemeta```
 - _Handler Signature_ 
 ```go
     func(context.Context, events.S3Event)
@@ -219,8 +238,9 @@ type S3UserIdentity struct {
 #### Simple Queue Service 
 
 
-- [FileMeta](msglog/msglog.go)
+- [FileMeta](msglog/)
 - [E2E Use Case](e2e/regression/cases/004_msglog)
+   * ```endly -i=msglog```
 - _Handler Signature_ 
 ```go
     func(ctx context.Context, sqsEvent events.SQSEvent) error
@@ -255,8 +275,9 @@ type SQSMessage struct {
 #### Simple Notification Service 
 
 
-- [Agg](agg/agg.go)
+- [Aggregatio Source code](agg/)
 - [E2E Use Case](e2e/regression/cases/005_agg)
+    * ```endly -i=agg```
 - _Handler Signature_ 
 ```go
     func(ctx context.Context, snsEvent events.SNSEvent) error
@@ -294,6 +315,25 @@ type SNSEntity struct {
 
 - References:
    * [Using Lambda with Amazon SNS](https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example.html)
+
+
+
+#### RDS mysql, google storage 
+
+##### Securing sensitive data
+
+- aws kms create-key
+- aws kms create-alias
+- aws ssm put-parameter --name "<string-name>" --value '<secure data>' --type SecureString --key-id alias/<kms-key-name>
+- aws ssm get-parameters --names "<string-name>" --with-decryption
+
+
+- [Data Transfer Source code](dstransfer/)
+- [E2E Use Case](e2e/regression/cases/006_dstransfer)
+    * ```endly -i=dstransfer```
+
+- References:
+    * [Managing-secrets-with-parameter-store-and-iam-roles](https://aws.amazon.com/blogs/compute/managing-secrets-for-amazon-ecs-applications-using-parameter-store-and-iam-roles-for-tasks/)
 
 
 ### Error Handling

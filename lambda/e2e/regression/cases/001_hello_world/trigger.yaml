@@ -2,7 +2,7 @@ init:
   functionName: HelloWorldFn
 pipeline:
   trigger:
-    action: aws/lambda:invoke
+    action: aws/lambda:call
     credentials: $awsCredentials
     comments: call $functionName lambda function
     functionname: $functionName

@@ -4,8 +4,9 @@ init:
     URL: ssh://127.0.0.1/
     credentials: localhost
   appHost: $Hostname($target.URL)
-  awsCredentials: aws
-  awsSecrets: $secrets.aws
+  awsCredentials: aws-e2e
+  awsSecrets: ${secrets.aws-e2e}
+  gcpCredentials: gcp-e2e
   appPath: $WorkingDirectory(../)
   startTimestamp: ${timestamp.now}
   testBucketPrefix: e2e$FormatTime('now','MMdd')

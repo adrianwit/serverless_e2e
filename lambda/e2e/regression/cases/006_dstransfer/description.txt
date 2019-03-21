@@ -1,0 +1,17 @@
+Function transfer data from mysql to google storage
+
+Input:
+
+    copy request:
+
+    {
+        SQL:"SELECT * FROM expenditure ORDER BY year, country",
+        DEST: "gs://mybucket/folder/expenditure.json.gz"
+    }
+
+
+Output:
+
+    Data file in google storage:
+
+        gs://mybucket/folder/expenditure.json.gz

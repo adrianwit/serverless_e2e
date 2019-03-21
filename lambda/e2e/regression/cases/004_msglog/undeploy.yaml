@@ -1,0 +1,10 @@
+pipeline:
+  undeploy:
+    action: aws/lambda:deleteFunction
+    credentials: $awsCredentials
+    functionname: MsgLogFn
+  removeLogGroup:
+    action: aws/logs:deleteLogGroup
+    credentials: $awsCredentials
+    logGroupName: /aws/lambda/MsgLogFn
+    sleepTimeMs: 5000

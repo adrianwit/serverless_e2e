@@ -1,0 +1,4 @@
+{
+  "SQL": "SELECT * FROM expenditure ORDER BY year, country",
+  "DestURL": "gs://dstransfer_e2e/folder/expenditure.json.gz"
+}

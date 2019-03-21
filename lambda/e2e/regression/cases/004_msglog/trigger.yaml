@@ -27,4 +27,4 @@ pipeline:
     thinkTime:
       action: nop
       comments: allow extra time for message processing and log flushing
-      sleepTimeMs: 20000
+      sleepTimeMs: 40000

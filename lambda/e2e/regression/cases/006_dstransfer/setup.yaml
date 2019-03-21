@@ -1,0 +1,41 @@
+init:
+  data: e2e test
+  '!dbhost': ${env.AWS_E2E_MYSQL_HOST}
+pipeline:
+  create-db:
+    action: dsunit:init
+    recreate: true
+    scripts:
+      - URL: ${parent.path}/datastore/db/schema.ddl
+    datastore: db
+    config:
+      driverName: mysql
+      descriptor: "[username]:[password]@tcp(${dbhost}:3306)/[dbname]?parseTime=true"
+      credentials: aws-e2e-mysql
+    admin:
+      datastore: mysql
+      ping: true
+      config:
+        driverName: mysql
+        descriptor: "[username]:[password]@tcp(${dbhost}:3306)/[dbname]?parseTime=true"
+        credentials: aws-e2e-mysql
+  populate:
+    action: dsunit:prepare
+    datastore: db
+    URL: ${parent.path}/datastore/data
+
+  create-bucket:
+    action: storage:upload
+    comments: init bucket
+    sourceKey: data
+    dest:
+      URL: gs://dstransfer_e2e/data.txt
+      credentials: $gcpCredentials
+  cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: gs://dstransfer_e2e/data.txt
+        credentials: $gcpCredentials
+      - URL: gs://dstransfer_e2e/folder/expenditure.json.gz
+        credentials: $gcpCredentials
