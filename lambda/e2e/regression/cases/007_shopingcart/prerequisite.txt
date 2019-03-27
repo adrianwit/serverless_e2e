@@ -1,4 +1,8 @@
-1. install oracle jdk 8
-2. generate locahost credentials with access to localhost (to run selenium server)
+1. This use case can run on osx or linux with selenium capability
+2. install oracle jdk 8
+3. generate locahost credentials with access to localhost (to run selenium server)
+   https://github.com/viant/endly/tree/master/doc/secrets#ssh-credentials
+
+
    endly -c=localhost -k=pathtoPK
 
