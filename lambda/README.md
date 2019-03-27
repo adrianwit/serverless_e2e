@@ -27,7 +27,7 @@ ls -al /root/.secret/localhost.json ## check encrypted credentials created
 ## generate aws-e2e.json  -> /root/.secret/aws.json  
 ### @aws-e2e.josn -> {"Region":"xxx", "Key":"yyy", "Secret":"zzz"}
 
-#For use case 6 and 7 apply prerequisites described in prerequisite.txt and remove skip.txt
+#For use case 6 and 7  (Securing sensitive data, Multi stack HTTP Gateway) apply prerequisites described in prerequisite.txt and remove skip.txt
 
 cd /e2e
 git clone https://github.com/adrianwit/serverless_e2e
@@ -305,7 +305,6 @@ type SNSEntity struct {
 
 
 
-#### RDS mysql, google storage 
 
 ##### Securing sensitive data
 
