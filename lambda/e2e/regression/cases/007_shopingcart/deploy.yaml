@@ -1,0 +1,109 @@
+init:
+  functionRole: lambda-shoppingcart
+  productCodeZip: ${appPath}shoppingcart/product/app/app.zip
+  proxyCodeZip: ${appPath}shoppingcart/ui/proxy.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
+pipeline:
+
+
+  productService:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}shoppingcart/product/app
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build app.go
+        - zip -j app.zip app
+
+    deploy:
+      action: aws/lambda:deploy
+      credentials: $awsCredentials
+      functionname: ProductService
+      runtime:  go1.x
+      handler: app
+      code:
+        zipfile: $LoadBinary(${productCodeZip})
+      rolename: $functionRole
+      define:
+        - policyname: lambda-sns-execution-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  ui:
+    setSdk:
+      action: sdk:set
+      sdk: node:10
+      target: $target
+
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}shoppingcart/ui
+        - rm -rf ${appPath}shoppingcart/ui/build
+        - npm update caniuse-lite browserslist
+        - npm run-script build
+
+  uiProxy:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}shoppingcart/ui
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build proxy.go
+        - zip -r proxy.zip proxy build
+
+    deploy:
+      action: aws/lambda:deploy
+      credentials: $awsCredentials
+      functionname: UIProxy
+      runtime:  go1.x
+      handler: proxy
+      code:
+        zipfile: $LoadBinary(${proxyCodeZip})
+      rolename: $functionRole
+      define:
+        - policyname: lambda-sns-execution-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+
+  deployGatewayAPI:
+    redeploy: true
+    action: aws/apigateway:setupRestAPI
+    credentials: $awsCredentials
+    '@name': shopingcart
+    resources:
+      - path: /
+        methods:
+        - httpMethod: GET
+          functionname: UIProxy
+      - path: /{proxy+}
+        methods:
+          - httpMethod: GET
+            functionname: UIProxy
+      - path: /v1/api/products
+        methods:
+          - httpMethod: GET
+            functionname: ProductService
+
+post:
+  endpointURL: ${deployGatewayAPI.EndpointURL}
+

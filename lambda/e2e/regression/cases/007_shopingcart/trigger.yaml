@@ -1,0 +1,27 @@
+init:
+  seleniumServerPort: 8085
+
+pipeline:
+  init:
+    selenium:
+      action: run
+      request: '@selenium_init'
+      comments: initialize seleniun
+
+
+  test:
+    action: rest/runner:send
+    comments: test product service
+    URL: ${endpointURL}/v1/api/products
+    method: get
+    expect:
+      Status: ok
+      '@length@Data': 17
+
+  testUI:
+    action: run
+    request: '@selenium_test'
+
+  destroy:
+    action: run
+    request: '@selenium_destroy'

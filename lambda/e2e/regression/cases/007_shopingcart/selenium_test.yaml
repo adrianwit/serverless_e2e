@@ -1,0 +1,31 @@
+pipeline:
+  productSelection:
+    action: selenium:run
+    sessionID: $SeleniumSessionID
+    comments: select and checkout 3 products
+    actionDelaysInMs: 500
+    commands:
+      - get(${endpointURL})
+      - command: output = (#root).text
+        exit: $output.Text:/Shirt/
+        sleepTimeMs: 1000
+        repeat: 20
+      - (#productList table tr:nth-child(2) button).click
+      - (#productList table tr:nth-child(2) button).click
+      - (#productList table tr:nth-child(3) button).click
+      - (#productList table tr:nth-child(5) button).click
+      - shirtRemainingQuantity = (#productList table tr:nth-child(2) td:nth-child(3)).text
+      - fishRemainingQuantity =  (#productList table tr:nth-child(3) td:nth-child(3)).text
+      - shoesRemainingQuantity = (#productList table tr:nth-child(5) td:nth-child(3)).text
+      - (xpath://a[contains(text(),'Card')]).click
+      - shirtInCard = (#cardContainer div:nth-child(1)).text
+    expect:
+      shirtRemainingQuantity:
+        Text: 10
+      fishRemainingQuantity:
+        Text: 14
+      shoesRemainingQuantity:
+        Text: 15
+      shirtInCard:
+        Text: /931/
+

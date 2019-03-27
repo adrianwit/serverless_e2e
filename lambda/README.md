@@ -28,19 +28,7 @@ ls -al /root/.secret/localhost.json ## check encrypted credentials created
 ## generate aws-e2e.json  -> /root/.secret/aws.json  
 ### @aws-e2e.josn -> {"Region":"xxx", "Key":"yyy", "Secret":"zzz"}
 
-
-
-#For use case 6 (transfering data from mysql to data store) and remove skip.txt file
-
-## generate gcp-e2e.json  -> /root/.secret/gcp-e2e.json  (from google secrets with owner google storage permission)
-
-## generate aws-e2e-mysql with RDS mysql  (username root/password e2etesting)
-endly -c=aws-e2e-mysql
-
-## set AWS_E2E_MYSQL_HOST variable with mysql hostname
-export AWS_E2E_MYSQL_HOST=db.******.us-west-1.rds.amazonaws.com
-
-
+#For use case 6 and 7 apply prerequisites described in prerequisite.txt and remove skip.txt
 
 cd /e2e
 git clone https://github.com/adrianwit/serverless_e2e
@@ -336,9 +324,15 @@ type SNSEntity struct {
     * [Managing-secrets-with-parameter-store-and-iam-roles](https://aws.amazon.com/blogs/compute/managing-secrets-for-amazon-ecs-applications-using-parameter-store-and-iam-roles-for-tasks/)
 
 
+#### Multi stack HTTP Gateway
+
+- [Shopping Cart Source code](shoppingcart)
+- [E2E Use Case](e2e/regression/cases/007_shopingcart)
+    * ```endly -i=shopingcart```
+
+
 ### Error Handling
 
 References:
  * [Errors](https://docs.aws.amazon.com/lambda/latest/dg/go-programming-model-errors.html)
- 
  

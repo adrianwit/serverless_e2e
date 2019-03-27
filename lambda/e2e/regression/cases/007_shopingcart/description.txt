@@ -1,0 +1,19 @@
+I. Product service (list product)
+Input:
+
+    ${endpointURL}/v1/api/products get request
+
+Output:
+
+    returns list of products
+
+II. UI product selection
+
+Input:
+1) table of product,
+2) selection of 1, 2, 4 products
+
+
+Output:
+1) Reduced quantity of selected product
+2) Selected product added to the card

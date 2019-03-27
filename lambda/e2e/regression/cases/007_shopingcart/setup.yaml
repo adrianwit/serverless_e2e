@@ -1,0 +1,25 @@
+pipeline:
+
+  initDb:
+    action: dsunit:init
+    datastore: db2
+    config:
+      driverName: dyndb
+      credentials: $awsCredentials
+    tables:
+      - table: Products
+        pkColumns:
+          - ID
+          - Name
+        schemaURL: ${parent.path}/db2/schema/products.json
+      - table: Documents
+        pkColumns:
+          - ID
+        schemaURL: ${parent.path}/db2/schema/documents.json
+  prepareDb:
+    db2:
+      action: dsunit:prepare
+      datastore: db2
+      URL:  ${parent.path}/db2/prepare
+
+

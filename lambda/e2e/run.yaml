@@ -3,6 +3,7 @@ init:
   target:
     URL: ssh://127.0.0.1/
     credentials: localhost
+  targetHost: $Hostname($target.URL)
   appHost: $Hostname($target.URL)
   awsCredentials: aws-e2e
   awsSecrets: ${secrets.aws-e2e}

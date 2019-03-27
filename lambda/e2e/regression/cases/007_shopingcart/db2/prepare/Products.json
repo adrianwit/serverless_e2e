@@ -1,0 +1,104 @@
+[
+  {
+    "ID": 1,
+    "Name": "Shirt",
+    "Price": 931,
+    "Quantity": 12
+  },
+  {
+    "ID": 3,
+    "Name": "Fish",
+    "Price": 61,
+    "Quantity": 15
+  },
+  {
+    "ID": 4,
+    "Name": "Sausages",
+    "Price": 588,
+    "Quantity": 12
+  },
+  {
+    "ID": 5,
+    "Name": "Shoes",
+    "Price": 701,
+    "Quantity": 16
+  },
+  {
+    "ID": 6,
+    "Name": "Table",
+    "Price": 639,
+    "Quantity": 18
+  },
+  {
+    "ID": 7,
+    "Name": "Chair",
+    "Price": 634,
+    "Quantity": 19
+  },
+  {
+    "ID": 10,
+    "Name": "Towels",
+    "Price": 861,
+    "Quantity": 13
+  },
+  {
+    "ID": 13,
+    "Name": "Chips",
+    "Price": 927,
+    "Quantity": 15
+  },
+  {
+    "ID": 15,
+    "Name": "Bike",
+    "Price": 383,
+    "Quantity": 16
+  },
+  {
+    "ID": 16,
+    "Name": "Hat",
+    "Price": 633,
+    "Quantity": 7
+  },
+  {
+    "ID": 17,
+    "Name": "Tuna",
+    "Price": 766,
+    "Quantity": 15
+  },
+  {
+    "ID": 20,
+    "Name": "Chicken",
+    "Price": 555,
+    "Quantity": 7
+  },
+  {
+    "ID": 21,
+    "Name": "Keyboard",
+    "Price": 95,
+    "Quantity": 12
+  },
+  {
+    "ID": 22,
+    "Name": "Ball",
+    "Price": 987,
+    "Quantity": 6
+  },
+  {
+    "ID": 24,
+    "Name": "Soap",
+    "Price": 686,
+    "Quantity": 1
+  },
+  {
+    "ID": 26,
+    "Name": "Car",
+    "Price": 992,
+    "Quantity": 14
+  },
+  {
+    "ID": 29,
+    "Name": "Salad",
+    "Price": 20,
+    "Quantity": 5
+  }
+]
