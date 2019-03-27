@@ -2,7 +2,6 @@
 
 **Prerequisites:**
 
- - go1.11
  - dedicated aws account for e2e testing 
     * aws-e2e credentials file-> ~/.secret/aws-e2e.json 
     * [Setup Endly AWS Credentials](https://github.com/viant/endly/tree/master/doc/secrets#aws)
