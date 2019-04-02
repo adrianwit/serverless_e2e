@@ -7,10 +7,8 @@ pipeline:
     comments: call $functionName lambda function
     functionname: $functionName
     payload: ""
-    post:
-      payload: $AsString($Payload)
   assert:
     action: validator:assert
     comments: 'validate function output: $payload '
-    actual: $payload
+    actual: $trigger.Response
     expected: /Hello World/

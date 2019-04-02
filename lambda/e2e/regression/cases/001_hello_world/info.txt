@@ -1,1 +1,1 @@
-workload split
+hello world
