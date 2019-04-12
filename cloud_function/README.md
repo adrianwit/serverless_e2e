@@ -162,7 +162,13 @@ pipeline:
 2. BigQuery reader
     - [Source code](query/query_reader.go)
     - [E2E Use Case](e2e/regression/cases/002_query_data)
-      * ```endly -i=query_data```
+      * Running end to end test:
+  ```bash
+  cd /e2e
+  git clone https://github.com/adrianwit/serverless_e2e
+  cd  serverless_e2e/cloud_function/e2e
+  endly -i=query_data
+  ```
 
 
 
