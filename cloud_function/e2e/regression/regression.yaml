@@ -45,11 +45,11 @@ pipeline:
         comments: validate cloud function execution
         request: '@test'
 
-#      ubdeploy:
-#        when: $HasResource(${path}/undeploy.yaml)
-#        action: run
-#        comments: undeploy cloud function
-#        request: '@undeploy'
+      ubdeploy:
+        when: $HasResource(${path}/undeploy.yaml)
+        action: run
+        comments: undeploy cloud function
+        request: '@undeploy'
 
     post-test-sleep:
       action: nop
