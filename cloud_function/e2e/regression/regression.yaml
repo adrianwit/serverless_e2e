@@ -11,7 +11,7 @@ pipeline:
       - unset GOPATH
       - export GO111MODULE=on
   test:
-    tag: Test
+    tag: $pathMatch
     description: '@info'
     subPath: 'cases/${index}*'
     range: 1..008

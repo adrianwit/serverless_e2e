@@ -5,8 +5,8 @@
  - install gcloud
  - go1.11
  - service account for e2e testing dedicated project with enabled API
-    * regular secrets file -> ~/.secret/e2e.json from http://console.cloud.google.com/
-    * firebase secrets file -> ~/.secret/fbc.json from http://http://console.firebase.google.com/
+    * regular secrets file -> ~/.secret/gcp-e2e.json from http://console.cloud.google.com/
+    * firebase secrets file -> ~/.secret/fbc-e2e.json from http://http://console.firebase.google.com/
     * [endly GCP secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
     * [endly slack bot token](https://github.com/viant/endly/tree/master/doc/secrets#slack)
     * [endly e2e runner](https://github.com/viant/endly/releases) (0.32+)
@@ -158,11 +158,11 @@ pipeline:
 1. Hello World
     - [Source code](hello/hello.go)
     - [E2E Use Case](e2e/regression/cases/001_hello_world)
-      * ```endly -i=Test_cases001_hello_world```
+      * ```endly -i=hello_world```
 2. BigQuery reader
     - [Source code](query/query_reader.go)
     - [E2E Use Case](e2e/regression/cases/002_query_data)
-      * ```endly -i=Test_cases002_query_data```
+      * ```endly -i=query_data```
 
 
 
@@ -241,7 +241,7 @@ The following variables are automatically set by the Cloud Functions runtime.
 1. BigQuery Event dispatcher
     - [Source code](dispatcher/bq.go)
     - [E2E Use Case](e2e/regression/cases/003_bqdispatcher)
-      * ```endly -i=Test_cases003_bqdispatcher```
+      * ```endly -i=bqdispatcher```
 
 #### Google Storage
 1. Deployment: 
@@ -288,11 +288,11 @@ The following variables are automatically set by the Cloud Functions runtime.
 1. Storage Event dispatcher
     - [Source code](dispatcher/gs.go)
     - [E2E Use Case](e2e/regression/cases/004_gsdispatcher)
-      * ```endly -i=Test_cases004_gsdispatcher```
+      * ```endly -i=gsdispatcher```
 2. SplitWorkload
     - [Source code](split/split_workload.go)
     - [E2E Use Case](e2e/regression/cases/005_split_workload)
-      * ```endly -i=Test_cases005_split_workload```
+      * ```endly -i=split_workload```
 
 ####  Pubsub
 1. Deployment: 
@@ -319,7 +319,7 @@ The following variables are automatically set by the Cloud Functions runtime.
 1. Pubsub proxy
     - [Source code](msg/proxy_msg.go)
     - [E2E Use Case](e2e/regression/cases/006_proxy_message)
-      * ```endly -i=Test_cases006_proxy_message```
+      * ```endly -i=proxy_message```
 
 
 #### Realtime Database
@@ -352,7 +352,7 @@ The following variables are automatically set by the Cloud Functions runtime.
 1. Counting likes
     - [Source code](likes/count_likes.go)
     - [E2E Use Case](e2e/regression/cases/007_count_likes)
-      * ```endly -i=Test_cases007_count_likes```
+      * ```endly -i=count_likes```
 
 ####  Cloud Firestore
 1. Deployment: 
@@ -416,7 +416,7 @@ The following variables are automatically set by the Cloud Functions runtime.
 1. Moderate posts:
     - [Source code](moderate/moderate.go)
     - [E2E Use Case](e2e/regression/cases/008_moderate_posts)
-      * ```endly -i=Test_cases008_moderate_posts```
+      * ```endly -i=moderate_posts```
 
 
 ####  Google Compute Engine
