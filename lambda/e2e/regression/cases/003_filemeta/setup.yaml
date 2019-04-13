@@ -14,7 +14,7 @@ pipeline:
     assets:
       - URL: s3://${testBucketPrefix}2/meta/filemeta.json
         credentials: $awsCredentials
-      - URL: s3://${testBucketPrefix}2/data.txt
+      - URL: s3://${testBucketPrefix}2/folder1/datafile1.csv
         credentials: $awsCredentials
-      - URL: s3://${testBucketPrefix}2/data/
+      - URL: s3://${testBucketPrefix}2/folder1/datafile2.txt
         credentials: $awsCredentials

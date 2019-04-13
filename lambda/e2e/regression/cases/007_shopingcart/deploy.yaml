@@ -104,6 +104,7 @@ pipeline:
           - httpMethod: GET
             functionname: ProductService
 
+
 post:
   endpointURL: ${deployGatewayAPI.EndpointURL}
 

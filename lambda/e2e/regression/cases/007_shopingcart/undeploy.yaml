@@ -1,0 +1,10 @@
+pipeline:
+  undeploy:
+    service:
+      action: aws/lambda:deleteFunction
+      credentials: $awsCredentials
+      functionname: ProductService
+    ui:
+      action: aws/lambda:deleteFunction
+      credentials: $awsCredentials
+      functionname: UIProxy

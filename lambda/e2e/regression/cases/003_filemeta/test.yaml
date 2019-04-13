@@ -5,8 +5,10 @@ pipeline:
       source:
         URL: s3://${testBucketPrefix}2/meta/filemeta.json
         credentials: $awsCredentials
-      expect:
-        Paths:
-          's3://${testBucketPrefix}2/folder1':
-            FileCount: 2
-            LinesCount: 52
+#      expect:
+#        Paths:
+#          's3://${testBucketPrefix}2/folder1':
+#              FileCount: 1
+#              LinesCount: 26
+
+

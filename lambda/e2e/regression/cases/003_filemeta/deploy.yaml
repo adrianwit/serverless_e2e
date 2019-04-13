@@ -37,7 +37,7 @@ pipeline:
     notification:
       action: aws/s3:setupBucketNotification
       credentials: $awsCredentials
-      sleepTimeMs: 10000
+      sleepTimeMs: 20000
       bucket: ${testBucketPrefix}2
       lambdaFunctionConfigurations:
         - functionName: $functionName

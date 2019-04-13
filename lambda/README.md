@@ -72,7 +72,7 @@ where handler supports the following function signatures:
 
 **Pull/Push model lambda trigger configuration**
 
-1. Poll-based AWS services: Amazon Kinesis Data Streams and DynamoDB streams or Amazon SQS queues
+1. Pull-based AWS services: Amazon Kinesis Data Streams and DynamoDB streams or Amazon SQS queues
     - trigger is configured within lambda via Event Source Mapping
     
 2. Push based AWS services     
