@@ -1,0 +1,33 @@
+init:
+  testData: '_'
+pipeline:
+
+  create-source:
+    action: storage:upload
+    comments: create a bucket with dummy data
+    sourceKey: testData
+    dest:
+      URL: ${config.SourceURL}/info
+      credentials: $gcpSecrets
+
+  create-dest:
+    action: storage:upload
+    comments: create a bucket with dummy data
+    sourceKey: testData
+    dest:
+      URL: ${config.DestURL}/info
+      credentials: $awsSecrets
+
+  source-cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: ${config.SourceURL}
+        credentials: $gcpSecrets
+
+  dest-cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: ${config.DestURL}
+        credentials: $awsSecrets

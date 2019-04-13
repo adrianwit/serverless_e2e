@@ -1,0 +1,51 @@
+init:
+  awsConfig: ${secrets.$awsSecrets}
+
+defaults:
+  credentials: $gcpSecrets
+
+pipeline:
+
+  deployKey:
+    action: gcp/kms:deployKey
+    ring: mirrorAppRing
+    key: mirrorAppKey
+    purpose: ENCRYPT_DECRYPT
+
+  encrypt:
+    action: gcp/kms:encrypt
+    ring: mirrorAppRing
+    key: mirrorAppKey
+    plainData: ${awsConfig.Data}
+    logging: false
+
+
+  setConfig:
+    action: nop
+    init:
+      mirrorConfig:
+        DestURL: ${config.DestURL}
+        SecretKey: ${deployKey.Name}
+        Secrets: ${encrypt.CipherBase64Text}
+
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/mirror
+      - go mod vendor
+
+  deploy:
+    action: gcp/cloudfunctions:deploy
+    '@name': Mirror
+    entryPoint: MirrorFn
+    runtime: go111
+    serviceAccountEmail: $serviceAccount
+    environmentVariables:
+      config: $AsString($mirrorConfig)
+    eventTrigger:
+      eventType: google.storage.object.finalize
+      resource: projects/_/buckets/${config.Bucket}
+    source:
+      URL: ${appPath}/mirror

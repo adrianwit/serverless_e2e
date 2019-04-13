@@ -1,0 +1,1 @@
+Make that you add aws credentials before running this test

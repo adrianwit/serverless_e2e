@@ -1,0 +1,5 @@
+{
+  "SourceURL": "gs://viante2emirror/data",
+  "DestURL": "s3://viante2emirror/data",
+  "Bucket": "viante2emirror"
+}

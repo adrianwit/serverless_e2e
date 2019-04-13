@@ -1,0 +1,6 @@
+defaults:
+  credentials: $gcpSecrets
+pipeline:
+  undeploy:
+    action: gcp/cloudfunctions:delete
+    '@name': Mirror

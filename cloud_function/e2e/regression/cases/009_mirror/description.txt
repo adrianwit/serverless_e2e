@@ -1,0 +1,8 @@
+Function copy content from source to dest
+
+Input:
+    gs://${config.Bucket}/data/data.txt
+    cloud function event  triggered by --trigger-resource ${config.Bucket}
+Output:
+    s3://${config.Bucket}/data/data.txt
+

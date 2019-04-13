@@ -1,0 +1,9 @@
+pipeline:
+  trigger:
+    action: storage:copy
+    source:
+      URL: ${parent.path}/data/data.txt
+    dest:
+      URL: ${config.SourceURL}/data.txt
+      credentials: $gcpSecrets
+    sleepTimeMs: 5000

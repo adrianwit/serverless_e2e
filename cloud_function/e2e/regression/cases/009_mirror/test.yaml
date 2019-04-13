@@ -1,0 +1,8 @@
+pipeline:
+  loop:
+    check-content:
+      action: storage:download
+      source:
+        URL: ${config.DestURL}/data.txt
+        credentials: $awsSecrets
+      expect: $Cat(${parent.path}/expect/data.txt)
