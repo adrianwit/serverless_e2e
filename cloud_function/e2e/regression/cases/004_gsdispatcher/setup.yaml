@@ -7,11 +7,11 @@ pipeline:
     sourceKey: testData
     dest:
       URL: gs://${testBucketPrefix}_ds/data
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
 
   cleanup:
     action: storage:remove
-    credentials: $gcSecrets
+    credentials: $gcpSecrets
     comments: remove assets used in this use case
     assets:
       - URL: gs://${testBucketPrefix}_ds/folder1/data.txt
@@ -24,7 +24,7 @@ pipeline:
       URL: ${appPath}/dispatcher/config/gs.json
     dest:
       URL: gs://${testBucketPrefix}_config/gs.json
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
 
   setupMessageBus:
     action: msg:setupResource
@@ -32,11 +32,11 @@ pipeline:
       - URL: iniTopic
         type: topic
         vendor: gcp
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: iniTopicSubscription
         type: subscription
         vendor: gcp
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
         config:
           topic:
             URL: /projects/${projectID}/topics/iniTopic

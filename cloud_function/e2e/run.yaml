@@ -6,16 +6,20 @@ init:
   appHost: $Hostname($target.URL)
   appPath: $WorkingDirectory(..)
 
-  gcSecrets: gcp-e2e
-  e2e: $secrets.e2e
+
+
+  gcpSecrets: gcp-e2e
+  gcp: ${secrets.$gcpSecrets}
+  projectID: $gcp.ProjectID
+  serviceAccount: $gcp.ClientEmail
 
   fbSecrets: fbc-e2e
   fbc: $secrets.fbc
   fbProjectID: $fbc.ProjectID
 
-  projectID: $e2e.ProjectID
-  testBucketPrefix: ${projectID}
+  awsSecrets: aws-e2e
 
+  testBucketPrefix: ${projectID}
 
 
 defaults:

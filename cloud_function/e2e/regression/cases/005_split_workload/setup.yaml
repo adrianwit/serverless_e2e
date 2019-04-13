@@ -7,18 +7,18 @@ pipeline:
     sourceKey: testData
     dest:
       URL: gs://${testBucketPrefix}_e2e001/data
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
   cleanup:
     action: storage:remove
     comments: remove assets used in this use case
     assets:
       - URL: gs://${testBucketPrefix}_e2e001/data/master/data.csv
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: gs://${testBucketPrefix}_e2e001/data/workers/01_data.csv
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: gs://${testBucketPrefix}_e2e001/data/workers/02_data.csv
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: gs://${testBucketPrefix}_e2e001/data/workers/00_data.csv
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: gs://${testBucketPrefix}_e2e001/data
-        credentials: $gcSecrets
+        credentials: $gcpSecrets

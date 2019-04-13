@@ -5,7 +5,7 @@ pipeline:
       datastore: db2
       config:
         driverName: bigquery
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
         parameters:
           datasetId: db2
       scripts:
@@ -23,7 +23,7 @@ pipeline:
       URL: ${appPath}/dispatcher/config/bq.json
     dest:
       URL: gs://${testBucketPrefix}_config/bq.json
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
 
   listenOnSlack:
     listen:
@@ -38,11 +38,11 @@ pipeline:
       - URL: table1Topic
         type: topic
         vendor: gcp
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       - URL: table1TopicSubscription
         type: subscription
         vendor: gcp
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
         config:
           topic:
             URL: /projects/${projectID}/topics/table1Topic

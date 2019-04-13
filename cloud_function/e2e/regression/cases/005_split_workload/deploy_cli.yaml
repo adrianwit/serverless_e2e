@@ -8,7 +8,7 @@ pipeline:
     errors:
       - ERROR
     env:
-      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcSecrets}.json
+      GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcpSecrets}.json
     commands:
       - cd $appPath
       - export PATH=$PATH:${env.HOME}/google-cloud-sdk/bin/

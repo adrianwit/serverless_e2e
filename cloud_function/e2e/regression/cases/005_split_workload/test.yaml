@@ -6,7 +6,7 @@ pipeline:
       action: storage:download
       source:
         URL: gs://${testBucketPrefix}_e2e001/data/workers/0${self.i}_data.csv
-        credentials: $gcSecrets
+        credentials: $gcpSecrets
       expect: $Cat(${parent.path}/expect/0${self.i}_data.csv)
     inc:
       action: nop

@@ -4,7 +4,7 @@ pipeline:
     sleepTimeMs: 5000
     dest:
       URL: /projects/${projectID}/topics/proxySourceTopic
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
       vendor: gcp
     messages:
       - data:

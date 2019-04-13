@@ -13,13 +13,25 @@ pipeline:
   test:
     tag: $pathMatch
     description: '@info'
-    subPath: 'cases/${index}*'
-    range: 1..008
+    subPath: 'cases/${index}_*'
+    range: 1..009
     template:
+
       setVars:
         action: nop
         comments: use case init
         skip: $HasResource(${path}/skip.txt)
+
+
+      loadConifg:
+        action: nop
+        when: $HasResource(${path}/config.json)
+        ':init':
+          configText: $Cat('${path}/config.json')
+          config: $AsMap(${configText})
+
+        comments: load config if present
+
 
       setup:
         when: $HasResource(${path}/setup.yaml)

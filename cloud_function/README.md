@@ -7,9 +7,11 @@
  - service account for e2e testing dedicated project with enabled API
     * regular secrets file -> ~/.secret/gcp-e2e.json from http://console.cloud.google.com/
     * firebase secrets file -> ~/.secret/fbc-e2e.json from http://http://console.firebase.google.com/
+    * optionally aws credentials for mirror storage use case file -> ~/.secret/aws-e2e.json 
     * [endly GCP secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
     * [endly slack bot token](https://github.com/viant/endly/tree/master/doc/secrets#slack)
-    * [endly e2e runner](https://github.com/viant/endly/releases) (0.32+)
+    * [endly e2e runner](https://github.com/viant/endly/releases) (0.33+)
+    
 
 ### Running e2e tests with endly docker container
 
@@ -225,8 +227,6 @@ The following variables are automatically set by the Cloud Functions runtime.
     functionName = os.Getenv("FUNCTION_NAME")
     region       = os.Getenv("FUNCTION_REGION")
 ```
-        
-
 
 #### BigQuery 
 1. Deployment: 
@@ -425,6 +425,20 @@ The following variables are automatically set by the Cloud Functions runtime.
       * ```endly -i=moderate_posts```
 
 
+
+
+##### Securing data with KMS
+
+1. Moderate posts:
+    - [Source code](mirror)
+    - [E2E Use Case](e2e/regression/cases/009_mirror)
+      * ```endly -i=mirror```
+
+- _Reference_: 
+    * [Cloud Key Management Service](https://cloud.google.com/kms/docs/quickstart)
+    * Endly [securing workflows](https://github.com/viant/endly/tree/master/system/cloud/gcp/kms)  
+
+
 ####  Google Compute Engine
 1. Deployment: 
     ```bash
@@ -460,10 +474,10 @@ The following variables are automatically set by the Cloud Functions runtime.
         * google.compute.autoscaler.create
         * google.compute.autoscaler.update
         * google.compute.autoscaler.delete
+
     
 ### External projects with e2e testing using cloud functions
 - [BigQuery Windowed Tables](http://github.com/viant/bqwt)
-
 
 
 

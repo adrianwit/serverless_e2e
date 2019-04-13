@@ -1,7 +1,7 @@
 init:
   instanceId: 112306322498926XXX
 defaults:
-  credentials: $gcSecrets
+  credentials: $gcpSecrets
 stop:
   info:
     action: gcp/compute:instancesGet

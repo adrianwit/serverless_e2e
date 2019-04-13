@@ -5,5 +5,5 @@ pipeline:
       URL: ${parent.path}/data/data.csv
     dest:
       URL: gs://${testBucketPrefix}_e2e001/data/master/data.csv
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
     sleepTimeMs: 5000

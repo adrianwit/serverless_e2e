@@ -5,7 +5,7 @@ pipeline:
       URL: ${parent.path}/data
     dest:
       URL: gs://${testBucketPrefix}_ds/folder1/
-      credentials: $gcSecrets
+      credentials: $gcpSecrets
     assets:
       data.ini: data.ini
       data.txt: data.txt
