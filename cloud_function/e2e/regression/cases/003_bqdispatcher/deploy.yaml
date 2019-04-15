@@ -9,6 +9,7 @@ pipeline:
     comments: vendor build for deployment speedup
     target: $target
     commands:
+      - unset GOPATH
       - cd ${appPath}/dispatcher
       - go mod vendor
 

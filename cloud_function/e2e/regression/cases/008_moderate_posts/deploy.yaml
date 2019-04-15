@@ -6,6 +6,7 @@ pipeline:
     comments: vendor build for deployment speedup
     target: $target
     commands:
+      - unset GOPATH
       - cd ${appPath}/moderate
       - go mod vendor
 
