@@ -1,8 +1,8 @@
 package split
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin/json"
 	"os"
 	"strings"
 )
