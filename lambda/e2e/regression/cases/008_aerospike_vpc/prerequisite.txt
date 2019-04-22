@@ -1,0 +1,4 @@
+1. create aerospike cluster (name box e2e-aero)
+2. update security group with access on port 3000
+3. added public access to e2e runner box to setup and validate
+4. remove skip.txt

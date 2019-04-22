@@ -1,0 +1,9 @@
+init:
+  today: $FormatTime('now','yyyy-MM-dd')
+
+pipeline:
+  checkDb:
+    action: dsunit:expect
+    comments: check desired Events table database changes
+    datastore: db1
+    URL:  ${parent.path}/db1/expect

@@ -1,0 +1,48 @@
+init:
+  functionRole: lambda-aeroagg-executor
+  functionName: AeroaggFn
+  codeZip: ${appPath}aeroagg/app/aeroagg.zip
+  privilegePolicy: ${parent.path}/privilege-policy.json
+pipeline:
+  deploy:
+    build:
+      action: exec:run
+      target: $target
+      sleepTimeMs: 1500
+      errors:
+        - ERROR
+      commands:
+        - cd ${appPath}aeroagg/app
+        - unset GOPATH
+        - export GOOS=linux
+        - export GOARCH=amd64
+        - go build -o aeroagg
+        - zip -j aeroagg.zip aeroagg
+
+    setupFunction:
+      action: aws/lambda:deploy
+      credentials: $awsCredentials
+      functionname: $functionName
+      runtime:  go1.x
+      handler: aeroagg
+      timeout: 360
+      vpcMatcher:
+        vpc:
+          name: aero
+      environment:
+        variables:
+          CONFIG: $AsString($config)
+      code:
+        zipfile: $LoadBinary(${codeZip})
+      rolename: lambda-aeroagg-executor
+      define:
+        - policyname: lambda-sns-execution-role
+          policydocument: $Cat('${privilegePolicy}')
+      attach:
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+    setupSubscription:
+      action: aws/sns:setupSubscription
+      protocol: lambda
+      endpoint: $functionName
+      topic: mye2eAeroTopic

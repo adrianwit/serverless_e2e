@@ -1,0 +1,8 @@
+Function aggregates messages push to sns in aerospike test.events set
+
+Input:
+  mye2eTopic  messages
+
+Output:
+  aerospike: test.events table
+

@@ -1,0 +1,40 @@
+pipeline:
+
+  aerospikeInfo:
+    action: aws/ec2:getInstance
+    credentials: $awsCredentials
+    '@name': e2e-aero
+    post:
+      'config.IP': ${NetworkInterfaces[0].PrivateIpAddress}
+      'config.PublicIP': ${NetworkInterfaces[0].Association.PublicIp}
+
+  info:
+    action: print
+    message: 'Aerospike privateIP: ${config.IP}, publicID: ${config.PublicIP}'
+
+  setup:
+    action: msg:setupResource
+    credentials: $awsCredentials
+    resources:
+      - URL: mye2eAeroTopic
+        type: topic
+        vendor: aws
+
+  initDb:
+    action: dsunit:init
+    datastore: db1
+    recreate: true
+    config:
+      driverName: aerospike
+      descriptor: "tcp([host]:3000)/test"
+      parameters:
+        namespace: test
+        host: ${config.PublicIP}
+        port: 3000
+        dateFormat: yyyy-MM-dd hh:mm:ss
+        events.keyColumn: date
+
+  prepareDb:
+    action: dsunit:prepare
+    datastore: db1
+    URL:  ${parent.path}/db1/data
