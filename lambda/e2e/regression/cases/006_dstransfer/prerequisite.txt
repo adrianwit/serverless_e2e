@@ -1,6 +1,4 @@
-
 1 generate gcp-e2e.json  -> /root/.secret/gcp-e2e.json  (from google secrets with owner google storage permission)
-2.  generate aws-e2e-mysql with RDS mysql  (username root/password e2etesting)
+2.  generate aws-e2e-mysql with RDS mysql  (username root/password e2etesting) use db as databae namw
     endly -c=aws-e2e-mysql
-3. set AWS_E2E_MYSQL_HOST variable with mysql hostname
-    export AWS_E2E_MYSQL_HOST=db.******.us-west-1.rds.amazonaws.com
+3. Remove skip.txt

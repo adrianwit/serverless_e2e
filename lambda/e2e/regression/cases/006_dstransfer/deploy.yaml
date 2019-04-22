@@ -3,7 +3,6 @@ init:
   functionName: DsTransferFn
   codeZip: ${appPath}dstransfer/app/dstransfer.zip
   privilegePolicy: ${parent.path}/privilege-policy.json
-  config: $Cat(${parent.path}/config.json)
   gcpSecrets: ${secrets.$gcpCredentials}
   mysqlSecrets: ${secrets.aws-e2e-mysql}
 

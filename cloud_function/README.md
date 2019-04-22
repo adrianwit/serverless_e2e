@@ -71,79 +71,6 @@ Google cloud platform supports two following function types:
 - end to end testing
 
 
-### E2E automation workflow:
-
-This project uses [endly](http://github.com/viant/endly/) as e2e test runner.
-
-* Basic workflow demystified
-
-[@deploy.yaml](e2e/regression/cases/001_hello_world/deploy.yaml)
-```yaml
-init:
-   srcCodeLocation: ${appPath}/hello/
-   target:
-      URL: ssh://127.0.0.1
-   credentials: dev   
-defaults:
-  credentials: gcp
-pipeline:
-  
-  package:
-    action: exec:run
-    comments: vendor build for deployment speedup using SSH service
-    target: $target
-    commands:
-      - cd ${appPath}/split
-      - go mod vendor
-
-  deploy:
-    action: gcp/cloudfunctions:deploy
-    '@name': HelloWorld
-    entryPoint: HelloWorldFn
-    runtime: go111
-    source:
-      URL: $srcCodeLocation
-```
-
-1. 'init' node: variable initialization
-2. 'pipeline' node: tasks definition
-3. package/deploy is arbitrary task name.
-4. defaults node appends specified attributes to all action nodes (no override).
-5. node with 'action' attribute triggers API call to specified service:method
-   * package
-   ```javascript
-   sshExecutorService.run({
-       target: {
-           URL:"ssh://127.0.0.1",
-           credentials: "dev"
-       },
-       commands: [
-           'cd ${appPath}/split',
-           'go mod vendor' 
-       ]
-   })
-   ```
-   * deploy
-   ```javascript
-   gcpCloudFunctionsService.deploy({
-        name: "HelloWorld",
-        entryPoint: "HelloWorldFn",
-        runtime: "go111",
-        source: {
-           URL: '/somepath//hello/'
-        }
-   })
-    ```
-6. API contracts details
-```bash
-    endly -s='gcp/cloudfunctions' -a='deploy'
-    endly -s='gcp/cloudfunctions' 
-    endly -s='*' 
-```   
-7. [Find out more](https://github.com/adrianwit/endly-introduction) about E2E endly workflows.
-
-
-
 
 ### HTTP Functions
 
@@ -171,7 +98,6 @@ pipeline:
   cd  serverless_e2e/cloud_function/e2e
   endly -i=query_data
   ```
-
 
 
 ### Background Functions
@@ -326,6 +252,7 @@ The following variables are automatically set by the Cloud Functions runtime.
     - [Source code](msg/proxy_msg.go)
     - [E2E Use Case](e2e/regression/cases/006_proxy_message)
       * ```endly -i=proxy_message```
+2. Aggregating messags with aerospike
 
 
 #### Realtime Database
@@ -426,10 +353,9 @@ The following variables are automatically set by the Cloud Functions runtime.
 
 
 
-
 ##### Securing data with KMS
 
-1. Moderate posts:
+1. Mirroring data between GS and S3:
     - [Source code](mirror)
     - [E2E Use Case](e2e/regression/cases/009_mirror)
       * ```endly -i=mirror```
@@ -437,6 +363,11 @@ The following variables are automatically set by the Cloud Functions runtime.
 - _Reference_: 
     * [Cloud Key Management Service](https://cloud.google.com/kms/docs/quickstart)
     * Endly [securing workflows](https://github.com/viant/endly/tree/master/system/cloud/gcp/kms)  
+
+
+
+
+
 
 
 ####  Google Compute Engine
@@ -474,6 +405,7 @@ The following variables are automatically set by the Cloud Functions runtime.
         * google.compute.autoscaler.create
         * google.compute.autoscaler.update
         * google.compute.autoscaler.delete
+
 
     
 ### External projects with e2e testing using cloud functions

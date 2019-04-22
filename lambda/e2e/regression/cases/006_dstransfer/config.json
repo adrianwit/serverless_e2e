@@ -1,5 +1,4 @@
 {
-  "DbHost": "${env.AWS_E2E_MYSQL_HOST}",
   "DbName": "db",
   "DbSecretParam": "dstransfer.mysql",
   "StorageSecretParam": "dstransfer.gs",

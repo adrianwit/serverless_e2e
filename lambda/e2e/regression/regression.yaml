@@ -8,12 +8,19 @@ pipeline:
     tag: $pathMatch
     description: '@info'
     subPath: 'cases/${index}_*'
-    range: 1..007
+    range: 1..008
     template:
       setVars:
         action: nop
         comments: use case init
         skip: $HasResource(${path}/skip.txt)
+
+      conifg:
+        action: nop
+        when: $HasResource(${path}/config.json)
+        ':init':
+          configText: $Cat('${path}/config.json')
+          config: $AsMap(${configText})
 
       setup:
         when: $HasResource(${path}/setup.yaml)
@@ -38,11 +45,11 @@ pipeline:
         comments: validate lambda function execution
         request: '@test'
 
-#      ubdeploy:
-#        when: $HasResource(${path}/undeploy.yaml)
-#        action: run
-#        comments: undeploy lambda function
-#        request: '@undeploy'
+      ubdeploy:
+        when: $HasResource(${path}/undeploy.yaml)
+        action: run
+        comments: undeploy lambda function
+        request: '@undeploy'
 
     post-test-sleep:
       action: nop

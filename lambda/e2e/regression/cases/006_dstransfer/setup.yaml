@@ -1,7 +1,13 @@
 init:
   data: e2e test
-  '!dbhost': ${env.AWS_E2E_MYSQL_HOST}
 pipeline:
+  getDbInfo:
+    action: aws/rds:describeDBInstances
+    credentials: aws-e2e
+    dbinstanceidentifier: db
+    logging: false
+    post:
+      'config.DbHost': $DBInstances[0].Endpoint.Address
   create-db:
     action: dsunit:init
     recreate: true
@@ -10,14 +16,14 @@ pipeline:
     datastore: db
     config:
       driverName: mysql
-      descriptor: "[username]:[password]@tcp(${dbhost}:3306)/[dbname]?parseTime=true"
+      descriptor: "[username]:[password]@tcp(${config.DbHost}:3306)/[dbname]?parseTime=true"
       credentials: aws-e2e-mysql
     admin:
       datastore: mysql
       ping: true
       config:
         driverName: mysql
-        descriptor: "[username]:[password]@tcp(${dbhost}:3306)/[dbname]?parseTime=true"
+        descriptor: "[username]:[password]@tcp(${config.DbHost}:3306)/[dbname]?parseTime=true"
         credentials: aws-e2e-mysql
   populate:
     action: dsunit:prepare

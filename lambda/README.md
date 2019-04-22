@@ -304,8 +304,6 @@ type SNSEntity struct {
    * [Using Lambda with Amazon SNS](https://docs.aws.amazon.com/lambda/latest/dg/with-sns-example.html)
 
 
-
-
 ##### Securing sensitive data
 
 - aws kms create-key
@@ -313,9 +311,9 @@ type SNSEntity struct {
 - aws ssm put-parameter --name "<string-name>" --value '<secure data>' --type SecureString --key-id alias/<kms-key-name>
 - aws ssm get-parameters --names "<string-name>" --with-decryption
 
-
 - [Data Transfer Source code](dstransfer/)
 - [E2E Use Case](e2e/regression/cases/006_dstransfer)
+    * apply [prerequsites](e2e/regression/cases/006_dstransfer/prerequisite.txt)
     * ```endly -i=dstransfer```
 
 - References:
@@ -326,7 +324,17 @@ type SNSEntity struct {
 
 - [Shopping Cart Source code](shoppingcart)
 - [E2E Use Case](e2e/regression/cases/007_shopingcart)
+    * apply [prerequsites](e2e/regression/cases/007_shopingcart/prerequisite.txt)
     * ```endly -i=shopingcart```
+
+
+#### Virtual Private Cloud with aerospike and SQS 
+
+- [Event aggregation in aerospike](aeroagg)
+- [E2E Use Case](e2e/regression/cases/008_aerospike_vpc)
+    * apply [prerequsites](e2e/regression/cases/008_aerospike_vpc/prerequisite.txt)
+    * ```endly -i=aerospike_vpc```
+
 
 
 ### Error Handling

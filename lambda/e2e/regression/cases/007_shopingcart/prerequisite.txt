@@ -3,6 +3,7 @@
 3. generate locahost credentials with access to localhost (to run selenium server)
    https://github.com/viant/endly/tree/master/doc/secrets#ssh-credentials
 
+   endly -c=localhost -k=pathToPK
 
-   endly -c=localhost -k=pathtoPK
 
+4. remove skip.txt
