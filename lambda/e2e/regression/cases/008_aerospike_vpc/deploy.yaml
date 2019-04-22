@@ -27,8 +27,8 @@ pipeline:
       handler: aeroagg
       timeout: 360
       vpcMatcher:
-        vpc:
-          name: aero
+        instance:
+          name: e2e-aero
       environment:
         variables:
           CONFIG: $AsString($config)
