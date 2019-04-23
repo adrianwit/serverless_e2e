@@ -1,0 +1,15 @@
+{
+  "Threads": 10,
+  "BatchSize": 10,
+  "ProcessedURL": "/tmp/processed",
+  "Routes": [
+    {
+      "Expr": ".+/events/.+",
+      "Dest": {
+        "Table": "events",
+        "driverName": "sqlite3",
+        "descriptor": "test/db1/data/db.db"
+      }
+    }
+  ]
+}

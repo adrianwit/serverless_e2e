@@ -2,7 +2,7 @@ pipeline:
   set_sdk:
     action: sdk.set
     target: $target
-    sdk: go:1.11
+    sdk: go:1.12
   set_env:
     action: exec:run
     comments: vendor build for deployment speedup
@@ -14,7 +14,7 @@ pipeline:
     tag: $pathMatch
     description: '@info'
     subPath: 'cases/${index}_*'
-    range: 1..009
+    range: 1..010
     template:
 
       setVars:
@@ -57,11 +57,11 @@ pipeline:
         comments: validate cloud function execution
         request: '@test'
 
-      ubdeploy:
-        when: $HasResource(${path}/undeploy.yaml)
-        action: run
-        comments: undeploy cloud function
-        request: '@undeploy'
+#      ubdeploy:
+#        when: $HasResource(${path}/undeploy.yaml)
+#        action: run
+#        comments: undeploy cloud function
+#        request: '@undeploy'
 
     post-test-sleep:
       action: nop

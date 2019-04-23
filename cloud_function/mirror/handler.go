@@ -3,7 +3,6 @@ package split
 import (
 	"context"
 	"fmt"
-	"runtime/debug"
 )
 
 
@@ -28,7 +27,6 @@ type GCSWorkflowEvent struct {
 func MirrorFn(ctx context.Context, event GCSWorkflowEvent) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
-			debug.PrintStack()
 			err = fmt.Errorf("%v", r)
 		}
 	}()

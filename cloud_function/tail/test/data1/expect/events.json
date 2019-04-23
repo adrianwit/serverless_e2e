@@ -1,0 +1,14 @@
+[
+  {"@indexBy@": "id"},
+{ "id": 1, "event_type": 2, "quantity": 33.2, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 2, "event_type": 2, "quantity": 23.1, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 3, "event_type": 2, "quantity": 13.7, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 4, "event_type": 2, "quantity": 7.3, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 5, "event_type": 2, "quantity": 8.4, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 6, "event_type": 3, "quantity": 22.1, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 7, "event_type": 3, "quantity": 8.3, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 8, "event_type": 3, "quantity": 14.7, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 9, "event_type": 3, "quantity": 9.2, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 10, "event_type": 2, "quantity": 32.1, "timestamp": "2019-04-23 02:20:33" },
+{ "id": 11, "event_type": 2, "quantity": 29.2, "timestamp": "2019-04-23 02:20:33" }
+]

@@ -1,0 +1,28 @@
+init:
+  awsConfig: ${secrets.$awsSecrets}
+
+defaults:
+  credentials: $gcpSecrets
+pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - unset GOPATH
+      - cd ${appPath}/tail
+      - go mod vendor
+
+  deploy:
+    action: gcp/cloudfunctions:deploy
+    '@name': Tail
+    entryPoint: TailFn
+    runtime: go111
+    serviceAccountEmail: $serviceAccount
+    environmentVariables:
+      config: $AsString($config)
+    eventTrigger:
+      eventType: google.storage.object.finalize
+      resource: projects/_/buckets/${config.Bucket}
+    source:
+      URL: ${appPath}/tail

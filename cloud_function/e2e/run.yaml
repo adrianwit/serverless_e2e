@@ -13,8 +13,8 @@ init:
   projectID: $gcp.ProjectID
   serviceAccount: $gcp.ClientEmail
 
-  fbSecrets: fbc-e2e
-  fbc: $secrets.fbc
+  fbSecrets: gcp-fb-e2e
+  fbc: ${secrets.gcp-fb-e2e}
   fbProjectID: $fbc.ProjectID
 
   awsSecrets: aws-e2e

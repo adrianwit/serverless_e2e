@@ -1,0 +1,6 @@
+datastore: db1
+config:
+  driverName: sqlite3
+  descriptor: test/db1/data/db.db
+scripts:
+  - URL: test/db1/schema.sql

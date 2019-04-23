@@ -4,4 +4,4 @@ pipeline:
       action: dsunit:prepare
       datastore: db2
       URL:  ${parent.path}/db2/triggger
-      sleepTimeMs: 2000
+      sleepTimeMs: 5000

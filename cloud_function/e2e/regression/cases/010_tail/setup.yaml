@@ -1,0 +1,34 @@
+init:
+  testData: '_'
+pipeline:
+
+  create-source:
+    action: storage:upload
+    comments: create a bucket with dummy data
+    sourceKey: testData
+    dest:
+      URL: gs://${config.Bucket}/data/info
+      credentials: $gcpSecrets
+
+  source-cleanup:
+    action: storage:remove
+    comments: remove assets used in this use case
+    assets:
+      - URL: gs://${config.Bucket}/data
+        credentials: $gcpSecrets
+
+  init-db:
+    action: dsunit:init
+    datastore: db1
+    config:
+      driverName: bigquery
+      credentials: $gcpSecrets
+      parameters:
+        datasetId: db1
+    scripts:
+      - URL: ${parent.path}/db1/schema.sql
+  prepare:
+    db1:
+      action: dsunit:prepare
+      datastore: db1
+      URL:  ${parent.path}/db1/prepare

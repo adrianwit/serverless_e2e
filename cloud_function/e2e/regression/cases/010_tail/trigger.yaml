@@ -1,0 +1,9 @@
+pipeline:
+  trigger:
+    action: storage:copy
+    source:
+      URL: ${parent.path}/data/dummy.json
+    dest:
+      URL: gs://${config.Bucket}/data/dummy/dummy.json
+      credentials: $gcpSecrets
+    sleepTimeMs: 30000

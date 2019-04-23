@@ -6,7 +6,7 @@
  - go1.11
  - service account for e2e testing dedicated project with enabled API
     * regular secrets file -> ~/.secret/gcp-e2e.json from http://console.cloud.google.com/
-    * firebase secrets file -> ~/.secret/fbc-e2e.json from http://http://console.firebase.google.com/
+    * firebase secrets file -> ~/.secret/gcp-fb-e2e.json from http://http://console.firebase.google.com/
     * optionally aws credentials for mirror storage use case file -> ~/.secret/aws-e2e.json 
     * [endly GCP secrets](https://github.com/viant/endly/tree/master/doc/secrets#gc)
     * [endly slack bot token](https://github.com/viant/endly/tree/master/doc/secrets#slack)

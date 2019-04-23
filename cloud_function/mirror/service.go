@@ -10,7 +10,7 @@ import (
 )
 
 
-const gsResourceURL = "gs://dummy/dumy"
+const gsResourceURL = "gs://dummy/dummy"
 
 type Service interface {
 	Mirror(SourceURL string) error

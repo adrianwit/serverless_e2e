@@ -1,0 +1,19 @@
+{
+  "Threads": 2,
+  "BatchSize": 524288,
+  "ProcessedURL": "gs://vianttail/data/processed",
+  "Routes": [
+    {
+      "Expr": ".+/dummy/.+",
+      "Dest": {
+        "Table": "dummy",
+        "DriverName": "bigquery",
+        "Parameters": {
+          "datasetId": "db1",
+          "projectId": "$gcp.projectID"
+        }
+      }
+    }
+  ],
+  "Bucket": "vianttail"
+}

@@ -1,0 +1,13 @@
+pipeline:
+  validate:
+    check-content:
+      action: storage:download
+      source:
+        URL: ${config.ProcessedURL}/dummy.json.meta
+        credentials: $gcpSecrets
+      expect: $Cat(${parent.path}/data/expect/dummy.json.meta)
+    check-db:
+      db1:
+        action: dsunit:expect
+        datastore: db1
+        URL:  ${parent.path}/db1/expect
