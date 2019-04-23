@@ -6,9 +6,8 @@ type Meta struct {
 	ResourceURL string
 	RecordCount int
 	Transferred int
-	Error string
+	Error       string
 }
-
 
 func NewMetaFromURL(URL string) (*Meta, error) {
 	meta := &Meta{}

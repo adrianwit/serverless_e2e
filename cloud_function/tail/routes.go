@@ -25,7 +25,7 @@ func (r *Route) RegExpr() (*regexp.Regexp, error) {
 }
 
 func (r Routes) Match(URL string) (*Route, error) {
-	if ! strings.Contains(URL, ".json") {
+	if !strings.Contains(URL, ".json") {
 		return nil, nil
 	}
 	parsedURL, err := url.Parse(URL)

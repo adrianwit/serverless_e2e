@@ -6,16 +6,12 @@ import (
 )
 
 type Service interface {
-
 	UpdateLikes(ctx context.Context, resource Resource) error
-
 }
 
-type service struct {}
+type service struct{}
 
-
-
-func (s *service) update(snapshot db.TransactionNode) (interface{} , error) {
+func (s *service) update(snapshot db.TransactionNode) (interface{}, error) {
 	var record = Record{}
 	if err := snapshot.Unmarshal(&record); err != nil {
 		return nil, err
@@ -28,8 +24,7 @@ func (s *service) update(snapshot db.TransactionNode) (interface{} , error) {
 	return record, nil
 }
 
-
-func (s *service) UpdateLikes(ctx context.Context, resource Resource) error  {
+func (s *service) UpdateLikes(ctx context.Context, resource Resource) error {
 	databaseURL, err := resource.DatabaseURL()
 	if err != nil {
 		return err
@@ -40,7 +35,6 @@ func (s *service) UpdateLikes(ctx context.Context, resource Resource) error  {
 	}
 	return RunTransaction(ctx, databaseURL, refPath, s.update)
 }
-
 
 func New() Service {
 	return &service{}

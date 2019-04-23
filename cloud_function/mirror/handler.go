@@ -5,8 +5,6 @@ import (
 	"fmt"
 )
 
-
-
 const configKey = "config"
 
 // GCSWorkflowEvent is the payload of a GCS event.
@@ -20,8 +18,6 @@ type GCSWorkflowEvent struct {
 	SelfLink    string `json:"selfLink"`
 	MediaLink   string `json:"mediaLink"`
 }
-
-
 
 // MirrorFn copies source to destination
 func MirrorFn(ctx context.Context, event GCSWorkflowEvent) (err error) {

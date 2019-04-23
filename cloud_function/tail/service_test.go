@@ -18,11 +18,11 @@ func TestService_Transfer(t *testing.T) {
 		return
 	}
 	config, err := NewConfigFromURL(url.NewResource(path.Join(parent, "test/config.json")).URL)
-	if ! assert.Nil(t, err) {
+	if !assert.Nil(t, err) {
 		log.Fatal(err)
 	}
 	service, err := New(config)
-	if ! assert.Nil(t, err) {
+	if !assert.Nil(t, err) {
 		log.Fatal(err)
 	}
 
@@ -32,13 +32,13 @@ func TestService_Transfer(t *testing.T) {
 		expectPath  string
 		transferred int
 		hasError    bool
-		hasMeta bool
+		hasMeta     bool
 	}{
 		{
 			description: "basic transfer",
 			resourceURL: url.NewResource(path.Join(parent, "test/data1/events/data_8D05F5F23F76.json")).URL,
-			expectPath: path.Join(parent, "test/data1/expect"),
-			transferred:11,
+			expectPath:  path.Join(parent, "test/data1/expect"),
+			transferred: 11,
 		},
 	}
 
@@ -56,7 +56,7 @@ func TestService_Transfer(t *testing.T) {
 			}
 			continue
 		}
-		if !assert.Nil(t, err, ) {
+		if !assert.Nil(t, err) {
 			log.Print(err)
 			continue
 		}

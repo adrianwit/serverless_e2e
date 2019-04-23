@@ -12,11 +12,10 @@ type FirebaseEvent struct {
 }
 
 var srv Service
+
 func init() {
 	srv = New()
 }
-
-
 
 //CountLikesFn counts post likes to update likes_count
 func CountLikesFn(ctx context.Context, event FirebaseEvent) error {

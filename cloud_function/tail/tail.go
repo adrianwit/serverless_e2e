@@ -2,8 +2,8 @@ package tail
 
 import (
 	"context"
-	_ "github.com/viant/toolbox/storage/gs"
 	_ "github.com/viant/bgc"
+	_ "github.com/viant/toolbox/storage/gs"
 )
 
 const configKey = "config"

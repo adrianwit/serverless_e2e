@@ -18,4 +18,3 @@ func getDynamoService() (*dynamodb.DynamoDB, error) {
 	dynamoDb = dynamodb.New(sess)
 	return dynamoDb, nil
 }
-

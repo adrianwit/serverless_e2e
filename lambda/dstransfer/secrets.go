@@ -9,6 +9,7 @@ import (
 )
 
 var systemManager *ssm.SSM
+
 func getSystemManager() (*ssm.SSM, error) {
 	if systemManager != nil {
 		return systemManager, nil
@@ -21,15 +22,14 @@ func getSystemManager() (*ssm.SSM, error) {
 	return systemManager, nil
 }
 
-
 func getParameters(name string) (*ssm.Parameter, error) {
 	systemManager, err := getSystemManager()
 	if err != nil {
 		return nil, err
 	}
 	output, err := systemManager.GetParameter(&ssm.GetParameterInput{
-		Name:aws.String(name),
-		WithDecryption:aws.Bool(true),
+		Name:           aws.String(name),
+		WithDecryption: aws.Bool(true),
 	})
 	if err != nil {
 		return nil, err
@@ -37,8 +37,7 @@ func getParameters(name string) (*ssm.Parameter, error) {
 	return output.Parameter, nil
 }
 
-
-func getCredConfigFromParam(name string) (*cred.Config, error){
+func getCredConfigFromParam(name string) (*cred.Config, error) {
 	param, err := getParameters(name)
 	if err != nil {
 		return nil, err

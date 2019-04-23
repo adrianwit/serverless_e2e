@@ -3,12 +3,12 @@ package tail
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"encoding/json"
 	"github.com/viant/dsc"
 	"github.com/viant/toolbox"
 	"github.com/viant/toolbox/data"
 	"github.com/viant/toolbox/storage"
-	"context"
 	"io"
 	"sync/atomic"
 )
@@ -21,7 +21,6 @@ type service struct {
 	storageService storage.Service
 	Config         *Config
 }
-
 
 func (s *service) writeBatch(session *Session, collection *data.CompactedSlice) {
 	defer session.release()
@@ -45,14 +44,13 @@ func (s *service) writeBatch(session *Session, collection *data.CompactedSlice) 
 	session.SetError(err)
 }
 
-
 func (s *service) UpdateMeta(session *Session) {
 	_, name := toolbox.URLSplit(session.resourceURL)
 	destURL := toolbox.URLPathJoin(s.Config.ProcessedURL, name+".meta")
 	meta := &Meta{
 		ResourceURL: session.resourceURL,
 		RecordCount: int(atomic.LoadInt64(&session.count)),
-		Transferred:int(atomic.LoadInt64(&session.transferred)),
+		Transferred: int(atomic.LoadInt64(&session.transferred)),
 	}
 	if err := session.err; err != nil {
 		meta.Error = err.Error()
@@ -92,7 +90,6 @@ func (s *service) transferData(session *Session, reader io.Reader) error {
 	}
 	return err
 }
-
 
 func (s *service) Transfer(ctx context.Context, resourceURL string) error {
 	route, err := s.Config.Routes.Match(resourceURL)

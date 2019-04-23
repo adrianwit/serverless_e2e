@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-
 type Resource string
 
 func (r Resource) InstanceID() (string, error) {

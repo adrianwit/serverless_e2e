@@ -11,15 +11,13 @@ import (
 	"google.golang.org/api/option"
 )
 
-
-
 func getSecret(ctx context.Context, key string, cipherBase64Text string) (*cred.Config, error) {
 	kmsService, err := cloudkms.NewService(ctx, option.WithScopes(cloudkms.CloudPlatformScope, cloudkms.CloudkmsScope))
 	if err != nil {
 		return nil, err
 	}
 	service := cloudkms.NewProjectsLocationsKeyRingsCryptoKeysService(kmsService)
-	response, err := service.Decrypt(key, &cloudkms.DecryptRequest{Ciphertext:cipherBase64Text}).Context(ctx).Do()
+	response, err := service.Decrypt(key, &cloudkms.DecryptRequest{Ciphertext: cipherBase64Text}).Context(ctx).Do()
 	if err != nil {
 		return nil, err
 	}

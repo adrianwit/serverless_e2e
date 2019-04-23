@@ -3,17 +3,16 @@ package dstransfer
 import (
 	"bytes"
 	"encoding/json"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/klauspost/compress/gzip"
 	"github.com/viant/dsc"
 	"github.com/viant/toolbox/storage"
-	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/viant/toolbox/storage/gs"
 )
 
-
 //Service represents a data transfer service
 type Service interface {
-	Copy(request *Request) (*Response)
+	Copy(request *Request) *Response
 }
 
 const (
@@ -52,7 +51,6 @@ func (s *service) Copy(request *Request) *Response {
 	}
 	return response
 }
-
 
 //New creates a new service for supplied config
 func New(config *Config) (Service, error) {

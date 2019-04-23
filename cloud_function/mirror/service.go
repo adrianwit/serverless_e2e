@@ -3,12 +3,11 @@ package split
 import (
 	"github.com/viant/toolbox"
 	"github.com/viant/toolbox/storage"
-	"github.com/viant/toolbox/storage/s3"
 	_ "github.com/viant/toolbox/storage/gs"
-	"net/url"
+	"github.com/viant/toolbox/storage/s3"
 	"golang.org/x/net/context"
+	"net/url"
 )
-
 
 const gsResourceURL = "gs://dummy/dummy"
 
@@ -16,10 +15,9 @@ type Service interface {
 	Mirror(SourceURL string) error
 }
 
-
 type service struct {
-	config *Config
-	destService storage.Service
+	config        *Config
+	destService   storage.Service
 	sourceService storage.Service
 }
 
@@ -32,7 +30,7 @@ func (s *service) Mirror(SourceURL string) error {
 	defer reader.Close()
 	_, name := toolbox.URLSplit(SourceURL)
 	destURL := toolbox.URLPathJoin(s.config.DestURL, name)
-	return  s.destService.Upload(destURL, reader)
+	return s.destService.Upload(destURL, reader)
 }
 
 func newService(ctx context.Context, config *Config) (Service, error) {
@@ -45,11 +43,11 @@ func newService(ctx context.Context, config *Config) (Service, error) {
 		return nil, err
 	}
 	switch URL.Scheme {
-		case "s3":
-			s3.SetProvider(credConfig)
+	case "s3":
+		s3.SetProvider(credConfig)
 	}
 	result := &service{
-		config:config,
+		config: config,
 	}
 	result.destService, err = storage.NewServiceForURL(config.DestURL, "")
 	if err != nil {
@@ -61,11 +59,6 @@ func newService(ctx context.Context, config *Config) (Service, error) {
 	}
 	return result, nil
 }
-
-
-
-
-
 
 var srv Service
 

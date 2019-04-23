@@ -8,13 +8,11 @@ import (
 )
 
 type Config struct {
-	IP string
-	Port int
+	IP        string
+	Port      int
 	Namespace string
-	Dataset string
+	Dataset   string
 }
-
-
 
 //NewConfigFromEnv creates a new config from env
 func NewConfigFromEnv(key string) (*Config, error) {

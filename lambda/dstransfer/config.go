@@ -15,7 +15,6 @@ type Config struct {
 	DefaultStorageURL  string
 }
 
-
 //Validate checks if config is valid
 func (c *Config) Validate() error {
 	if c.DbHost == "" {
@@ -36,16 +35,15 @@ func (c *Config) Validate() error {
 	return nil
 }
 
-
 //DbConfig returns dsc.Config or error
 func (c *Config) DbConfig(credConfig *cred.Config) (*dsc.Config, error) {
 	dbConifg := &dsc.Config{
 		DriverName: "mysql",
 		Descriptor: "[username]:[password]@tcp([host]:3306)/[dbname]?parseTime=true",
 		Parameters: map[string]interface{}{
-			"host":   c.DbHost,
-			"dbname": c.DbName,
-			"username":credConfig.Username,
+			"host":     c.DbHost,
+			"dbname":   c.DbName,
+			"username": credConfig.Username,
 			"password": credConfig.Password,
 		},
 	}
