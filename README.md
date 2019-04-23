@@ -25,7 +25,7 @@ init:
       URL: ssh://127.0.0.1
    credentials: dev   
 defaults:
-  credentials: gcp
+  credentials: gcp-e2e
 pipeline:
   
   package:
@@ -67,6 +67,7 @@ pipeline:
    ```javascript
    gcpCloudFunctionsService.deploy({
         name: "HelloWorld",
+        credentials: "gcp-e2e",
         entryPoint: "HelloWorldFn",
         runtime: "go111",
         source: {
