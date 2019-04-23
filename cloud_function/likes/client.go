@@ -29,6 +29,8 @@ func NewApp(ctx context.Context, URL string) (*firebase.App, error) {
 	return app, err
 }
 
+
+
 //NewDb returns new db
 func NewDb(ctx context.Context, URL string) (*db.Client, error) {
 	app, err := NewApp(ctx, URL)
