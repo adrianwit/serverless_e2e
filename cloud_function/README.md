@@ -221,11 +221,15 @@ The following variables are automatically set by the Cloud Functions runtime.
     - [Source code](dispatcher/gs.go)
     - [E2E Use Case](e2e/regression/cases/004_gsdispatcher)
       * ```endly -i=gsdispatcher```
-2. SplitWorkload
+2. Tail - load data to BigQuery seamlessly
+    - [Source code](dispatcher/gs.go)
+    - [E2E Use Case](e2e/regression/cases/010_tail)
+      * ```endly -i=tail```
+3. SplitWorkload
     - [Source code](split/split_workload.go)
     - [E2E Use Case](e2e/regression/cases/005_split_workload)
       * ```endly -i=split_workload```
-
+      
 ####  Pubsub
 1. Deployment: 
     ```bash
