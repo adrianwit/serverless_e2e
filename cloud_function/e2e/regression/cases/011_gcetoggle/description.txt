@@ -1,0 +1,18 @@
+Test start/stopping GCE instance by name
+
+
+Start:
+    input:
+       selector: natip
+       zone: us-central1-a
+       name: myboxname
+     output:
+        instance up
+        naip
+
+Stop
+    input:
+       zone: us-central1-a
+       name: myboxname
+     output:
+        instance down

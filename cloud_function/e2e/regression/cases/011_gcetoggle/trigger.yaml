@@ -1,0 +1,31 @@
+init:
+  httpsTrigger: https://us-central1-${projectID}.cloudfunctions.net/HTTPGCEToggle/
+pipeline:
+  trigger-up:
+    action: http/runner:send
+    requests:
+      - URL: $httpsTrigger
+        method: POST
+        jsonBody:
+          action: start
+          selector: natip
+          zone: us-central1-a
+          name: myboxname
+        expect:
+          Code: 200
+  info:
+    action: print
+    message: $trigger.Responses[0].Body
+
+  trigger-down:
+    action: http/runner:send
+    requests:
+      - URL: $httpsTrigger
+        method: POST
+        jsonBody:
+          action: stop
+          zone: us-central1-a
+          name: myboxname
+        expect:
+          Code: 200
+

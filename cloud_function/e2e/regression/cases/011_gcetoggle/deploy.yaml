@@ -1,0 +1,20 @@
+defaults:
+  credentials: $gcpSecrets
+pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    commands:
+      - cd ${appPath}/gcetoggle
+      - go mod vendor
+
+  deploy:
+    action: gcp/cloudfunctions:deploy
+    '@name': HTTPGCEToggle
+    entryPoint: HTTPGCEToggleFn
+    runtime: go111
+    public: true
+    source:
+      URL: ${appPath}/gcetoggle
+    sleepTimeMs: 5000
