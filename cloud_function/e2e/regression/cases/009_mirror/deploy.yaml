@@ -42,7 +42,7 @@ pipeline:
     '@name': Mirror
     entryPoint: MirrorFn
     runtime: go111
-#    serviceAccountEmail: $serviceAccount
+    serviceAccountEmail: $serviceAccount
     environmentVariables:
       config: $AsString($mirrorConfig)
     eventTrigger:

@@ -11,10 +11,10 @@ pipeline:
 
   deploy:
     action: gcp/cloudfunctions:deploy
-    '@name': HTTPGCEToggle
-    entryPoint: HTTPGCEToggleFn
+    '@name': ToggleVm
+    entryPoint: ToggleVmFn
     runtime: go111
     public: true
     source:
-      URL: ${appPath}/gcetoggle
+      URL: ${appPath}/togglevm
     sleepTimeMs: 5000
