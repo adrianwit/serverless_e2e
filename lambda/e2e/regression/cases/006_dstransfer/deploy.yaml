@@ -36,8 +36,7 @@ pipeline:
       action: exec:run
       target: $target
       sleepTimeMs: 1500
-      errors:
-        - ERROR
+      checkError: true
       commands:
         - cd ${appPath}dstransfer/app
         - unset GOPATH

@@ -1,27 +1,27 @@
-{
-  "AttributeDefinitions": [
-    {
-      "AttributeName": "EventDate",
-      "AttributeType": "S"
-    },
-    {
-      "AttributeName": "EventType",
-      "AttributeType": "N"
-    }
+  {
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "EventDate",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "EventType",
+        "AttributeType": "N"
+      }
 
-  ],
-  "KeySchema": [
-    {
-      "AttributeName": "EventDate",
-      "KeyType": "HASH"
-    },
-    {
-      "AttributeName": "EventType",
-      "KeyType": "RANGE"
+    ],
+    "KeySchema": [
+      {
+        "AttributeName": "EventDate",
+        "KeyType": "HASH"
+      },
+      {
+        "AttributeName": "EventType",
+        "KeyType": "RANGE"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
     }
-  ],
-  "ProvisionedThroughput": {
-    "ReadCapacityUnits": 1,
-    "WriteCapacityUnits": 1
   }
-}

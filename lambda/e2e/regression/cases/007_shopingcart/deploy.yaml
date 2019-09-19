@@ -11,8 +11,7 @@ pipeline:
       action: exec:run
       target: $target
       sleepTimeMs: 1500
-      errors:
-        - ERROR
+      checkError: true
       commands:
         - cd ${appPath}shoppingcart/product/app
         - unset GOPATH

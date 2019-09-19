@@ -9,8 +9,7 @@ pipeline:
       action: exec:run
       target: $target
       sleepTimeMs: 1500
-      errors:
-        - ERROR
+      checkError: true
       commands:
         - cd ${appPath}agg/app
         - unset GOPATH
@@ -19,7 +18,7 @@ pipeline:
         - go build -o agg
         - zip -j agg.zip agg
 
-    setupFunction:
+    deployFunction:
       action: aws/lambda:deploy
       credentials: $awsCredentials
       functionname: $functionName
@@ -33,6 +32,7 @@ pipeline:
           policydocument: $Cat('${privilegePolicy}')
       attach:
         - policyarn: arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
     setupSubscription:
       action: aws/sns:setupSubscription
       protocol: lambda
