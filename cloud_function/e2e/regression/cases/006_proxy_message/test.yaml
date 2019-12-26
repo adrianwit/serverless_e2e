@@ -27,6 +27,6 @@ pipeline:
     UDF: AsMap
     expect:
       - Transformed:
-          message: "this is my 2nd message"
+          Attributes: "this is my 2nd message"
           projectID: $projectID
           source: /proxySourceTopic/

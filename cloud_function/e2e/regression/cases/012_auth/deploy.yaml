@@ -1,0 +1,31 @@
+defaults:
+  credentials: $gcpSecrets
+pipeline:
+  package:
+    action: exec:run
+    comments: vendor build for deployment speedup
+    target: $target
+    checkError: true
+    commands:
+      - cd ${appPath}/auth
+      - go mod vendor
+
+  deployProtected:
+    action: gcp/cloudfunctions:deploy
+    '@name': AuthProtected
+    entryPoint: AuthProtected
+    public: false
+    runtime: go111
+    source:
+      URL: ${appPath}/auth
+    sleepTimeMs: 20000
+
+  deployAuthProxy:
+    action: gcp/cloudfunctions:deploy
+    '@name': AuthProxy
+    entryPoint: AuthProxy
+    public: true
+    runtime: go111
+    source:
+      URL: ${appPath}/auth
+    sleepTimeMs: 20000

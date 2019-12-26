@@ -8,6 +8,7 @@ pipeline:
     action: exec:run
     comments: vendor build for deployment speedup
     target: $target
+    checkError: true
     commands:
       - unset GOPATH
       - cd ${appPath}/tail
@@ -17,6 +18,7 @@ pipeline:
     action: gcp/cloudfunctions:deploy
     '@name': Tail
     entryPoint: TailFn
+    public: true
     runtime: go111
     serviceAccountEmail: $serviceAccount
     environmentVariables:

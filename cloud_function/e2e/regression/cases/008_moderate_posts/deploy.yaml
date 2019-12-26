@@ -5,6 +5,7 @@ pipeline:
     action: exec:run
     comments: vendor build for deployment speedup
     target: $target
+    checkError: true
     commands:
       - unset GOPATH
       - cd ${appPath}/moderate

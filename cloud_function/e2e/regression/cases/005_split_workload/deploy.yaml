@@ -5,6 +5,7 @@ pipeline:
     action: exec:run
     comments: vendor build for deployment speedup
     target: $target
+    checkError: true
     commands:
       - unset GOPATH
       - cd ${appPath}/split
@@ -15,6 +16,7 @@ pipeline:
     '@name': SplitWorkload
     entryPoint: SplitWorkloadFn
     runtime: go111
+    public: true
     eventTrigger:
       eventType: google.storage.object.finalize
       resource: projects/_/buckets/${testBucketPrefix}_e2e001

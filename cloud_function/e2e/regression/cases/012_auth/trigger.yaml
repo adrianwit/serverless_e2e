@@ -1,0 +1,17 @@
+init:
+  httpsTrigger: https://us-central1-${projectID}.cloudfunctions.net/AuthProxy
+pipeline:
+  trigger:
+    action: rest/runner:send
+    comments: call function via HTTP
+    URL: $httpsTrigger
+    method: POST
+    request:
+      ProjectID: $projectID
+      DatasetID: db1
+      SQL: SELECT * FROM dummy ORDER BY id
+    expect:
+      Data: '/SELECT * FROM dummy ORDER BY id/'
+  info:
+    action: print
+    message: $AsJSON($trigger)

@@ -14,6 +14,7 @@ pipeline:
     action: gcp/cloudfunctions:deploy
     '@name': PubSubProxy
     entryPoint: PubSubProxyFn
+    checkError: true
     runtime: go111
     eventTrigger:
       eventType: google.pubsub.topic.publish

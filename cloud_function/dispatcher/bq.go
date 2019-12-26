@@ -5,6 +5,7 @@ import (
 	"context"
 	"dispatcher/bq"
 	"fmt"
+	"github.com/viant/toolbox"
 	"os"
 	"strings"
 )
@@ -12,10 +13,18 @@ import (
 var bigQueryDispatcher Service
 
 //BQEventDispatcher dispatches BigQuery events to matched targets
-func BQEventDispatcherFn(ctx context.Context, eventData struct{}) error {
+func BQEventDispatcherFn(ctx context.Context, eventData interface{}) error {
 	meta, err := metadata.FromContext(ctx)
 	if err != nil {
 		return fmt.Errorf("failed to get metadata: %v", err)
+	}
+	fmt.Printf(":: %T  %v\n", ctx, ctx)
+	fmt.Printf("-- mete: %v\n", meta)
+	toolbox.DumpIndent(meta, true)
+
+	if eventData != nil {
+
+		toolbox.DumpIndent(eventData, true)
 	}
 	resourceParts := strings.Split(meta.Resource.Name, "/")
 	projectID := resourceParts[1]

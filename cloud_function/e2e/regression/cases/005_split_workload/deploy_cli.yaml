@@ -5,8 +5,7 @@ pipeline:
     sleepTimeMs: 1500
     terminators:
       - Do you want to continue
-    errors:
-      - ERROR
+    checkError: true
     env:
       GOOGLE_APPLICATION_CREDENTIALS: ${env.HOME}/.secret/${gcpSecrets}.json
     commands:

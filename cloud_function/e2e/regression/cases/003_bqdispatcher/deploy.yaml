@@ -8,6 +8,7 @@ pipeline:
     action: exec:run
     comments: vendor build for deployment speedup
     target: $target
+    checkError: true
     commands:
       - unset GOPATH
       - cd ${appPath}/dispatcher
@@ -18,6 +19,7 @@ pipeline:
     '@name': BQEventDispatcher
     entryPoint: BQEventDispatcherFn
     runtime: go111
+    public: true
     environmentVariables:
       configURL: gs://${testBucketPrefix}_config/bq.json
       slackSecrets: $slackSecrets.Data

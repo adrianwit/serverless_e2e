@@ -20,7 +20,6 @@ func (e *Event) Source() string {
 	case "EXTRACT":
 		source := e.Configuration.Extract.SourceTable
 		return source.ProjectId + ":" + source.DatasetId + "." + source.TableId
-
 	case "COPY":
 		source := e.Configuration.Copy.SourceTable
 		return source.ProjectId + ":" + source.DatasetId + "." + source.TableId

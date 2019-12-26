@@ -370,46 +370,12 @@ The following variables are automatically set by the Cloud Functions runtime.
 
 
 
+####  Auth call cross cloud function
 
-
-
-
-####  Google Compute Engine
-1. Deployment: 
-    ```bash
-    gcloud functions deploy MyFunction --entry-point MyFunctionFn \
-       --trigger-resource projects/PROJECT/zones/ZONE/instances/{id}  \
-       --trigger-event google.compute.instance.stop \
-       --runtime go111
-    ```
-2. Instances 
-    -  Supported trigger types:
-        * google.compute.instance.create
-        * google.compute.instance.delete
-        * google.compute.instance.start
-        * google.compute.instance.stop
-        * google.compute.instance.reset
-    - Resource: 
-        * projects/{project}/zones/{zone}/instances/{id}
-3. instanceGroupManagers
-    -  Supported trigger types:
-        * google.compute.instancegroupmanager.create
-        * google.compute.instancegroupmanager.update
-        * google.compute.instancegroupmanager.resize
-        * google.compute.instancegroupmanager.delete
-    - Resource
-        * projects/{project}/{locationType}/{location}/instanceGroupManagers/{manager} 
-4. Firewall     
-    -  Supported trigger types:
-        * google.compute.firewall.create
-        * google.compute.firewall.update
-        * google.compute.firewall.delete
-5. Autoscaler    
-    -  Supported trigger types:
-        * google.compute.autoscaler.create
-        * google.compute.autoscaler.update
-        * google.compute.autoscaler.delete
-
+1. Moderate posts:
+    - [Source code](auth/)
+    - [E2E Use Case](e2e/regression/cases/012_auth)
+      * ```endly -i=auth```
 
     
 ### External projects with e2e testing using cloud functions

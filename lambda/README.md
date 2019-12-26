@@ -311,6 +311,7 @@ type SNSEntity struct {
 - aws ssm put-parameter --name "<string-name>" --value '<secure data>' --type SecureString --key-id alias/<kms-key-name>
 - aws ssm get-parameters --names "<string-name>" --with-decryption
 
+
 - [Data Transfer Source code](dstransfer/)
 - [E2E Use Case](e2e/regression/cases/006_dstransfer)
     * apply [prerequsites](e2e/regression/cases/006_dstransfer/prerequisite.txt)

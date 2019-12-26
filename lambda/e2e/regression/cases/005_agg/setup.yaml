@@ -6,6 +6,7 @@ pipeline:
       - URL: mye2eTopic
         type: topic
         vendor: aws
+
   initDb:
     action: dsunit:init
     datastore: db1
